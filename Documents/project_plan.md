@@ -119,17 +119,17 @@ If unexpected complications arise, we might face difficultly implementing our DN
 
 ## Citations
 
-[1] http://www.daemon.be/maarten/dnstunnel.html
-[2] http://www.networkworld.com/article/2231682/cisco-subnet/cisco-subnet-allow-both-tcp-and-udp-port-53-to-your-dns-servers.html
-[3] https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/URLLoadingSystem/URLLoadingSystem.html#//apple_ref/doc/uid/10000165i
-[4] https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSURLProtocol_Class/index.html#//apple_ref/occ/cl/NSURLProtocol
-[5] https://www.vpnoverdns.com/faq.html
-[6] http://archives.neohapsis.com/archives/bugtraq/1998_2/0079.html
-[7] https://developer.apple.com/library/prerelease/ios/documentation/NetworkExtension/Reference/NETunnelProviderClassRef/index.html
-[8] https://developer.apple.com/videos/play/wwdc2015/717/
-[9] https://github.com/iCepa/iCepa
-[10] http://www.smartinsights.com/mobile-marketing/mobile-marketing-analytics/mobile-marketing-statistics/
-[11] http://blog.cloudmark.com/2014/10/07/dns-tunneling-abuses/
-[12] http://dnstunnel.de/
-[13] http://www.splitbrain.org/blog/2008-11/02-dns_tunneling_made_simple
+1. http://www.daemon.be/maarten/dnstunnel.html
+2. http://www.networkworld.com/article/2231682/cisco-subnet/cisco-subnet-allow-both-tcp-and-udp-port-53-to-your-dns-servers.html
+3. https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/URLLoadingSystem/URLLoadingSystem.html#//apple_ref/doc/uid/10000165i
+4. https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSURLProtocol_Class/index.html#//apple_ref/occ/cl/NSURLProtocol
+5. https://www.vpnoverdns.com/faq.html
+6. http://archives.neohapsis.com/archives/bugtraq/1998_2/0079.html
+7. https://developer.apple.com/library/prerelease/ios/documentation/NetworkExtension/Reference/NETunnelProviderClassRef/index.html
+8. https://developer.apple.com/videos/play/wwdc2015/717/
+9. https://github.com/iCepa/iCepa
+10. http://www.smartinsights.com/mobile-marketing/mobile-marketing-analytics/mobile-marketing-statistics/
+11. http://blog.cloudmark.com/2014/10/07/dns-tunneling-abuses/
+12. http://dnstunnel.de/
+13. http://www.splitbrain.org/blog/2008-11/02-dns_tunneling_made_simple
 
