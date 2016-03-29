@@ -87,6 +87,7 @@ We're targeting completion of the project by week 8 of term, so we should aim to
 - *Milestone 7 - *Make continuing DNS request to server with token received in response to initial request. Repeat as necessary.
 - *Milestone 9* - Reconstruct HTTP response data and return it to the in-app browser.
 - get a working network extension where we successfully intercept all network traffic
+
 #### Server
 - *Milestone 0 - *Buy a domain and set up a server.
 - *Milestone 1 - *Log incoming DNS requests.
