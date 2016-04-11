@@ -22,7 +22,8 @@ extension String {
 }
 
 extension TXTRecord {
-    /// Copies the data
+    /// Extracts the TXT record data from a `ResourceRecord`, copying its contents.
+    /// Returns `nil` if the record was not of type TXT.
     init?(_ resourceRecord: ResourceRecord) {
         guard ResourceRecordGetType(resourceRecord) == ns_t_txt else { return nil }
         
