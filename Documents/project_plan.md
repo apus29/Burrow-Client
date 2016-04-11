@@ -1,6 +1,6 @@
-CS 144 — Project Plan
+# Project Plan
 
-# Motivation
+## Motivation
 
 Though the world wide web is meant to be accessible to everyone, this is sometimes not the case when using certain networks that restrict access to the internet. Examples of these restrictions include paywalled WiFi, blocked websites on school networks, and censorship of some or all sites in countries ruled by oppressive governments. Bypassing these obstacles is commonly achieved by tunneling network traffic around the filtering mechanism to another device that has unrestricted Internet access. This only works when the filter or obstacle does not realize that traffic is being routed around it. SSH forwarding and VPNs are common examples of such workarounds, but can be detected and due to their popularity are often blocked. DNS tunneling is an unusual and hard-to-detect method of bypassing network barriers by routing all network traffic through the DNS system.
 
@@ -10,8 +10,8 @@ DNS traffic is a promising alternative to traditional tunneling channels. Tunnel
 
 There are a number of DNS tunneling programs available, but most are designed for use on desktop/laptop computers and require significant technical skill and effort to configure. The number of mobile Internet users has been increasing at a breakneck pace since 2007, and in 2014 even exceeded the number of desktop Internet users [10]. The vast majority of Internet users aren’t skilled or motivated enough to set up their own server, and don’t have easy access to the resources to do so - particularly if they live under an oppressive government. Our goal is to create a turnkey iOS app that allows a non-technical user to browse the web through a DNS tunnel, including providing our own managed cloud server to relay data.
 
-# Technical Details
-## Intercepting Client-Side Network Traffic
+## Technical Details
+#### Intercepting Client-Side Network Traffic
 
 Depending on whether we receive permission to build a network extension from Apple (more about that later), we will build either an in-app web browser or a system-wide network extension to DNS tunnel traffic. We’ll first describe the conservative scenario in which we do not receive the entitlement and must build the in-app web browser, then we’ll describe the preferable scenario in which we build the network extension.
 
@@ -23,7 +23,7 @@ This limitation is avoided by building a network tunnel extension so all traffic
 
 If we are granted access to the entitlement, we’ll opt to forgo the in-app web browser and opt to instead build the system-wide tunneling extension. An interesting distinction between the UIWebView approach and the NETunnelProvider approach is that the former operates on the transport layer while the latter operates on the network layer. This means that a NETunnelProvider extension should be able to handle TCP traffic as well as UDP traffic, while the UIWebView approach would only target TCP traffic. Note that the UIWebView approach does not require us to reimplement TCP since DNS works over TCP, so we’d effectively just be operating between the transport and the application layer.
 
-## Performing DNS Requests on the Client
+#### Performing DNS Requests on the Client
 
 We will outline the approach we will take to implement DNS tunneling for the in-app web browser approach. If we take the network extension approach, slight modifications will be needed, but it’ll be simpler overall. Our plan is to develop custom code on the client which will intercept HTTP requests, download the HTTP response for that request from our server (which will have fetched it from the Internet) through the DNS protocol, and then return the downloaded HTTP response.
 
@@ -38,7 +38,7 @@ The sequence of events on the client will be roughly as follows:
 
 In the event that we can’t successfully implement this process ourselves, we plan to attempt to integrate an existing open-source DNS tunneling library.
 
-## Fulfilling DNS Requests on the Server
+#### Fulfilling DNS Requests on the Server
 
 An important component of our project is the cloud service that actually accesses the Internet on behalf of our client devices. At first this will probably be an always-on Linux-based VM on a local computer, but if we decide to attempt to grow the service we will investigate moving it to a professional hosting provider.
 
@@ -51,7 +51,7 @@ Our server will receive DNS requests of the format encodedrequest.ourdomain.com,
 
 Our server will also get DNS requests of the format index.token.ourdomain.com, which will trigger a DNS response containing a chunk of the HTTP response associated with token.
 
-# Related Work
+## Related Work
 
 DNS tunneling as a topic of interest seems to have first appeared in 1998 [6]. Since it’s not a subject with much commercial value, and it’s far too tricky for your average hobbyist to successfully set up, there’s not much information about it on the Internet.
 However, there are a decent number of blog and forum posts floating around, some with snippets of sample code. Most seem to have been written by security professionals interested in the possibility of a virus on an infected system using DNS tunneling to communicate with a C&C server under the radar, and how to defend against such a possibility.
@@ -72,13 +72,13 @@ There are a significant number of existing projects that seek to provide semi-tu
 
 We found a few existing applications that use the newly introduced network tunneling extension point. For example, iCepa uses the API to route all traffic system-wide through the Tor network [9]. On the app store, we found a few VPN apps that use the API to automatically install profiles (with user permission via a system dialog).
 
-# Timeline/Milestones
+## Timeline/Milestones
 
 We’ve compiled a list of milestones. They’re separated by client and server tasks, in roughly the order that they need to be completed. Milestones with the same number can be worked on in parallel, while milestones with higher numbers generally depend on earlier milestones.
 
 We're targeting completion of the project by week 8 of term, so we should aim to average one client and one server milestone per week to stay on track.
 
-## Client
+#### Client
 - *Milestone 0 - *Set up a test environment, specifically a wifi hotspot that blocks internet access other than DNS requests.
 - *Milestone 1 - *Build an iOS app that logs all HTTP requests made through the in-app web browser.
 - *Milestone 3 - *In app, make random DNS request to our server and verify correct “Hello world” response.
@@ -87,7 +87,8 @@ We're targeting completion of the project by week 8 of term, so we should aim to
 - *Milestone 7 - *Make continuing DNS request to server with token received in response to initial request. Repeat as necessary.
 - *Milestone 9* - Reconstruct HTTP response data and return it to the in-app browser.
 - get a working network extension where we successfully intercept all network traffic
-## Server
+
+#### Server
 - *Milestone 0 - *Buy a domain and set up a server.
 - *Milestone 1 - *Log incoming DNS requests.
 - *Milestone 2 - *Reply with “Hello world” to all incoming DNS requests as a TXT record.
@@ -98,11 +99,11 @@ We're targeting completion of the project by week 8 of term, so we should aim to
 
 If and when we receive the tunneling network extension entitlement from Apple, we’ll reevaluate our strategy and may decide to tunnel traffic at the network layer, rather than the application layer.
 
-# Final Product
+## Final Product
 
 At the end of the term, we will have build an iPhone app that will provide no-setup DNS tunneling to its users. To do so, we must build both the app and the DNS server that user traffic will be passing through. Depending on if we receive the network extension entitlement, our app will either provide an in-app web browser (that tunnels only its traffic over DNS) or a 1-click button to configure the network extension (that tunnels all traffic system-wide over DNS).
 
-## Stretch Goals
+#### Stretch Goals
 - Determine how much it costs to tunnel the average users traffic. Then, use iOS’s in-app  purchase mechanism to allow users to subscribe to the service for a monthly fee. Perhaps also allow purchases of single-day passes.
 - Provide a mechanism by which the user can test whether the app can connect over their current network without paying for a subscription or a pass. The app could simply try to connect to our server (over DNS) and show an indicator indicating success or failure. 
 - Build an authentication mechanism so that our servers can only be used by paying users. Otherwise, we might build up a large bill that isn’t supported by user payments.
@@ -111,25 +112,25 @@ At the end of the term, we will have build an iPhone app that will provide no-se
 - Release an OS X app with similar capabilities. Since the network extension API is cross-platform, this would only require minimal effort.
 - Make the service resilient to having our domain or IP address blocked. We could potentially accomplish this by changing the server’s IP address and domain every few weeks. We’d have to notify the device ahead of time of future planned domains and IP addresses so that a device unable to access our servers knows which to try next.
 - Release the app on the App Store to get it in the hands of users.
-## Worst Case Scenario
+#### Worst Case Scenario
 
 If all goes as planned, we will have developed an app that enables system-wide DNS tunneling on a user’s device. We expect that Apple will likely approve our entitlement request, so we hope this will be the outcome. If Apple for some reason rejects our entitlement request, we’ll instead plan to build the in-app DNS tunneling browser.
 
 If unexpected complications arise, we might face difficultly implementing our DNS tunneling protocol in a way that can interface with either UIWebView or NETunnelProvider. After spending a good amount of time researching the workings of each of these classes we believe this is unlikely, but we still ought to plan for such a situation. A backup plan could be to provide a more limited interface to the DNS tunnel—either a command line-like interface allow users to ping servers over DNS or perhaps a mechanism to download static HTML files and load them into the web view after the fact.
 
-# Citations
+## Citations
 
-[1] http://www.daemon.be/maarten/dnstunnel.html
-[2] http://www.networkworld.com/article/2231682/cisco-subnet/cisco-subnet-allow-both-tcp-and-udp-port-53-to-your-dns-servers.html
-[3] https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/URLLoadingSystem/URLLoadingSystem.html#//apple_ref/doc/uid/10000165i
-[4] https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSURLProtocol_Class/index.html#//apple_ref/occ/cl/NSURLProtocol
-[5] https://www.vpnoverdns.com/faq.html
-[6] http://archives.neohapsis.com/archives/bugtraq/1998_2/0079.html
-[7] https://developer.apple.com/library/prerelease/ios/documentation/NetworkExtension/Reference/NETunnelProviderClassRef/index.html
-[8] https://developer.apple.com/videos/play/wwdc2015/717/
-[9] https://github.com/iCepa/iCepa
-[10] http://www.smartinsights.com/mobile-marketing/mobile-marketing-analytics/mobile-marketing-statistics/
-[11] http://blog.cloudmark.com/2014/10/07/dns-tunneling-abuses/
-[12] http://dnstunnel.de/
-[13] http://www.splitbrain.org/blog/2008-11/02-dns_tunneling_made_simple
+1. http://www.daemon.be/maarten/dnstunnel.html
+2. http://www.networkworld.com/article/2231682/cisco-subnet/cisco-subnet-allow-both-tcp-and-udp-port-53-to-your-dns-servers.html
+3. https://developer.apple.com/library/mac/documentation/Cocoa/Conceptual/URLLoadingSystem/URLLoadingSystem.html#//apple_ref/doc/uid/10000165i
+4. https://developer.apple.com/library/mac/documentation/Cocoa/Reference/Foundation/Classes/NSURLProtocol_Class/index.html#//apple_ref/occ/cl/NSURLProtocol
+5. https://www.vpnoverdns.com/faq.html
+6. http://archives.neohapsis.com/archives/bugtraq/1998_2/0079.html
+7. https://developer.apple.com/library/prerelease/ios/documentation/NetworkExtension/Reference/NETunnelProviderClassRef/index.html
+8. https://developer.apple.com/videos/play/wwdc2015/717/
+9. https://github.com/iCepa/iCepa
+10. http://www.smartinsights.com/mobile-marketing/mobile-marketing-analytics/mobile-marketing-statistics/
+11. http://blog.cloudmark.com/2014/10/07/dns-tunneling-abuses/
+12. http://dnstunnel.de/
+13. http://www.splitbrain.org/blog/2008-11/02-dns_tunneling_made_simple
 
