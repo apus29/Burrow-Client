@@ -7,46 +7,195 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		4D282D301C9121F800E41631 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D282D2F1C9121F800E41631 /* AppDelegate.swift */; };
-		4D282D321C9121F800E41631 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D282D311C9121F800E41631 /* ViewController.swift */; };
-		4D282D351C9121F800E41631 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D282D331C9121F800E41631 /* Main.storyboard */; };
-		4D282D371C9121F800E41631 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 4D282D361C9121F800E41631 /* Assets.xcassets */; };
-		4D282D3A1C9121F800E41631 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D282D381C9121F800E41631 /* LaunchScreen.storyboard */; };
-		4D282D451C9121F800E41631 /* BurrowTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D282D441C9121F800E41631 /* BurrowTests.swift */; };
+		4D0D56121CB37302008CB981 /* BurrowTunnel-Mac.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4D0D56091CB37302008CB981 /* BurrowTunnel-Mac.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4D0D56211CB37390008CB981 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0D56191CB37390008CB981 /* AppDelegate.swift */; };
+		4D0D56231CB37390008CB981 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D0D561B1CB37390008CB981 /* LaunchScreen.storyboard */; };
+		4D0D56241CB37390008CB981 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D0D561D1CB37390008CB981 /* Main.storyboard */; };
+		4D0D56261CB37390008CB981 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0D56201CB37390008CB981 /* ViewController.swift */; };
+		4D0D56381CB3739C008CB981 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 4D0D56351CB3739C008CB981 /* Info.plist */; };
+		4D0D563B1CB3742B008CB981 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0D56281CB37394008CB981 /* AppDelegate.swift */; };
+		4D0D563C1CB37431008CB981 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 4D0D562A1CB37394008CB981 /* Main.storyboard */; };
+		4D0D563E1CB3743A008CB981 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0D562D1CB37394008CB981 /* ViewController.swift */; };
+		4D0D564B1CB37862008CB981 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0D564A1CB37862008CB981 /* NetworkExtension.framework */; };
+		4D0D564C1CB37893008CB981 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0D564A1CB37862008CB981 /* NetworkExtension.framework */; };
+		4D4B136C1CBB9FE1008EC7CD /* Burrow-iOS.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 4D4B136B1CBB9FE1008EC7CD /* Burrow-iOS.entitlements */; };
+		4D4B136E1CBB9FE9008EC7CD /* Burrow-Mac.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 4D4B136D1CBB9FE9008EC7CD /* Burrow-Mac.entitlements */; };
+		4D4B13701CBBA00B008EC7CD /* BurrowTunnel-Extension-Mac.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 4D4B136F1CBBA00B008EC7CD /* BurrowTunnel-Extension-Mac.entitlements */; };
+		4D4B13721CBBA00F008EC7CD /* BurrowTunnel-Extension-iOS.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 4D4B13711CBBA00F008EC7CD /* BurrowTunnel-Extension-iOS.entitlements */; };
+		4D4B13751CBBA0AE008EC7CD /* ServerMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4B13731CBBA0AE008EC7CD /* ServerMessage.m */; };
+		4D4B13761CBBA0AE008EC7CD /* ServerMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4B13741CBBA0AE008EC7CD /* ServerMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4D4B13791CBBA0C4008EC7CD /* ServerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4B13781CBBA0C4008EC7CD /* ServerMessage.swift */; };
+		4D4C41AB1CBB4C8C00055D86 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0D56361CB3739C008CB981 /* PacketTunnelProvider.swift */; };
+		4D4C41AC1CBB4C8D00055D86 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0D56361CB3739C008CB981 /* PacketTunnelProvider.swift */; };
+		4D4C41DE1CBB50C000055D86 /* Shovel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4C41D41CBB50C000055D86 /* Shovel.framework */; };
+		4D4C41E31CBB50C000055D86 /* TXTRecordTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C41E21CBB50C000055D86 /* TXTRecordTests.swift */; };
+		4D4C41F01CBB531400055D86 /* Shovel.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4C41EE1CBB52D500055D86 /* Shovel.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4D4C42181CBB5B8000055D86 /* CResolver.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4D4C42171CBB5B8000055D86 /* CResolver.xcconfig */; };
+		4D4C421F1CBB5F7600055D86 /* TXTRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C421E1CBB5F7600055D86 /* TXTRecord.swift */; };
+		4D4C42231CBB609400055D86 /* CResolver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4C420F1CBB5B5C00055D86 /* CResolver.framework */; settings = {ATTRIBUTES = (Required, ); }; };
+		4D4C42261CBB646B00055D86 /* ResourceRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4C42241CBB646B00055D86 /* ResourceRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
+		4D4C42271CBB646B00055D86 /* ResourceRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C42251CBB646B00055D86 /* ResourceRecord.m */; };
+		4D4C42291CBB73A300055D86 /* ResourceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C42281CBB73A300055D86 /* ResourceRecord.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
-		4D282D411C9121F800E41631 /* PBXContainerItemProxy */ = {
+		4D0D55FE1CB372F3008CB981 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
-			containerPortal = 4D282D241C9121F800E41631 /* Project object */;
+			containerPortal = 4D0D55C31CB3722F008CB981 /* Project object */;
 			proxyType = 1;
-			remoteGlobalIDString = 4D282D2B1C9121F800E41631;
-			remoteInfo = Burrow;
+			remoteGlobalIDString = 4D0D55F61CB372F3008CB981;
+			remoteInfo = "BurrowTunnel-iOS";
+		};
+		4D0D56101CB37302008CB981 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D0D55C31CB3722F008CB981 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D0D56081CB37302008CB981;
+			remoteInfo = "BurrowTunnel-Mac";
+		};
+		4D4C41DF1CBB50C000055D86 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D0D55C31CB3722F008CB981 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D4C41D31CBB50C000055D86;
+			remoteInfo = Shovel;
+		};
+		4D4C42201CBB605F00055D86 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D0D55C31CB3722F008CB981 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D4C420E1CBB5B5C00055D86;
+			remoteInfo = CResolver;
 		};
 /* End PBXContainerItemProxy section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		4D0D56041CB372F3008CB981 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D0D56161CB37302008CB981 /* Embed App Extensions */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 13;
+			files = (
+				4D0D56121CB37302008CB981 /* BurrowTunnel-Mac.appex in Embed App Extensions */,
+			);
+			name = "Embed App Extensions";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D4C42091CBB5B4000055D86 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		4D282D2C1C9121F800E41631 /* Burrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Burrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D282D2F1C9121F800E41631 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		4D282D311C9121F800E41631 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		4D282D341C9121F800E41631 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		4D282D361C9121F800E41631 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		4D282D391C9121F800E41631 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
-		4D282D3B1C9121F800E41631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		4D282D401C9121F800E41631 /* BurrowTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BurrowTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		4D282D441C9121F800E41631 /* BurrowTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BurrowTests.swift; sourceTree = "<group>"; };
-		4D282D461C9121F800E41631 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D0D55CD1CB37274008CB981 /* Burrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Burrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D0D55E41CB37297008CB981 /* Burrow.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Burrow.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D0D55F71CB372F3008CB981 /* BurrowTunnel-iOS.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "BurrowTunnel-iOS.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D0D56091CB37302008CB981 /* BurrowTunnel-Mac.appex */ = {isa = PBXFileReference; explicitFileType = "wrapper.app-extension"; includeInIndex = 0; path = "BurrowTunnel-Mac.appex"; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D0D56191CB37390008CB981 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4D0D561A1CB37390008CB981 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4D0D561C1CB37390008CB981 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		4D0D561E1CB37390008CB981 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4D0D561F1CB37390008CB981 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D0D56201CB37390008CB981 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4D0D56281CB37394008CB981 /* AppDelegate.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		4D0D56291CB37394008CB981 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		4D0D562B1CB37394008CB981 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		4D0D562C1CB37394008CB981 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D0D562D1CB37394008CB981 /* ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		4D0D56351CB3739C008CB981 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D0D56361CB3739C008CB981 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
+		4D0D564A1CB37862008CB981 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		4D4B136B1CBB9FE1008EC7CD /* Burrow-iOS.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Burrow-iOS.entitlements"; sourceTree = "<group>"; };
+		4D4B136D1CBB9FE9008EC7CD /* Burrow-Mac.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Burrow-Mac.entitlements"; sourceTree = "<group>"; };
+		4D4B136F1CBBA00B008EC7CD /* BurrowTunnel-Extension-Mac.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "BurrowTunnel-Extension-Mac.entitlements"; sourceTree = "<group>"; };
+		4D4B13711CBBA00F008EC7CD /* BurrowTunnel-Extension-iOS.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "BurrowTunnel-Extension-iOS.entitlements"; sourceTree = "<group>"; };
+		4D4B13731CBBA0AE008EC7CD /* ServerMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerMessage.m; sourceTree = "<group>"; };
+		4D4B13741CBBA0AE008EC7CD /* ServerMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerMessage.h; sourceTree = "<group>"; };
+		4D4B13781CBBA0C4008EC7CD /* ServerMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMessage.swift; sourceTree = "<group>"; };
+		4D4C41D41CBB50C000055D86 /* Shovel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shovel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D4C41D81CBB50C000055D86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D4C41DD1CBB50C000055D86 /* ShovelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShovelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D4C41E21CBB50C000055D86 /* TXTRecordTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TXTRecordTests.swift; sourceTree = "<group>"; };
+		4D4C41E41CBB50C000055D86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D4C41EE1CBB52D500055D86 /* Shovel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Shovel.h; sourceTree = "<group>"; };
+		4D4C420F1CBB5B5C00055D86 /* CResolver.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = CResolver.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D4C42131CBB5B5D00055D86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D4C42171CBB5B8000055D86 /* CResolver.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = CResolver.xcconfig; sourceTree = "<group>"; };
+		4D4C42191CBB5BCD00055D86 /* iphoneos.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphoneos.modulemap; sourceTree = "<group>"; };
+		4D4C421A1CBB5BE600055D86 /* iphonesimulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphonesimulator.modulemap; sourceTree = "<group>"; };
+		4D4C421B1CBB5BE600055D86 /* macosx.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = macosx.modulemap; sourceTree = "<group>"; };
+		4D4C421C1CBB5D4100055D86 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/usr/lib/libresolv.tbd; sourceTree = DEVELOPER_DIR; };
+		4D4C421E1CBB5F7600055D86 /* TXTRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TXTRecord.swift; sourceTree = "<group>"; };
+		4D4C42241CBB646B00055D86 /* ResourceRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceRecord.h; sourceTree = "<group>"; };
+		4D4C42251CBB646B00055D86 /* ResourceRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceRecord.m; sourceTree = "<group>"; };
+		4D4C42281CBB73A300055D86 /* ResourceRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceRecord.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
-		4D282D291C9121F800E41631 /* Frameworks */ = {
+		4D0D55CA1CB37274008CB981 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D0D564C1CB37893008CB981 /* NetworkExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D0D55E11CB37297008CB981 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D0D564B1CB37862008CB981 /* NetworkExtension.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D0D55F41CB372F3008CB981 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D282D3D1C9121F800E41631 /* Frameworks */ = {
+		4D0D56061CB37302008CB981 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D4C41D01CBB50C000055D86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D4C42231CBB609400055D86 /* CResolver.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D4C41DA1CBB50C000055D86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D4C41DE1CBB50C000055D86 /* Shovel.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D4C420B1CBB5B5C00055D86 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -56,104 +205,357 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		4D282D231C9121F800E41631 = {
+		4D0D55C21CB3722F008CB981 = {
 			isa = PBXGroup;
 			children = (
-				4D282D2E1C9121F800E41631 /* Burrow */,
-				4D282D431C9121F800E41631 /* BurrowTests */,
-				4D282D2D1C9121F800E41631 /* Products */,
+				4D0D56181CB37390008CB981 /* iOS */,
+				4D0D56271CB37394008CB981 /* Mac */,
+				4D0D56331CB3739C008CB981 /* Extension */,
+				4D4C42101CBB5B5D00055D86 /* CResolver */,
+				4D4C41D51CBB50C000055D86 /* Shovel */,
+				4D4C41E11CBB50C000055D86 /* ShovelTests */,
+				4D0D564D1CB3789C008CB981 /* Frameworks */,
+				4D0D55CE1CB37274008CB981 /* Products */,
 			);
 			sourceTree = "<group>";
 		};
-		4D282D2D1C9121F800E41631 /* Products */ = {
+		4D0D55CE1CB37274008CB981 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				4D282D2C1C9121F800E41631 /* Burrow.app */,
-				4D282D401C9121F800E41631 /* BurrowTests.xctest */,
+				4D0D55CD1CB37274008CB981 /* Burrow.app */,
+				4D0D55E41CB37297008CB981 /* Burrow.app */,
+				4D0D55F71CB372F3008CB981 /* BurrowTunnel-iOS.appex */,
+				4D0D56091CB37302008CB981 /* BurrowTunnel-Mac.appex */,
+				4D4C41D41CBB50C000055D86 /* Shovel.framework */,
+				4D4C41DD1CBB50C000055D86 /* ShovelTests.xctest */,
+				4D4C420F1CBB5B5C00055D86 /* CResolver.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		4D282D2E1C9121F800E41631 /* Burrow */ = {
+		4D0D56181CB37390008CB981 /* iOS */ = {
 			isa = PBXGroup;
 			children = (
-				4D282D2F1C9121F800E41631 /* AppDelegate.swift */,
-				4D282D311C9121F800E41631 /* ViewController.swift */,
-				4D282D331C9121F800E41631 /* Main.storyboard */,
-				4D282D361C9121F800E41631 /* Assets.xcassets */,
-				4D282D381C9121F800E41631 /* LaunchScreen.storyboard */,
-				4D282D3B1C9121F800E41631 /* Info.plist */,
+				4D0D56191CB37390008CB981 /* AppDelegate.swift */,
+				4D0D56201CB37390008CB981 /* ViewController.swift */,
+				4D0D561D1CB37390008CB981 /* Main.storyboard */,
+				4D0D564E1CB378B3008CB981 /* Supporting Files */,
 			);
-			path = Burrow;
+			path = iOS;
 			sourceTree = "<group>";
 		};
-		4D282D431C9121F800E41631 /* BurrowTests */ = {
+		4D0D56271CB37394008CB981 /* Mac */ = {
 			isa = PBXGroup;
 			children = (
-				4D282D441C9121F800E41631 /* BurrowTests.swift */,
-				4D282D461C9121F800E41631 /* Info.plist */,
+				4D0D56281CB37394008CB981 /* AppDelegate.swift */,
+				4D0D562D1CB37394008CB981 /* ViewController.swift */,
+				4D0D562A1CB37394008CB981 /* Main.storyboard */,
+				4D0D564F1CB378C3008CB981 /* Supporting Files */,
 			);
-			path = BurrowTests;
+			path = Mac;
+			sourceTree = SOURCE_ROOT;
+		};
+		4D0D56331CB3739C008CB981 /* Extension */ = {
+			isa = PBXGroup;
+			children = (
+				4D0D56361CB3739C008CB981 /* PacketTunnelProvider.swift */,
+				4D0D56501CB3798F008CB981 /* Supporting Files */,
+			);
+			path = Extension;
+			sourceTree = "<group>";
+		};
+		4D0D564D1CB3789C008CB981 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				4D4C421C1CBB5D4100055D86 /* libresolv.tbd */,
+				4D0D564A1CB37862008CB981 /* NetworkExtension.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4D0D564E1CB378B3008CB981 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4D0D561B1CB37390008CB981 /* LaunchScreen.storyboard */,
+				4D0D561A1CB37390008CB981 /* Assets.xcassets */,
+				4D0D561F1CB37390008CB981 /* Info.plist */,
+				4D4B136B1CBB9FE1008EC7CD /* Burrow-iOS.entitlements */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4D0D564F1CB378C3008CB981 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4D0D56291CB37394008CB981 /* Assets.xcassets */,
+				4D0D562C1CB37394008CB981 /* Info.plist */,
+				4D4B136D1CBB9FE9008EC7CD /* Burrow-Mac.entitlements */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4D0D56501CB3798F008CB981 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				4D4B13711CBBA00F008EC7CD /* BurrowTunnel-Extension-iOS.entitlements */,
+				4D4B136F1CBBA00B008EC7CD /* BurrowTunnel-Extension-Mac.entitlements */,
+				4D0D56351CB3739C008CB981 /* Info.plist */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		4D4B13771CBBA0B5008EC7CD /* ServerMessage */ = {
+			isa = PBXGroup;
+			children = (
+				4D4B13741CBBA0AE008EC7CD /* ServerMessage.h */,
+				4D4B13731CBBA0AE008EC7CD /* ServerMessage.m */,
+				4D4B13781CBBA0C4008EC7CD /* ServerMessage.swift */,
+			);
+			name = ServerMessage;
+			sourceTree = "<group>";
+		};
+		4D4C41D51CBB50C000055D86 /* Shovel */ = {
+			isa = PBXGroup;
+			children = (
+				4D4C41EE1CBB52D500055D86 /* Shovel.h */,
+				4D4B13771CBBA0B5008EC7CD /* ServerMessage */,
+				4D4C422A1CBB73A600055D86 /* ResourceRecord */,
+				4D4C421E1CBB5F7600055D86 /* TXTRecord.swift */,
+				4D4C41D81CBB50C000055D86 /* Info.plist */,
+			);
+			path = Shovel;
+			sourceTree = "<group>";
+		};
+		4D4C41E11CBB50C000055D86 /* ShovelTests */ = {
+			isa = PBXGroup;
+			children = (
+				4D4C41E21CBB50C000055D86 /* TXTRecordTests.swift */,
+				4D4C41E41CBB50C000055D86 /* Info.plist */,
+			);
+			path = ShovelTests;
+			sourceTree = "<group>";
+		};
+		4D4C42101CBB5B5D00055D86 /* CResolver */ = {
+			isa = PBXGroup;
+			children = (
+				4D4C42171CBB5B8000055D86 /* CResolver.xcconfig */,
+				4D4C42191CBB5BCD00055D86 /* iphoneos.modulemap */,
+				4D4C421A1CBB5BE600055D86 /* iphonesimulator.modulemap */,
+				4D4C421B1CBB5BE600055D86 /* macosx.modulemap */,
+				4D4C42131CBB5B5D00055D86 /* Info.plist */,
+			);
+			path = CResolver;
+			sourceTree = "<group>";
+		};
+		4D4C422A1CBB73A600055D86 /* ResourceRecord */ = {
+			isa = PBXGroup;
+			children = (
+				4D4C42241CBB646B00055D86 /* ResourceRecord.h */,
+				4D4C42251CBB646B00055D86 /* ResourceRecord.m */,
+				4D4C42281CBB73A300055D86 /* ResourceRecord.swift */,
+			);
+			name = ResourceRecord;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
+/* Begin PBXHeadersBuildPhase section */
+		4D4C41D11CBB50C000055D86 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D4C42261CBB646B00055D86 /* ResourceRecord.h in Headers */,
+				4D4B13761CBBA0AE008EC7CD /* ServerMessage.h in Headers */,
+				4D4C41F01CBB531400055D86 /* Shovel.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D4C420C1CBB5B5C00055D86 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
 /* Begin PBXNativeTarget section */
-		4D282D2B1C9121F800E41631 /* Burrow */ = {
+		4D0D55CC1CB37274008CB981 /* Burrow-iOS */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4D282D491C9121F800E41631 /* Build configuration list for PBXNativeTarget "Burrow" */;
+			buildConfigurationList = 4D0D55DD1CB37274008CB981 /* Build configuration list for PBXNativeTarget "Burrow-iOS" */;
 			buildPhases = (
-				4D282D281C9121F800E41631 /* Sources */,
-				4D282D291C9121F800E41631 /* Frameworks */,
-				4D282D2A1C9121F800E41631 /* Resources */,
+				4D0D55C91CB37274008CB981 /* Sources */,
+				4D0D55CA1CB37274008CB981 /* Frameworks */,
+				4D0D55CB1CB37274008CB981 /* Resources */,
+				4D0D56041CB372F3008CB981 /* Embed App Extensions */,
+				4D4C42091CBB5B4000055D86 /* Embed Frameworks */,
 			);
 			buildRules = (
 			);
 			dependencies = (
+				4D0D55FF1CB372F3008CB981 /* PBXTargetDependency */,
 			);
-			name = Burrow;
-			productName = Burrow;
-			productReference = 4D282D2C1C9121F800E41631 /* Burrow.app */;
+			name = "Burrow-iOS";
+			productName = "Burrow-iOS";
+			productReference = 4D0D55CD1CB37274008CB981 /* Burrow.app */;
 			productType = "com.apple.product-type.application";
 		};
-		4D282D3F1C9121F800E41631 /* BurrowTests */ = {
+		4D0D55E31CB37297008CB981 /* Burrow-Mac */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 4D282D4C1C9121F800E41631 /* Build configuration list for PBXNativeTarget "BurrowTests" */;
+			buildConfigurationList = 4D0D55F01CB37297008CB981 /* Build configuration list for PBXNativeTarget "Burrow-Mac" */;
 			buildPhases = (
-				4D282D3C1C9121F800E41631 /* Sources */,
-				4D282D3D1C9121F800E41631 /* Frameworks */,
-				4D282D3E1C9121F800E41631 /* Resources */,
+				4D0D55E01CB37297008CB981 /* Sources */,
+				4D0D55E11CB37297008CB981 /* Frameworks */,
+				4D0D55E21CB37297008CB981 /* Resources */,
+				4D0D56161CB37302008CB981 /* Embed App Extensions */,
 			);
 			buildRules = (
 			);
 			dependencies = (
-				4D282D421C9121F800E41631 /* PBXTargetDependency */,
+				4D0D56111CB37302008CB981 /* PBXTargetDependency */,
 			);
-			name = BurrowTests;
-			productName = BurrowTests;
-			productReference = 4D282D401C9121F800E41631 /* BurrowTests.xctest */;
+			name = "Burrow-Mac";
+			productName = "Burrow-Mac";
+			productReference = 4D0D55E41CB37297008CB981 /* Burrow.app */;
+			productType = "com.apple.product-type.application";
+		};
+		4D0D55F61CB372F3008CB981 /* BurrowTunnel-iOS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D0D56011CB372F3008CB981 /* Build configuration list for PBXNativeTarget "BurrowTunnel-iOS" */;
+			buildPhases = (
+				4D0D55F31CB372F3008CB981 /* Sources */,
+				4D0D55F41CB372F3008CB981 /* Frameworks */,
+				4D0D55F51CB372F3008CB981 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BurrowTunnel-iOS";
+			productName = "BurrowTunnel-iOS";
+			productReference = 4D0D55F71CB372F3008CB981 /* BurrowTunnel-iOS.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		4D0D56081CB37302008CB981 /* BurrowTunnel-Mac */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D0D56131CB37302008CB981 /* Build configuration list for PBXNativeTarget "BurrowTunnel-Mac" */;
+			buildPhases = (
+				4D0D56051CB37302008CB981 /* Sources */,
+				4D0D56061CB37302008CB981 /* Frameworks */,
+				4D0D56071CB37302008CB981 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "BurrowTunnel-Mac";
+			productName = "BurrowTunnel-Mac";
+			productReference = 4D0D56091CB37302008CB981 /* BurrowTunnel-Mac.appex */;
+			productType = "com.apple.product-type.app-extension";
+		};
+		4D4C41D31CBB50C000055D86 /* Shovel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D4C41E51CBB50C000055D86 /* Build configuration list for PBXNativeTarget "Shovel" */;
+			buildPhases = (
+				4D4C41CF1CBB50C000055D86 /* Sources */,
+				4D4C41D01CBB50C000055D86 /* Frameworks */,
+				4D4C41D11CBB50C000055D86 /* Headers */,
+				4D4C41D21CBB50C000055D86 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4D4C42211CBB605F00055D86 /* PBXTargetDependency */,
+			);
+			name = Shovel;
+			productName = Shovel;
+			productReference = 4D4C41D41CBB50C000055D86 /* Shovel.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4D4C41DC1CBB50C000055D86 /* ShovelTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D4C41E81CBB50C000055D86 /* Build configuration list for PBXNativeTarget "ShovelTests" */;
+			buildPhases = (
+				4D4C41D91CBB50C000055D86 /* Sources */,
+				4D4C41DA1CBB50C000055D86 /* Frameworks */,
+				4D4C41DB1CBB50C000055D86 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				4D4C41E01CBB50C000055D86 /* PBXTargetDependency */,
+			);
+			name = ShovelTests;
+			productName = ShovelTests;
+			productReference = 4D4C41DD1CBB50C000055D86 /* ShovelTests.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		4D4C420E1CBB5B5C00055D86 /* CResolver */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D4C42141CBB5B5D00055D86 /* Build configuration list for PBXNativeTarget "CResolver" */;
+			buildPhases = (
+				4D4C420A1CBB5B5C00055D86 /* Sources */,
+				4D4C420B1CBB5B5C00055D86 /* Frameworks */,
+				4D4C420C1CBB5B5C00055D86 /* Headers */,
+				4D4C420D1CBB5B5C00055D86 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = CResolver;
+			productName = CResolver;
+			productReference = 4D4C420F1CBB5B5C00055D86 /* CResolver.framework */;
+			productType = "com.apple.product-type.framework";
 		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
-		4D282D241C9121F800E41631 /* Project object */ = {
+		4D0D55C31CB3722F008CB981 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0720;
-				LastUpgradeCheck = 0720;
-				ORGANIZATIONNAME = "Jaden Geller";
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
 				TargetAttributes = {
-					4D282D2B1C9121F800E41631 = {
-						CreatedOnToolsVersion = 7.2;
+					4D0D55CC1CB37274008CB981 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = PLYLXBYCEQ;
+						SystemCapabilities = {
+							com.apple.VPNLite = {
+								enabled = 1;
+							};
+						};
 					};
-					4D282D3F1C9121F800E41631 = {
-						CreatedOnToolsVersion = 7.2;
-						TestTargetID = 4D282D2B1C9121F800E41631;
+					4D0D55E31CB37297008CB981 = {
+						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = PLYLXBYCEQ;
+						SystemCapabilities = {
+							com.apple.Sandbox = {
+								enabled = 0;
+							};
+							com.apple.VPNLite = {
+								enabled = 1;
+							};
+						};
+					};
+					4D0D55F61CB372F3008CB981 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					4D0D56081CB37302008CB981 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					4D4C41D31CBB50C000055D86 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					4D4C41DC1CBB50C000055D86 = {
+						CreatedOnToolsVersion = 7.3;
+					};
+					4D4C420E1CBB5B5C00055D86 = {
+						CreatedOnToolsVersion = 7.3;
 					};
 				};
 			};
-			buildConfigurationList = 4D282D271C9121F800E41631 /* Build configuration list for PBXProject "Burrow" */;
+			buildConfigurationList = 4D0D55C61CB3722F008CB981 /* Build configuration list for PBXProject "Burrow" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -161,89 +563,733 @@
 				en,
 				Base,
 			);
-			mainGroup = 4D282D231C9121F800E41631;
-			productRefGroup = 4D282D2D1C9121F800E41631 /* Products */;
+			mainGroup = 4D0D55C21CB3722F008CB981;
+			productRefGroup = 4D0D55CE1CB37274008CB981 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				4D282D2B1C9121F800E41631 /* Burrow */,
-				4D282D3F1C9121F800E41631 /* BurrowTests */,
+				4D0D55CC1CB37274008CB981 /* Burrow-iOS */,
+				4D0D55E31CB37297008CB981 /* Burrow-Mac */,
+				4D0D55F61CB372F3008CB981 /* BurrowTunnel-iOS */,
+				4D0D56081CB37302008CB981 /* BurrowTunnel-Mac */,
+				4D4C420E1CBB5B5C00055D86 /* CResolver */,
+				4D4C41D31CBB50C000055D86 /* Shovel */,
+				4D4C41DC1CBB50C000055D86 /* ShovelTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
-		4D282D2A1C9121F800E41631 /* Resources */ = {
+		4D0D55CB1CB37274008CB981 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D282D3A1C9121F800E41631 /* LaunchScreen.storyboard in Resources */,
-				4D282D371C9121F800E41631 /* Assets.xcassets in Resources */,
-				4D282D351C9121F800E41631 /* Main.storyboard in Resources */,
+				4D4B13721CBBA00F008EC7CD /* BurrowTunnel-Extension-iOS.entitlements in Resources */,
+				4D0D56381CB3739C008CB981 /* Info.plist in Resources */,
+				4D0D56241CB37390008CB981 /* Main.storyboard in Resources */,
+				4D4B13701CBBA00B008EC7CD /* BurrowTunnel-Extension-Mac.entitlements in Resources */,
+				4D4B136C1CBB9FE1008EC7CD /* Burrow-iOS.entitlements in Resources */,
+				4D4B136E1CBB9FE9008EC7CD /* Burrow-Mac.entitlements in Resources */,
+				4D0D56231CB37390008CB981 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D282D3E1C9121F800E41631 /* Resources */ = {
+		4D0D55E21CB37297008CB981 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D0D563C1CB37431008CB981 /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D0D55F51CB372F3008CB981 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D0D56071CB37302008CB981 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D4C41D21CBB50C000055D86 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D4C41DB1CBB50C000055D86 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D4C420D1CBB5B5C00055D86 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D4C42181CBB5B8000055D86 /* CResolver.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
-		4D282D281C9121F800E41631 /* Sources */ = {
+		4D0D55C91CB37274008CB981 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D282D321C9121F800E41631 /* ViewController.swift in Sources */,
-				4D282D301C9121F800E41631 /* AppDelegate.swift in Sources */,
+				4D0D56261CB37390008CB981 /* ViewController.swift in Sources */,
+				4D0D56211CB37390008CB981 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		4D282D3C1C9121F800E41631 /* Sources */ = {
+		4D0D55E01CB37297008CB981 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D282D451C9121F800E41631 /* BurrowTests.swift in Sources */,
+				4D0D563E1CB3743A008CB981 /* ViewController.swift in Sources */,
+				4D0D563B1CB3742B008CB981 /* AppDelegate.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D0D55F31CB372F3008CB981 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D4C41AC1CBB4C8D00055D86 /* PacketTunnelProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D0D56051CB37302008CB981 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D4C41AB1CBB4C8C00055D86 /* PacketTunnelProvider.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D4C41CF1CBB50C000055D86 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D4B13791CBBA0C4008EC7CD /* ServerMessage.swift in Sources */,
+				4D4B13751CBBA0AE008EC7CD /* ServerMessage.m in Sources */,
+				4D4C42291CBB73A300055D86 /* ResourceRecord.swift in Sources */,
+				4D4C421F1CBB5F7600055D86 /* TXTRecord.swift in Sources */,
+				4D4C42271CBB646B00055D86 /* ResourceRecord.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D4C41D91CBB50C000055D86 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D4C41E31CBB50C000055D86 /* TXTRecordTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D4C420A1CBB5B5C00055D86 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
-		4D282D421C9121F800E41631 /* PBXTargetDependency */ = {
+		4D0D55FF1CB372F3008CB981 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 4D282D2B1C9121F800E41631 /* Burrow */;
-			targetProxy = 4D282D411C9121F800E41631 /* PBXContainerItemProxy */;
+			target = 4D0D55F61CB372F3008CB981 /* BurrowTunnel-iOS */;
+			targetProxy = 4D0D55FE1CB372F3008CB981 /* PBXContainerItemProxy */;
+		};
+		4D0D56111CB37302008CB981 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D0D56081CB37302008CB981 /* BurrowTunnel-Mac */;
+			targetProxy = 4D0D56101CB37302008CB981 /* PBXContainerItemProxy */;
+		};
+		4D4C41E01CBB50C000055D86 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D4C41D31CBB50C000055D86 /* Shovel */;
+			targetProxy = 4D4C41DF1CBB50C000055D86 /* PBXContainerItemProxy */;
+		};
+		4D4C42211CBB605F00055D86 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D4C420E1CBB5B5C00055D86 /* CResolver */;
+			targetProxy = 4D4C42201CBB605F00055D86 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
 /* Begin PBXVariantGroup section */
-		4D282D331C9121F800E41631 /* Main.storyboard */ = {
+		4D0D561B1CB37390008CB981 /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4D282D341C9121F800E41631 /* Base */,
+				4D0D561C1CB37390008CB981 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		4D0D561D1CB37390008CB981 /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				4D0D561E1CB37390008CB981 /* Base */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
-		4D282D381C9121F800E41631 /* LaunchScreen.storyboard */ = {
+		4D0D562A1CB37394008CB981 /* Main.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
-				4D282D391C9121F800E41631 /* Base */,
+				4D0D562B1CB37394008CB981 /* Base */,
 			);
-			name = LaunchScreen.storyboard;
+			name = Main.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		4D282D471C9121F800E41631 /* Debug */ = {
+		4D0D55C71CB3722F008CB981 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+			};
+			name = Debug;
+		};
+		4D0D55C81CB3722F008CB981 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+			};
+			name = Release;
+		};
+		4D0D55DE1CB37274008CB981 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "Burrow-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.ios;
+				PRODUCT_NAME = Burrow;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		4D0D55DF1CB37274008CB981 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "Burrow-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = iOS/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.ios;
+				PRODUCT_NAME = Burrow;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4D0D55F11CB37297008CB981 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "Burrow-Mac.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Mac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.mac;
+				PRODUCT_NAME = Burrow;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4D0D55F21CB37297008CB981 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "Burrow-Mac.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Mac Developer";
+				COMBINE_HIDPI_IMAGES = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				EMBEDDED_CONTENT_CONTAINS_SWIFT = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Mac/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
+				MACOSX_DEPLOYMENT_TARGET = 10.11;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.mac;
+				PRODUCT_NAME = Burrow;
+				PROVISIONING_PROFILE = "";
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		4D0D56021CB372F3008CB981 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "Extension/BurrowTunnel-Extension-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Extension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.ios.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4D0D56031CB372F3008CB981 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "Extension/BurrowTunnel-Extension-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Extension/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.ios.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		4D0D56141CB37302008CB981 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "Extension/BurrowTunnel-Extension-Mac.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Extension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.mac.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		4D0D56151CB37302008CB981 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_ENTITLEMENTS = "Extension/BurrowTunnel-Extension-Mac.entitlements";
+				CODE_SIGN_IDENTITY = "Mac Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Extension/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.mac.extension;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = macosx;
+				SKIP_INSTALL = YES;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
+			};
+			name = Release;
+		};
+		4D4C41E61CBB50C000055D86 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Shovel/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JadenGeller.Shovel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4D4C41E71CBB50C000055D86 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = Shovel/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MODULEMAP_FILE = "";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JadenGeller.Shovel;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
+		4D4C41E91CBB50C000055D86 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -276,19 +1322,24 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				INFOPLIST_FILE = ShovelTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JadenGeller.ShovelTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
-		4D282D481C9121F800E41631 /* Release */ = {
+		4D4C41EA1CBB50C000055D86 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ALLOW_NON_MODULAR_INCLUDES_IN_FRAMEWORK_MODULES = NO;
+				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -315,89 +1366,209 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.2;
+				INFOPLIST_FILE = ShovelTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JadenGeller.ShovelTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
-				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
 		};
-		4D282D4A1C9121F800E41631 /* Debug */ = {
+		4D4C42151CBB5B5D00055D86 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D4C42171CBB5B8000055D86 /* CResolver.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Burrow/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.JadenGeller.Burrow;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = CResolver/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				MACH_O_TYPE = mh_dylib;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JadenGeller.CResolver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Debug;
 		};
-		4D282D4B1C9121F800E41631 /* Release */ = {
+		4D4C42161CBB5B5D00055D86 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 4D4C42171CBB5B8000055D86 /* CResolver.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = Burrow/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.JadenGeller.Burrow;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-			};
-			name = Release;
-		};
-		4D282D4D1C9121F800E41631 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = BurrowTests/Info.plist;
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = CResolver/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.JadenGeller.BurrowTests;
+				MACH_O_TYPE = mh_dylib;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.JadenGeller.CResolver;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Burrow.app/Burrow";
-			};
-			name = Debug;
-		};
-		4D282D4E1C9121F800E41631 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = BurrowTests/Info.plist;
-				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.JadenGeller.BurrowTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Burrow.app/Burrow";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
 			};
 			name = Release;
 		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		4D282D271C9121F800E41631 /* Build configuration list for PBXProject "Burrow" */ = {
+		4D0D55C61CB3722F008CB981 /* Build configuration list for PBXProject "Burrow" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4D282D471C9121F800E41631 /* Debug */,
-				4D282D481C9121F800E41631 /* Release */,
+				4D0D55C71CB3722F008CB981 /* Debug */,
+				4D0D55C81CB3722F008CB981 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		4D282D491C9121F800E41631 /* Build configuration list for PBXNativeTarget "Burrow" */ = {
+		4D0D55DD1CB37274008CB981 /* Build configuration list for PBXNativeTarget "Burrow-iOS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4D282D4A1C9121F800E41631 /* Debug */,
-				4D282D4B1C9121F800E41631 /* Release */,
+				4D0D55DE1CB37274008CB981 /* Debug */,
+				4D0D55DF1CB37274008CB981 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		4D282D4C1C9121F800E41631 /* Build configuration list for PBXNativeTarget "BurrowTests" */ = {
+		4D0D55F01CB37297008CB981 /* Build configuration list for PBXNativeTarget "Burrow-Mac" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				4D282D4D1C9121F800E41631 /* Debug */,
-				4D282D4E1C9121F800E41631 /* Release */,
+				4D0D55F11CB37297008CB981 /* Debug */,
+				4D0D55F21CB37297008CB981 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D0D56011CB372F3008CB981 /* Build configuration list for PBXNativeTarget "BurrowTunnel-iOS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D0D56021CB372F3008CB981 /* Debug */,
+				4D0D56031CB372F3008CB981 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D0D56131CB37302008CB981 /* Build configuration list for PBXNativeTarget "BurrowTunnel-Mac" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D0D56141CB37302008CB981 /* Debug */,
+				4D0D56151CB37302008CB981 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D4C41E51CBB50C000055D86 /* Build configuration list for PBXNativeTarget "Shovel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D4C41E61CBB50C000055D86 /* Debug */,
+				4D4C41E71CBB50C000055D86 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D4C41E81CBB50C000055D86 /* Build configuration list for PBXNativeTarget "ShovelTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D4C41E91CBB50C000055D86 /* Debug */,
+				4D4C41EA1CBB50C000055D86 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		4D4C42141CBB5B5D00055D86 /* Build configuration list for PBXNativeTarget "CResolver" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D4C42151CBB5B5D00055D86 /* Debug */,
+				4D4C42161CBB5B5D00055D86 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
-	rootObject = 4D282D241C9121F800E41631 /* Project object */;
+	rootObject = 4D0D55C31CB3722F008CB981 /* Project object */;
 }
