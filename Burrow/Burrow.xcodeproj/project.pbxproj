@@ -36,6 +36,10 @@
 		4D4C42261CBB646B00055D86 /* ResourceRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4C42241CBB646B00055D86 /* ResourceRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D4C42271CBB646B00055D86 /* ResourceRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C42251CBB646B00055D86 /* ResourceRecord.m */; };
 		4D4C42291CBB73A300055D86 /* ResourceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C42281CBB73A300055D86 /* ResourceRecord.swift */; };
+		4DBD0AA31CC465F6003BC82C /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AA21CC465F6003BC82C /* Transmission.swift */; };
+		4DBD0AA51CC4ACD3003BC82C /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AA41CC4ACD3003BC82C /* Domain.swift */; };
+		4DBD0AA71CC4B66E003BC82C /* TransmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AA61CC4B66E003BC82C /* TransmissionTests.swift */; };
+		4DBD0AA91CC4B78A003BC82C /* DomainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AA81CC4B78A003BC82C /* DomainTests.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -146,6 +150,10 @@
 		4D4C42241CBB646B00055D86 /* ResourceRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceRecord.h; sourceTree = "<group>"; };
 		4D4C42251CBB646B00055D86 /* ResourceRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceRecord.m; sourceTree = "<group>"; };
 		4D4C42281CBB73A300055D86 /* ResourceRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceRecord.swift; sourceTree = "<group>"; };
+		4DBD0AA21CC465F6003BC82C /* Transmission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transmission.swift; sourceTree = "<group>"; };
+		4DBD0AA41CC4ACD3003BC82C /* Domain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Domain.swift; sourceTree = "<group>"; };
+		4DBD0AA61CC4B66E003BC82C /* TransmissionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionTests.swift; sourceTree = "<group>"; };
+		4DBD0AA81CC4B78A003BC82C /* DomainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainTests.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -317,6 +325,8 @@
 		4D4C41D51CBB50C000055D86 /* Shovel */ = {
 			isa = PBXGroup;
 			children = (
+				4DBD0AA41CC4ACD3003BC82C /* Domain.swift */,
+				4DBD0AA21CC465F6003BC82C /* Transmission.swift */,
 				4D4C41EE1CBB52D500055D86 /* Shovel.h */,
 				4D4B13771CBBA0B5008EC7CD /* ServerMessage */,
 				4D4C422A1CBB73A600055D86 /* ResourceRecord */,
@@ -330,6 +340,8 @@
 			isa = PBXGroup;
 			children = (
 				4D4C41E21CBB50C000055D86 /* TXTRecordTests.swift */,
+				4DBD0AA81CC4B78A003BC82C /* DomainTests.swift */,
+				4DBD0AA61CC4B66E003BC82C /* TransmissionTests.swift */,
 				4D4C41E41CBB50C000055D86 /* Info.plist */,
 			);
 			path = ShovelTests;
@@ -682,8 +694,10 @@
 				4D4B13791CBBA0C4008EC7CD /* ServerMessage.swift in Sources */,
 				4D4B13751CBBA0AE008EC7CD /* ServerMessage.m in Sources */,
 				4D4C42291CBB73A300055D86 /* ResourceRecord.swift in Sources */,
+				4DBD0AA31CC465F6003BC82C /* Transmission.swift in Sources */,
 				4D4C421F1CBB5F7600055D86 /* TXTRecord.swift in Sources */,
 				4D4C42271CBB646B00055D86 /* ResourceRecord.m in Sources */,
+				4DBD0AA51CC4ACD3003BC82C /* Domain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -691,7 +705,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DBD0AA91CC4B78A003BC82C /* DomainTests.swift in Sources */,
 				4D4C41E31CBB50C000055D86 /* TXTRecordTests.swift in Sources */,
+				4DBD0AA71CC4B66E003BC82C /* TransmissionTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -816,7 +832,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.ios;
 				PRODUCT_NAME = Burrow;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -862,7 +878,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.ios;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.ios;
 				PRODUCT_NAME = Burrow;
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -917,7 +933,7 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.mac;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.mac;
 				PRODUCT_NAME = Burrow;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -965,7 +981,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.mac;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.mac;
 				PRODUCT_NAME = Burrow;
 				PROVISIONING_PROFILE = "";
 				SDKROOT = macosx;
@@ -1016,7 +1032,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.ios.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.ios.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1062,7 +1078,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @executable_path/../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.ios.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.ios.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1113,7 +1129,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.mac.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.mac.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
@@ -1157,7 +1173,7 @@
 				INFOPLIST_FILE = Extension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.burrow.mac.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.mac.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
