@@ -88,7 +88,7 @@ extension TransmissionManager {
             continueDomain.prepending(String(index))
         })
         
-        // TODO: CLEAN UP
+        // TODO: CLEAN UP BC ASYNC STUFF
         let queueTHIS = dispatch_queue_create("TransmissionManagerTHIS", DISPATCH_QUEUE_SERIAL)
 
         let group = dispatch_group_create()
@@ -138,6 +138,7 @@ extension TransmissionManager {
             
             // Get the correct parent domain.
             var domain = domain(index: countIndex)
+            let level = domain.level
             
             // In each iteration, append a data label to the domain
             // looping while there is still data to append and space to append it
@@ -153,7 +154,7 @@ extension TransmissionManager {
                 defer { dataIndex = labelEndIndex }
                 
                 // Prepend the component
-                domain.prepend(String(data[dataIndex..<labelEndIndex]))
+                domain.prepend(String(data[dataIndex..<labelEndIndex]), atLevel: level)
             }
             
             domains.append(domain)

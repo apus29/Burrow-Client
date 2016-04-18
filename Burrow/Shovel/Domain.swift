@@ -14,6 +14,12 @@ public struct Domain {
     }
 }
 
+extension Domain {
+    public var level: Int {
+        return labels.count
+    }
+}
+
 extension Domain: StringLiteralConvertible {
     public init(_ string: String) {
         self.labels = string.componentsSeparatedByString(".")
@@ -57,16 +63,30 @@ extension Domain {
 }
 
 extension Domain {
-    public mutating func prepend(label: String) {
+    private mutating func insert(label: String, atIndex index: Int) {
         precondition(!label.containsString("."))
         precondition(label.utf8.count <= Domain.maxLabelLength)
-        labels.insert(label, atIndex: 0)
+        labels.insert(label, atIndex: index)
         precondition(domainTextualLength <= Domain.maxDomainTextualLength)
+    }
+    
+    public mutating func prepend(label: String) {
+        insert(label, atIndex: 0)
+    }
+    
+    public mutating func prepend(label: String, atLevel level: Int) {
+        insert(label, atIndex: labels.count - level)
     }
     
     public func prepending(label: String) -> Domain {
         var copy = self
         copy.prepend(label)
+        return copy
+    }
+    
+    public mutating func prepending(label: String, atLevel level: Int) -> Domain {
+        var copy = self
+        copy.prepending(label, atLevel: level)
         return copy
     }
 }

@@ -25,6 +25,16 @@ struct ShovelError: ErrorType {
     }
 }
 
+extension ShovelError: CustomStringConvertible {
+    var description: String {
+        var result = "ShovelError(code: \(code.rawValue.debugDescription)"
+        if let reason = reason { result += ", reason: \(reason.debugDescription)" }
+        if let object = object { result += ", object: \(object.debugDescription)" }
+        result += ")"
+        return result
+    }
+}
+
 public enum Result<Element> {
     case Success(Element)
     case Failure(ErrorType)

@@ -15,9 +15,9 @@ struct TXTRecord {
 
 extension TXTRecord {
     var attribute: (key: String, value: String)? {
-        let components = contents.componentsSeparatedByString("=")
+        let components = contents.characters.split("=", maxSplit: 1)
         guard components.count == 2 else { return nil }
-        return (key: components[0], value: components[1])
+        return (key: String(components[0]), value: String(components[1]))
     }
 }
 
@@ -29,7 +29,11 @@ extension TXTRecord {
                 throw ShovelError(code: .unexpectedRecordType, reason: "Expected TXT record.")
             }
             guard let (key, value) = record.attribute else {
-                throw ShovelError(code: .unexpectedRecordFormat, reason: "Expected RFC 1464 format.")
+                throw ShovelError(
+                    code: .unexpectedRecordFormat,
+                    reason: "Expected RFC 1464 format.",
+                    object: record.contents
+                )
             }
             result[key] = value
         }
