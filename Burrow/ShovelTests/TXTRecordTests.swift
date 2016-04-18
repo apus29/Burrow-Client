@@ -16,6 +16,7 @@ class TXTRecordTests: XCTestCase {
             domain: "constant.test.burrow.tech",
             recordClass: ns_c_in,
             recordType: ns_t_txt,
+            useTCP: true,
             bufferSize: 4096
         )
         XCTAssertEqual(1, serverMessage.value.answers.count)
@@ -30,6 +31,7 @@ class TXTRecordTests: XCTestCase {
             domain: "babies.test.burrow.tech",
             recordClass: ns_c_in,
             recordType: ns_t_txt,
+            useTCP: true,
             bufferSize: 4096
         )
         let expectedCount = 9
@@ -52,6 +54,7 @@ class TXTRecordTests: XCTestCase {
             domain: "bacon.test.burrow.tech",
             recordClass: ns_c_in,
             recordType: ns_t_txt,
+            useTCP: true,
             bufferSize: 4096
         )
         XCTAssertEqual(1, serverMessage.value.answers.count)

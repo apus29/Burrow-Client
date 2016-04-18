@@ -15,4 +15,4 @@ typedef ns_sect ServerMessageSection;
 
 int ServerMessageGetCount(ServerMessage message, ServerMessageSection section);
 int ServerMessageParse(ServerMessage message, ServerMessageSection section, int index, ResourceRecord *record);
-int ServerMessageFromQuery(const char *domain, RecordClass class, RecordType type, u_char *answerBuffer, int bufferSize, ServerMessage *message);
+int ServerMessageFromQuery(const char *domain, RecordClass class, RecordType type, bool useTCP, u_char *answerBuffer, int bufferSize, ServerMessage *message);
