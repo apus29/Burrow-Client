@@ -14,8 +14,8 @@ class TXTRecordTests: XCTestCase {
     func testConstant() {
         let serverMessage = try! ServerMessage.withQuery(
             domain: "constant.test.burrow.tech",
-            recordClass: ns_c_in,
-            recordType: ns_t_txt,
+            recordClass: .internet,
+            recordType: .txt,
             useTCP: true,
             bufferSize: 4096
         )
@@ -29,8 +29,8 @@ class TXTRecordTests: XCTestCase {
     func testBabies() {
         let serverMessage = try! ServerMessage.withQuery(
             domain: "babies.test.burrow.tech",
-            recordClass: ns_c_in,
-            recordType: ns_t_txt,
+            recordClass: .internet,
+            recordType: .txt,
             useTCP: true,
             bufferSize: 4096
         )
@@ -52,8 +52,8 @@ class TXTRecordTests: XCTestCase {
     func testBacon() {
         let serverMessage = try! ServerMessage.withQuery(
             domain: "bacon.test.burrow.tech",
-            recordClass: ns_c_in,
-            recordType: ns_t_txt,
+            recordClass: .internet,
+            recordType: .txt,
             useTCP: true,
             bufferSize: 4096
         )
