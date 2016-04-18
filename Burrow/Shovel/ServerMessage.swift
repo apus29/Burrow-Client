@@ -26,13 +26,13 @@ extension ServerMessage {
     /// to hold the result, an exception will be thrown. The resulting message is
     /// returned in a `ManagedBuffer` object such that its `value` property is only
     /// valid when while the buffer exists, otherwise a segmentation fault may occur.
-    static func withQuery(domain domain: String, recordClass: RecordClass, recordType: RecordType, bufferSize: Int) throws -> ManagedBuffer<ServerMessage, UInt8> {
+    static func withQuery(domain domain: Domain, recordClass: RecordClass, recordType: RecordType, bufferSize: Int) throws -> ManagedBuffer<ServerMessage, UInt8> {
         var status: Int = 0
         
         let result = ManagedBuffer<ServerMessage, UInt8>.create(bufferSize, initialValue: { buffer in
             var serverMessage = ServerMessage()
             status = buffer.withUnsafeMutablePointerToElements { bufferPointer in
-                domain.nulTerminatedUTF8.withUnsafeBufferPointer { domainBuffer in
+                String(domain).nulTerminatedUTF8.withUnsafeBufferPointer { domainBuffer in
                     Int(ServerMessageFromQuery(
                         UnsafePointer(domainBuffer.baseAddress),
                         recordClass,

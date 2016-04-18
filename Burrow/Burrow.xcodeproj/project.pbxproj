@@ -36,10 +36,10 @@
 		4D4C42261CBB646B00055D86 /* ResourceRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4C42241CBB646B00055D86 /* ResourceRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D4C42271CBB646B00055D86 /* ResourceRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C42251CBB646B00055D86 /* ResourceRecord.m */; };
 		4D4C42291CBB73A300055D86 /* ResourceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C42281CBB73A300055D86 /* ResourceRecord.swift */; };
-		4DBD0AA31CC465F6003BC82C /* Transmission.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AA21CC465F6003BC82C /* Transmission.swift */; };
+		4DBD0AA31CC465F6003BC82C /* TransmissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AA21CC465F6003BC82C /* TransmissionManager.swift */; };
 		4DBD0AA51CC4ACD3003BC82C /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AA41CC4ACD3003BC82C /* Domain.swift */; };
 		4DBD0AA71CC4B66E003BC82C /* TransmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AA61CC4B66E003BC82C /* TransmissionTests.swift */; };
-		4DBD0AA91CC4B78A003BC82C /* DomainTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AA81CC4B78A003BC82C /* DomainTests.swift */; };
+		4DBD0AAE1CC4CA56003BC82C /* ShovelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AAD1CC4CA56003BC82C /* ShovelError.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -150,10 +150,10 @@
 		4D4C42241CBB646B00055D86 /* ResourceRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceRecord.h; sourceTree = "<group>"; };
 		4D4C42251CBB646B00055D86 /* ResourceRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceRecord.m; sourceTree = "<group>"; };
 		4D4C42281CBB73A300055D86 /* ResourceRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceRecord.swift; sourceTree = "<group>"; };
-		4DBD0AA21CC465F6003BC82C /* Transmission.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Transmission.swift; sourceTree = "<group>"; };
+		4DBD0AA21CC465F6003BC82C /* TransmissionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionManager.swift; sourceTree = "<group>"; };
 		4DBD0AA41CC4ACD3003BC82C /* Domain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Domain.swift; sourceTree = "<group>"; };
 		4DBD0AA61CC4B66E003BC82C /* TransmissionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionTests.swift; sourceTree = "<group>"; };
-		4DBD0AA81CC4B78A003BC82C /* DomainTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainTests.swift; sourceTree = "<group>"; };
+		4DBD0AAD1CC4CA56003BC82C /* ShovelError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShovelError.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -325,12 +325,13 @@
 		4D4C41D51CBB50C000055D86 /* Shovel */ = {
 			isa = PBXGroup;
 			children = (
-				4DBD0AA41CC4ACD3003BC82C /* Domain.swift */,
-				4DBD0AA21CC465F6003BC82C /* Transmission.swift */,
 				4D4C41EE1CBB52D500055D86 /* Shovel.h */,
+				4DBD0AA41CC4ACD3003BC82C /* Domain.swift */,
+				4DBD0AA21CC465F6003BC82C /* TransmissionManager.swift */,
 				4D4B13771CBBA0B5008EC7CD /* ServerMessage */,
 				4D4C422A1CBB73A600055D86 /* ResourceRecord */,
-				4D4C421E1CBB5F7600055D86 /* TXTRecord.swift */,
+				4DBD0AAC1CC4C609003BC82C /* TXT */,
+				4DBD0AAD1CC4CA56003BC82C /* ShovelError.swift */,
 				4D4C41D81CBB50C000055D86 /* Info.plist */,
 			);
 			path = Shovel;
@@ -340,7 +341,6 @@
 			isa = PBXGroup;
 			children = (
 				4D4C41E21CBB50C000055D86 /* TXTRecordTests.swift */,
-				4DBD0AA81CC4B78A003BC82C /* DomainTests.swift */,
 				4DBD0AA61CC4B66E003BC82C /* TransmissionTests.swift */,
 				4D4C41E41CBB50C000055D86 /* Info.plist */,
 			);
@@ -367,6 +367,14 @@
 				4D4C42281CBB73A300055D86 /* ResourceRecord.swift */,
 			);
 			name = ResourceRecord;
+			sourceTree = "<group>";
+		};
+		4DBD0AAC1CC4C609003BC82C /* TXT */ = {
+			isa = PBXGroup;
+			children = (
+				4D4C421E1CBB5F7600055D86 /* TXTRecord.swift */,
+			);
+			name = TXT;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -691,10 +699,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DBD0AAE1CC4CA56003BC82C /* ShovelError.swift in Sources */,
 				4D4B13791CBBA0C4008EC7CD /* ServerMessage.swift in Sources */,
 				4D4B13751CBBA0AE008EC7CD /* ServerMessage.m in Sources */,
 				4D4C42291CBB73A300055D86 /* ResourceRecord.swift in Sources */,
-				4DBD0AA31CC465F6003BC82C /* Transmission.swift in Sources */,
+				4DBD0AA31CC465F6003BC82C /* TransmissionManager.swift in Sources */,
 				4D4C421F1CBB5F7600055D86 /* TXTRecord.swift in Sources */,
 				4D4C42271CBB646B00055D86 /* ResourceRecord.m in Sources */,
 				4DBD0AA51CC4ACD3003BC82C /* Domain.swift in Sources */,
@@ -705,7 +714,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4DBD0AA91CC4B78A003BC82C /* DomainTests.swift in Sources */,
 				4D4C41E31CBB50C000055D86 /* TXTRecordTests.swift in Sources */,
 				4DBD0AA71CC4B66E003BC82C /* TransmissionTests.swift in Sources */,
 			);

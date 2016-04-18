@@ -13,6 +13,30 @@ struct TXTRecord {
     var contents: String
 }
 
+extension TXTRecord {
+    var attribute: (key: String, value: String)? {
+        let components = contents.componentsSeparatedByString("=")
+        guard components.count == 2 else { return nil }
+        return (key: components[0], value: components[1])
+    }
+}
+
+extension TXTRecord {
+    static func parseAttributes(message: ServerMessage) throws -> [String : String] {
+        var result: [String : String] = [:]
+        for answer in message.answers {
+            guard let record = TXTRecord(answer) else {
+                throw ShovelError(code: .unexpectedRecordType, reason: "Expected TXT record.")
+            }
+            guard let (key, value) = record.attribute else {
+                throw ShovelError(code: .unexpectedRecordFormat, reason: "Expected RFC 1464 format.")
+            }
+            result[key] = value
+        }
+        return result
+    }
+}
+
 extension String {
     init?(baseAddress: UnsafePointer<CChar>, length: Int, encoding: NSStringEncoding) {
         let data = NSData(bytes: baseAddress, length: length)

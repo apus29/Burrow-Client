@@ -48,7 +48,7 @@ extension Domain {
         return (labels.count - 1) + labels.lazy.map{ $0.utf8.count }.reduce(0, combine: +)
     }
     
-    private var maxNextLabelLength: Int {
+    internal var maxNextLabelLength: Int {
         return min(
             Domain.maxLabelLength,
             Domain.maxDomainTextualLength - domainTextualLength - 1
@@ -70,42 +70,3 @@ extension Domain {
         return copy
     }
 }
-
-extension Domain {
-    static func package(data: NSData, underDomain domain: (index: Int) -> Domain) -> [Domain] {
-        let data = data.base64EncodedStringWithOptions([]).utf8
-        var dataIndex = data.startIndex
-        
-        // In each iteration of the loop, build a single domain and add it to the array.
-        var domains: [Domain] = []
-        var countIndex = 0
-        while dataIndex != data.endIndex {
-            defer { countIndex += 1 }
-            
-            // Get the correct parent domain.
-            var domain = domain(index: countIndex)
-            
-            // In each iteration, append a data label to the domain
-            // looping while there is still data to append and space to append it
-            while true {
-                let nextLabelLength = min(
-                    domain.maxNextLabelLength,
-                    dataIndex.distanceTo(data.endIndex)
-                )
-                guard nextLabelLength > 0 else { break }
-                
-                // From the length, compute the end index
-                let labelEndIndex = dataIndex.advancedBy(nextLabelLength)
-                defer { dataIndex = labelEndIndex }
-                
-                // Prepend the component
-                domain.prepend(String(data[dataIndex..<labelEndIndex]))
-            }
-            
-            domains.append(domain)
-        }
-        
-        return domains
-    }
-}
-

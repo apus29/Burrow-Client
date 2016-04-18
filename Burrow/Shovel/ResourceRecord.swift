@@ -14,3 +14,15 @@ extension ResourceRecord {
         )
     }
 }
+
+extension RecordType {
+    static var txt: RecordType {
+        return ns_t_txt
+    }
+}
+
+extension RecordClass {
+    static var internet: RecordClass {
+        return ns_c_in
+    }
+}
