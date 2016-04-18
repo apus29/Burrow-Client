@@ -16,10 +16,12 @@ struct ShovelError: ErrorType {
     
     var code: Code
     var reason: String?
+    var object: NSObject?
     
-    init(code: Code, reason: String? = nil) {
+    init(code: Code, reason: String? = nil, object: NSObject? = nil) {
         self.code = code
         self.reason = reason
+        self.object = object
     }
 }
 

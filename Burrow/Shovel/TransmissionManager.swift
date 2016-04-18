@@ -46,7 +46,7 @@ extension TransmissionManager {
 extension TransmissionManager {
     private func begin() throws -> String {
         let message = try ServerMessage.withQuery(
-            domain: domain.prepending("begin").prepending("garbage1"),
+            domain: domain.prepending("begin").prepending(NSUUID().UUIDString),
             recordClass: .internet,
             recordType: .txt,
             bufferSize: 4096
@@ -69,8 +69,13 @@ extension TransmissionManager {
         let attributes = try TXTRecord.parseAttributes(message.value)
         try requireValue("True", from: attributes, forExpectedKey: "success")
 
-        guard let data = NSData(base64EncodedString: try value(from: attributes, forExpectedKey: "contents"), options: []) else {
-            throw ShovelError(code: .unexpectedServerResponse, reason: "Unable to decode contents as Base64.")
+        let contents = try value(from: attributes, forExpectedKey: "contents")
+        guard let data = NSData(base64EncodedString: contents, options: []) else {
+            throw ShovelError(
+                code: .unexpectedServerResponse,
+                reason: "Unable to decode contents as Base64.",
+                object: contents
+            )
         }
         return data
     }
