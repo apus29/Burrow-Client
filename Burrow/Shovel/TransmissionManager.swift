@@ -8,7 +8,7 @@
 
 import Foundation
 
-public class TransmissionManager {
+public struct TransmissionManager {
     public let domain: Domain
     
     init(domain: Domain) {
@@ -39,7 +39,6 @@ private func requireValue(expectedValue: String, from attributes: [String : Stri
 }
 
 extension TransmissionManager {
-    // TODO: Make concurrent once we get async lookups.
     private static let queue = dispatch_queue_create("TransmissionManager", DISPATCH_QUEUE_CONCURRENT)
 }
 
