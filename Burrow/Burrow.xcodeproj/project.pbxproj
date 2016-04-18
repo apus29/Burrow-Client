@@ -560,6 +560,7 @@
 					};
 					4D0D55F61CB372F3008CB981 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = PLYLXBYCEQ;
 					};
 					4D0D56081CB37302008CB981 = {
 						CreatedOnToolsVersion = 7.3;
@@ -1042,6 +1043,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.ios.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -1088,6 +1090,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.ios.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";

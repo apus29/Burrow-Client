@@ -11,6 +11,7 @@ struct ShovelError: ErrorType {
         case unexpectedRecordType = "Unexpected record type."
         case unexpectedRecordFormat = "Unexpected record format."
         case unexpectedServerResponse = "Unexpected server response."
+        case serverErrorResponse = "Server error response."
     }
     
     var code: Code

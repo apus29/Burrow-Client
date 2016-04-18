@@ -23,14 +23,24 @@ private func value(from attributes: [String : String], forExpectedKey key: Strin
     return value
 }
 
+private func requireSuccess(expectedValue: String, from attributes: [String : String]) throws {
+    let foundValue = try value(from: attributes, forExpectedKey: "success")
+    precondition(["True", "False"].contains(foundValue))
+    guard foundValue == "True" else {
+        throw ShovelError(code: .serverErrorResponse, reason: attributes["error"])
+    }
+}
+
 private func requireValue(expectedValue: String, from attributes: [String : String], forExpectedKey key: String) throws {
-    guard try value(from: attributes, forExpectedKey: key) == expectedValue else {
-        throw ShovelError(code: .unexpectedServerResponse, reason: "Expected \"\(expectedValue)\" value for \"\(key)\" key.")
+    let foundValue = try value(from: attributes, forExpectedKey: key)
+    guard foundValue == expectedValue else {
+        throw ShovelError(code: .unexpectedServerResponse, reason: "Expected \"\(expectedValue)\" value for \"\(key)\" key. Found \"\(foundValue)\".")
     }
 }
 
 extension TransmissionManager {
-    private static let queue = dispatch_queue_create("TransmissionManager", DISPATCH_QUEUE_CONCURRENT)
+    // TODO: Make concurrent once we get async lookups.
+    private static let queue = dispatch_queue_create("TransmissionManager", DISPATCH_QUEUE_SERIAL)
 }
 
 extension TransmissionManager {
@@ -73,9 +83,12 @@ extension TransmissionManager {
             continueDomain.prepending(String(index))
         })
         
+        // TODO: CLEAN UP
+        let queueTHIS = dispatch_queue_create("TransmissionManagerTHIS", DISPATCH_QUEUE_SERIAL)
+
         let group = dispatch_group_create()
         for domain in domains {
-            dispatch_group_async(group, TransmissionManager.queue) {
+            dispatch_group_async(group, queueTHIS) {
                 do {
                     let message = try ServerMessage.withQuery(
                         domain: domain,
