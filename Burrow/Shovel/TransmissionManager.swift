@@ -11,7 +11,7 @@ import Foundation
 public struct TransmissionManager {
     public let domain: Domain
     
-    init(domain: Domain) {
+    public init(domain: Domain) {
         self.domain = domain
     }
 }
@@ -117,7 +117,7 @@ extension TransmissionManager {
         return response
     }
     
-    public func transmit(data: NSData, responseHandler: Result<NSData> -> ()) throws {
+    public func transmit(data: NSData, responseHandler: Result<NSData> throws -> ()) rethrows {
         dispatch_async(TransmissionManager.queue) {
             responseHandler(Result {
                 try self.transmit(data)
