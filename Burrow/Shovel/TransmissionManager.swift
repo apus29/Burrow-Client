@@ -40,7 +40,7 @@ private func requireValue(expectedValue: String, from attributes: [String : Stri
 
 extension TransmissionManager {
     // TODO: Make concurrent once we get async lookups.
-    private static let queue = dispatch_queue_create("TransmissionManager", DISPATCH_QUEUE_SERIAL)
+    private static let queue = dispatch_queue_create("TransmissionManager", DISPATCH_QUEUE_CONCURRENT)
 }
 
 extension TransmissionManager {
@@ -89,13 +89,10 @@ extension TransmissionManager {
         let domains = TransmissionManager.package(data, underDomain: { index in
             continueDomain.prepending(String(index))
         })
-        
-        // TODO: CLEAN UP BC ASYNC STUFF
-        let queueTHIS = dispatch_queue_create("TransmissionManagerTHIS", DISPATCH_QUEUE_SERIAL)
 
         let group = dispatch_group_create()
         for domain in domains {
-            dispatch_group_async(group, queueTHIS) {
+            dispatch_group_async(group, TransmissionManager.queue) {
                 do {
                     let message = try ServerMessage.withQuery(
                         domain: domain,
