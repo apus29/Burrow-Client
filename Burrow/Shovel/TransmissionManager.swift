@@ -49,6 +49,7 @@ extension TransmissionManager {
             domain: domain.prepending("begin").prepending(NSUUID().UUIDString),
             recordClass: .internet,
             recordType: .txt,
+            useTCP: true,
             bufferSize: 4096
         )
         let attributes = try TXTRecord.parseAttributes(message.value)
@@ -64,6 +65,7 @@ extension TransmissionManager {
             domain: domain.prepending("end").prepending(transmissionId).prepending(String(count)),
             recordClass: .internet,
             recordType: .txt,
+            useTCP: true,
             bufferSize: 4096
         )
         let attributes = try TXTRecord.parseAttributes(message.value)
@@ -99,6 +101,7 @@ extension TransmissionManager {
                         domain: domain,
                         recordClass: .internet,
                         recordType: .txt,
+                        useTCP: true,
                         bufferSize: 4096
                     )
                     let attributes = try TXTRecord.parseAttributes(message.value)

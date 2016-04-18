@@ -7,6 +7,7 @@
 //
 
 #include "ServerMessage.h"
+extern res_state res_state_new();
 
 int ServerMessageGetCount(ServerMessage message, ServerMessageSection section) {
     return ns_msg_count(message, section);
@@ -19,9 +20,20 @@ int ServerMessageParse(ServerMessage message, ServerMessageSection section, int 
     return 0;
 }
 
-int ServerMessageFromQuery(const char *domain, RecordClass class, RecordType type, u_char *answerBuffer, int bufferSize, ServerMessage *message) {
+int ServerMessageFromQuery(const char *domain, RecordClass class, RecordType type, bool useTCP, u_char *answerBuffer, int bufferSize, ServerMessage *message) {
     int answerLength;
-    if((answerLength = res_query(domain, class, type, answerBuffer, bufferSize)) < 0) {
+    res_state statp = res_state_new();
+    res_ninit(statp);
+    if (useTCP) {
+        // RES_USEVC uses virtual circuit. This forces usage of TCP.
+        // Used in this way here: http://opensource.apple.com//source/libresolv/libresolv-57/res_init.c
+        statp->options |= RES_USEVC;
+    }
+    else {
+        // Unsetting the RES_USEVC flag makes it only use UDP
+        statp->options &= ~RES_USEVC;
+    }
+    if((answerLength = res_nquery(statp, domain, class, type, answerBuffer, bufferSize)) < 0) {
         return -1;
     }
     if (ns_initparse(answerBuffer, answerLength, message)) {
