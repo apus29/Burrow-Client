@@ -111,6 +111,8 @@ extension TransmissionManager {
         
         // TODO: Should we have a timeout in case the server ceases to exist or something?
         dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
+        
+        // TODO: Waiting to send this might be adding significat delays.
         let response = try end(transmissionId, count: domains.count)
         return response
     }
