@@ -90,7 +90,9 @@ extension TransmissionManager {
         })
 
         let group = dispatch_group_create()
+        var count = 0
         for domain in domains {
+            count += 1
             dispatch_group_async(group, TransmissionManager.queue) {
                 do {
                     let message = try ServerMessage.withQuery(
@@ -113,7 +115,7 @@ extension TransmissionManager {
         dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
         
         // TODO: Waiting to send this might be adding significat delays.
-        let response = try end(transmissionId, count: domains.count)
+        let response = try end(transmissionId, count: count)
         return response
     }
     
@@ -127,18 +129,23 @@ extension TransmissionManager {
 }
 
 extension TransmissionManager {
-    internal static func package(data: NSData, underDomain domain: (index: Int) -> Domain) -> [Domain] {
+    internal static func package(data: NSData, underDomain domain: (sequenceNumber: Int) -> Domain) -> AnyGenerator<Domain> {
         let data = data.base64EncodedStringWithOptions([]).utf8
         var dataIndex = data.startIndex
-        
-        // In each iteration of the loop, build a single domain and add it to the array.
-        var domains: [Domain] = []
-        var countIndex = 0
-        while dataIndex != data.endIndex {
-            defer { countIndex += 1 }
+        var sequenceNumber = 0
+
+        // Return a generator that will return the data-packed domains sequentially.
+        return AnyGenerator {
+            // Once we package all the data, do not return any more domains.
+            guard dataIndex != data.endIndex else { return nil }
+            
+            // Increment sequence number with each iteration
+            defer { sequenceNumber += 1 }
             
             // Get the correct parent domain.
-            var domain = domain(index: countIndex)
+            var domain = domain(sequenceNumber: sequenceNumber)
+            
+            // Record the number of levels in the domain so we can prepend before them.
             let level = domain.level
             
             // In each iteration, append a data label to the domain
@@ -158,9 +165,7 @@ extension TransmissionManager {
                 domain.prepend(String(data[dataIndex..<labelEndIndex]), atLevel: level)
             }
             
-            domains.append(domain)
+            return domain
         }
-        
-        return domains
     }
 }
