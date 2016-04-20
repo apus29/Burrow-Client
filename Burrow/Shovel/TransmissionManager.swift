@@ -117,7 +117,7 @@ extension TransmissionManager {
         return response
     }
     
-    public func transmit(data: NSData, responseHandler: Result<NSData> throws -> ()) rethrows {
+    public func transmit(data: NSData, responseHandler: Result<NSData> -> ()) {
         dispatch_async(TransmissionManager.queue) {
             responseHandler(Result {
                 try self.transmit(data)

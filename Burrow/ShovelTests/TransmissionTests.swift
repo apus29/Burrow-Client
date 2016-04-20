@@ -42,11 +42,11 @@ class TransmissionTests: XCTestCase {
     
     func testTransmission() {
         let expectation = expectationWithDescription("Received response")
-        var result: Result<NSData>!
+        var result: String!
         
         let manager = TransmissionManager(domain: "burrow.tech")
-        try! manager.transmit(data) { response in
-            result = response
+        manager.transmit(data) { response in
+            result = String(data: try! response.value(), encoding: NSUTF8StringEncoding)
             expectation.fulfill()
         }
         
@@ -57,7 +57,7 @@ class TransmissionTests: XCTestCase {
         }
         XCTAssertEqual(
             ".tac ypmurg eht dnuora detnirps yppup nworb ykrep ehT .retspmah yllis eht ta dekaeuqs allihcnihc yarg yffulf ehT .tna ytsat eht no delbbin eltrut neerg wols ehT .god yzal eht revo depmuj xof nworb kciuq ehT",
-            try! String(data: result.value(), encoding: NSUTF8StringEncoding)
+            result
         )
     }
 }
