@@ -23,10 +23,17 @@ int ServerMessageParse(ServerMessage message, ServerMessageSection section, int 
 int ServerMessageFromQuery(const char *domain, RecordClass class, RecordType type, bool useTCP, u_char *answerBuffer, int bufferSize, ServerMessage *message) {
     int answerLength;
     res_state statp = res_state_new();
-    res_ninit(statp);
+    if (statp == NULL) {
+        return -1;
+    }
+    
+    if (res_ninit(statp)) {
+        return -1;
+    }
+    
     if (useTCP) {
         // RES_USEVC uses virtual circuit. This forces usage of TCP.
-        // Used in this way here: http://opensource.apple.com//source/libresolv/libresolv-57/res_init.c
+        // Used in this way here: http://opensource.apple.com//source/libresolv/libresolv-60/res_init.c
         statp->options |= RES_USEVC;
     }
     else {
