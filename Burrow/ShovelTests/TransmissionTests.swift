@@ -18,7 +18,7 @@ class TransmissionTests: XCTestCase {
         let continueDomain = parentDomain.prepending("continue")
         
         let encodedData = data.base64EncodedDataWithOptions([])
-        let domains = TransmissionManager.package(encodedData, underDomain: { index in
+        let domains = TransmissionManager.package(arbitraryData: encodedData, underDomain: { index in
             return continueDomain.prepending(String(index))
         })
 

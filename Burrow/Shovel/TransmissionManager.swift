@@ -85,7 +85,7 @@ extension TransmissionManager {
         let transmissionId = try begin()
         
         let continueDomain = domain.prepending("continue").prepending(transmissionId)
-        let domains = TransmissionManager.package(data, underDomain: { index in
+        let domains = TransmissionManager.package(arbitraryData: data, underDomain: { index in
             continueDomain.prepending(String(index))
         })
 
@@ -129,11 +129,24 @@ extension TransmissionManager {
 }
 
 extension TransmissionManager {
-    internal static func package(data: NSData, underDomain domain: (sequenceNumber: Int) -> Domain) -> AnyGenerator<Domain> {
-        let data = data.base64EncodedStringWithOptions([]).utf8
+    private static let domainSafeCharacterSet: NSCharacterSet = {
+        let set = NSMutableCharacterSet()
+        set.formUnionWithCharacterSet(NSCharacterSet.alphanumericCharacterSet())
+        set.addCharactersInString("-")
+        return set
+    }()
+
+    // Will not encode data.
+    internal static func package(domainSafeString data: String, underDomain domain: (sequenceNumber: Int) -> Domain) -> AnyGenerator<Domain> {
+        precondition(data.rangeOfCharacterFromSet(domainSafeCharacterSet.invertedSet) == nil,
+                     "String to package is not domain safe.")
+        precondition(data.characters.first != "-" && data.characters.last != "-",
+                     "String may not start or end with dash.")
+        precondition(data.characters.count > 0, "String must have length greater than zero.")
+        
         var dataIndex = data.startIndex
         var sequenceNumber = 0
-
+        
         // Return a generator that will return the data-packed domains sequentially.
         return AnyGenerator {
             // Once we package all the data, do not return any more domains.
@@ -167,5 +180,13 @@ extension TransmissionManager {
             
             return domain
         }
+    }
+    
+    // Will encode data making it 25% longer.
+    internal static func package(arbitraryData data: NSData, underDomain domain: (sequenceNumber: Int) -> Domain) -> AnyGenerator<Domain> {
+        precondition(data.length > 0, "Data must have length greater than zero.")
+        
+        let domainSafeData = data.base64EncodedStringWithOptions([]).utf8
+        return package(domainSafeString: String(domainSafeData), underDomain: domain)
     }
 }
