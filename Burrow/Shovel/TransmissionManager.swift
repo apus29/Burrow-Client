@@ -81,11 +81,11 @@ extension TransmissionManager {
         return data
     }
     
-    private func transmit(data: NSData) throws -> NSData {
+    public func transmit(uncheckedDomainSafeData data: NSData) throws -> NSData {
         let transmissionId = try begin()
         
         let continueDomain = domain.prepending("continue").prepending(transmissionId)
-        let domains = TransmissionManager.package(arbitraryData: data, underDomain: { index in
+        let domains = DomainPackagingMessage(arbitraryData: data, underDomain: { index in
             continueDomain.prepending(String(index))
         })
 
@@ -119,74 +119,11 @@ extension TransmissionManager {
         return response
     }
     
-    public func transmit(data: NSData, responseHandler: Result<NSData> -> ()) {
+    private func transmit(uncheckedDomainSafeData data: NSData, responseHandler: Result<NSData> -> ()) {
         dispatch_async(TransmissionManager.queue) {
             responseHandler(Result {
-                try self.transmit(data)
+                try self.transmit(uncheckedDomainSafeData: data)
             })
         }
-    }
-}
-
-extension TransmissionManager {
-    private static let domainSafeCharacterSet: NSCharacterSet = {
-        let set = NSMutableCharacterSet()
-        set.formUnionWithCharacterSet(NSCharacterSet.alphanumericCharacterSet())
-        set.addCharactersInString("-")
-        return set
-    }()
-
-    // Will not encode data.
-    internal static func package(domainSafeString data: String, underDomain domain: (sequenceNumber: Int) -> Domain) -> AnyGenerator<Domain> {
-        precondition(data.rangeOfCharacterFromSet(domainSafeCharacterSet.invertedSet) == nil,
-                     "String to package is not domain safe.")
-        precondition(data.characters.first != "-" && data.characters.last != "-",
-                     "String may not start or end with dash.")
-        precondition(data.characters.count > 0, "String must have length greater than zero.")
-        
-        var dataIndex = data.startIndex
-        var sequenceNumber = 0
-        
-        // Return a generator that will return the data-packed domains sequentially.
-        return AnyGenerator {
-            // Once we package all the data, do not return any more domains.
-            guard dataIndex != data.endIndex else { return nil }
-            
-            // Increment sequence number with each iteration
-            defer { sequenceNumber += 1 }
-            
-            // Get the correct parent domain.
-            var domain = domain(sequenceNumber: sequenceNumber)
-            
-            // Record the number of levels in the domain so we can prepend before them.
-            let level = domain.level
-            
-            // In each iteration, append a data label to the domain
-            // looping while there is still data to append and space to append it
-            while true {
-                let nextLabelLength = min(
-                    domain.maxNextLabelLength,
-                    dataIndex.distanceTo(data.endIndex)
-                )
-                guard nextLabelLength > 0 else { break }
-                
-                // From the length, compute the end index
-                let labelEndIndex = dataIndex.advancedBy(nextLabelLength)
-                defer { dataIndex = labelEndIndex }
-                
-                // Prepend the component
-                domain.prepend(String(data[dataIndex..<labelEndIndex]), atLevel: level)
-            }
-            
-            return domain
-        }
-    }
-    
-    // Will encode data making it 25% longer.
-    internal static func package(arbitraryData data: NSData, underDomain domain: (sequenceNumber: Int) -> Domain) -> AnyGenerator<Domain> {
-        precondition(data.length > 0, "Data must have length greater than zero.")
-        
-        let domainSafeData = data.base64EncodedStringWithOptions([]).utf8
-        return package(domainSafeString: String(domainSafeData), underDomain: domain)
     }
 }
