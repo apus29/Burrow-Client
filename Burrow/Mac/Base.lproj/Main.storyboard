@@ -672,7 +672,26 @@
                     <view key="view" wantsLayer="YES" id="m2S-Jp-Qdl">
                         <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <subviews>
+                            <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="iYA-SZ-Bmr">
+                                <rect key="frame" x="213" y="122" width="55" height="25"/>
+                                <buttonCell key="cell" type="roundTextured" title="Tunnel" bezelStyle="texturedRounded" alignment="center" lineBreakMode="truncatingTail" enabled="NO" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="A3E-4K-vXG">
+                                    <behavior key="behavior" lightByBackground="YES" lightByGray="YES" changeBackground="YES" changeGray="YES"/>
+                                    <font key="font" metaFont="system"/>
+                                </buttonCell>
+                                <connections>
+                                    <action selector="togglePress:" target="XfG-lQ-9wD" id="V1P-jb-h3x"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="iYA-SZ-Bmr" firstAttribute="centerY" secondItem="m2S-Jp-Qdl" secondAttribute="centerY" id="Gqc-hc-2ci"/>
+                            <constraint firstItem="iYA-SZ-Bmr" firstAttribute="centerX" secondItem="m2S-Jp-Qdl" secondAttribute="centerX" id="ldd-0Y-K5b"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="toggleButton" destination="iYA-SZ-Bmr" id="fYy-1c-K0f"/>
+                    </connections>
                 </viewController>
                 <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
