@@ -43,6 +43,9 @@ int ServerMessageFromQuery(const char *domain, RecordClass class, RecordType typ
     if((answerLength = res_nquery(statp, domain, class, type, answerBuffer, bufferSize)) < 0) {
         return -1;
     }
+    // TODO: Necessary?
+//    res_client_close(statp);
+    
     if (ns_initparse(answerBuffer, answerLength, message)) {
         return -1;
     }

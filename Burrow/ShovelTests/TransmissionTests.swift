@@ -9,34 +9,43 @@
 import XCTest
 @testable import Shovel
 
-let data = "The quick brown fox jumped over the lazy dog. The slow green turtle nibbled on the tasty ant. The fluffy gray chinchilla squeaked at the silly hampster. The perky brown puppy sprinted around the grumpy cat.".dataUsingEncoding(NSUTF8StringEncoding)!
 let parentDomain: Domain = "bacon.tech"
+
+// This message must be domain safe.
+// Note that message MUST start with "test-" to indicate that we're
+let message = "test-" + "The-quick-brown-fox-jumped-over-the-lazy-dog-The-slow-green-turtle-nibbled-on-the-tasty-ant-The-fluffy-gray-chinchilla-squeaked-at-the-silly-hampster-The-perky-brown-puppy-sprinted-around-the-grumpy-cat-The-quick-brown-fox-jumped-over-the-lazy-dog-The-slow-green-turtle-nibbled-on-the-tasty-ant-The-fluffy-gray-chinchilla-squeaked-at-the-silly-hampster-The-perky-brown-puppy-sprinted-around-the-grumpy-cat-The-quick-brown-fox-jumped-over-the-lazy-dog-The-slow-green-turtle-nibbled-on-the-tasty-ant-The-fluffy-gray-chinchilla-squeaked-at-the-silly-hampster-The-perky-brown-puppy-sprinted-around-the-grumpy-cat"
 
 class TransmissionTests: XCTestCase {
     
     func testDomainPackaging() {
         let continueDomain = parentDomain.prepending("continue")
         
-        let encodedData = data.base64EncodedDataWithOptions([])
-        let domains = TransmissionManager.package(arbitraryData: encodedData, underDomain: { index in
+        let domains = DomainPackagingMessage(domainSafeMessage: message, underDomain: { index in
             return continueDomain.prepending(String(index))
         })
 
         let expectedResult = [
             [
-                "VkdobElIRjFhV05ySUdKeWIzZHVJR1p2ZUNCcWRXMXdaV1FnYjNabGNpQjBhR1V",
-                "nYkdGNmVTQmtiMmN1SUZSb1pTQnpiRzkzSUdkeVpXVnVJSFIxY25Sc1pTQnVhV0",
-                "ppYkdWa0lHOXVJSFJvWlNCMFlYTjBlU0JoYm5RdUlGUm9aU0JtYkhWbVpua2daM",
-                "0poZVNCamFHbHVZMmhwYkd4aElITnhkV1ZoYTJW",
+                "test-The-quick-brown-fox-jumped-over-the-lazy-dog-The-slow-gree",
+                "n-turtle-nibbled-on-the-tasty-ant-The-fluffy-gray-chinchilla-sq",
+                "ueaked-at-the-silly-hampster-The-perky-brown-puppy-sprinted-aro",
+                "und-the-grumpy-cat-The-quick-brown-fox-",
                 "0.continue.bacon.tech"
             ],
             [
-                "a0lHRjBJSFJvWlNCemFXeHNlU0JvWVcxd2MzUmxjaTRnVkdobElIQmxjbXQ1SUd",
-                "KeWIzZHVJSEIxY0hCNUlITndjbWx1ZEdWa0lHRnliM1Z1WkNCMGFHVWdaM0oxYl",
-                "hCNUlHTmhkQzQ9",
+                "jumped-over-the-lazy-dog-The-slow-green-turtle-nibbled-on-the-t",
+                "asty-ant-The-fluffy-gray-chinchilla-squeaked-at-the-silly-hamps",
+                "ter-The-perky-brown-puppy-sprinted-around-the-grumpy-cat-The-qu",
+                "ick-brown-fox-jumped-over-the-lazy-dog-",
                 "1.continue.bacon.tech"
+            ],
+            [
+                "The-slow-green-turtle-nibbled-on-the-tasty-ant-The-fluffy-gray-",
+                "chinchilla-squeaked-at-the-silly-hampster-The-perky-brown-puppy",
+                "-sprinted-around-the-grumpy-cat",
+                "2.continue.bacon.tech"
             ]
-            ].map{ $0.joinWithSeparator(".") }
+        ].map{ $0.joinWithSeparator(".") }
         XCTAssertEqual(expectedResult, domains.map{ String($0) })
     }
     
@@ -44,10 +53,12 @@ class TransmissionTests: XCTestCase {
         let expectation = expectationWithDescription("Received response")
         var result: String!
         
-        let manager = TransmissionManager(domain: "burrow.tech")
-        manager.transmit(data) { response in
-            result = String(data: try! response.value(), encoding: NSUTF8StringEncoding)
+        let manager = TransmissionManager(domain: parentDomain)
+        
+        manager.transmit(domainSafeMessage: message) { response in
+            result = try! response.unwrap()
             expectation.fulfill()
+            expectation
         }
         
         waitForExpectationsWithTimeout(5) { error in
@@ -56,7 +67,7 @@ class TransmissionTests: XCTestCase {
             }
         }
         XCTAssertEqual(
-            ".tac ypmurg eht dnuora detnirps yppup nworb ykrep ehT .retspmah yllis eht ta dekaeuqs allihcnihc yarg yffulf ehT .tna ytsat eht no delbbin eltrut neerg wols ehT .god yzal eht revo depmuj xof nworb kciuq ehT",
+            String(message.characters.reverse()),
             result
         )
     }

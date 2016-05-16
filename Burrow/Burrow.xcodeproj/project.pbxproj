@@ -18,10 +18,12 @@
 		4D0D563E1CB3743A008CB981 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0D562D1CB37394008CB981 /* ViewController.swift */; };
 		4D0D564B1CB37862008CB981 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0D564A1CB37862008CB981 /* NetworkExtension.framework */; };
 		4D0D564C1CB37893008CB981 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0D564A1CB37862008CB981 /* NetworkExtension.framework */; };
+		4D4A1DC71CD7C138003AF9AD /* SessionIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A1DC41CD7C041003AF9AD /* SessionIdentifier.swift */; };
+		4D4A1DC81CD7C139003AF9AD /* SessionIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A1DC41CD7C041003AF9AD /* SessionIdentifier.swift */; };
+		4D4A1DCA1CD7C38F003AF9AD /* DeserializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A1DC91CD7C38F003AF9AD /* DeserializationError.swift */; };
+		4D4A1DCB1CD7C38F003AF9AD /* DeserializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A1DC91CD7C38F003AF9AD /* DeserializationError.swift */; };
+		4D4A1DCC1CD7C38F003AF9AD /* DeserializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A1DC91CD7C38F003AF9AD /* DeserializationError.swift */; };
 		4D4B136C1CBB9FE1008EC7CD /* Burrow-iOS.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 4D4B136B1CBB9FE1008EC7CD /* Burrow-iOS.entitlements */; };
-		4D4B136E1CBB9FE9008EC7CD /* Burrow-Mac.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 4D4B136D1CBB9FE9008EC7CD /* Burrow-Mac.entitlements */; };
-		4D4B13701CBBA00B008EC7CD /* BurrowTunnel-Extension-Mac.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 4D4B136F1CBBA00B008EC7CD /* BurrowTunnel-Extension-Mac.entitlements */; };
-		4D4B13721CBBA00F008EC7CD /* BurrowTunnel-Extension-iOS.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 4D4B13711CBBA00F008EC7CD /* BurrowTunnel-Extension-iOS.entitlements */; };
 		4D4B13751CBBA0AE008EC7CD /* ServerMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4B13731CBBA0AE008EC7CD /* ServerMessage.m */; };
 		4D4B13761CBBA0AE008EC7CD /* ServerMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4B13741CBBA0AE008EC7CD /* ServerMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D4B13791CBBA0C4008EC7CD /* ServerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4B13781CBBA0C4008EC7CD /* ServerMessage.swift */; };
@@ -36,10 +38,29 @@
 		4D4C42261CBB646B00055D86 /* ResourceRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4C42241CBB646B00055D86 /* ResourceRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D4C42271CBB646B00055D86 /* ResourceRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C42251CBB646B00055D86 /* ResourceRecord.m */; };
 		4D4C42291CBB73A300055D86 /* ResourceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C42281CBB73A300055D86 /* ResourceRecord.swift */; };
+		4D6768141CE994A30079E173 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6768131CE994A30079E173 /* Result.swift */; };
+		4D6768161CE995160079E173 /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6768151CE995160079E173 /* ServerError.swift */; };
+		4D6B46141CE11738007ADB37 /* NETunnelProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE66D41CE09D4300C9FBBC /* NETunnelProviderManager.swift */; };
+		4D6B46151CE117DE007ADB37 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0D564A1CB37862008CB981 /* NetworkExtension.framework */; };
+		4D6E12511CE2CD9400A889C0 /* Shovel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4C41D41CBB50C000055D86 /* Shovel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4D6E12541CE2CE8F00A889C0 /* CResolver.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4C420F1CBB5B5C00055D86 /* CResolver.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4D77F9F11CD7D95400F2586C /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77F9F01CD7D95400F2586C /* MessageType.swift */; };
+		4D77F9F21CD7D95400F2586C /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77F9F01CD7D95400F2586C /* MessageType.swift */; };
+		4D77F9F51CD7DA1500F2586C /* ServerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77F9F41CD7DA1500F2586C /* ServerMessage.swift */; };
+		4D77F9F61CD7DA1500F2586C /* ServerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77F9F41CD7DA1500F2586C /* ServerMessage.swift */; };
+		4D77FA031CD7ED1E00F2586C /* SessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77FA021CD7ED1E00F2586C /* SessionController.swift */; };
+		4D77FA041CD7ED1E00F2586C /* SessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77FA021CD7ED1E00F2586C /* SessionController.swift */; };
+		4D97880A1CCDBD1700774E3F /* ClientMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9788091CCDBD1700774E3F /* ClientMessage.swift */; };
+		4D97880B1CCDBD1700774E3F /* ClientMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9788091CCDBD1700774E3F /* ClientMessage.swift */; };
+		4DAE80441CE2B4FD00735599 /* BurrowTunnel-iOS.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4D0D55F71CB372F3008CB981 /* BurrowTunnel-iOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+		4DAE805B1CE2CBF200735599 /* Shovel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4C41D41CBB50C000055D86 /* Shovel.framework */; };
 		4DBD0AA31CC465F6003BC82C /* TransmissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AA21CC465F6003BC82C /* TransmissionManager.swift */; };
 		4DBD0AA51CC4ACD3003BC82C /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AA41CC4ACD3003BC82C /* Domain.swift */; };
 		4DBD0AA71CC4B66E003BC82C /* TransmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AA61CC4B66E003BC82C /* TransmissionTests.swift */; };
 		4DBD0AAE1CC4CA56003BC82C /* ShovelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AAD1CC4CA56003BC82C /* ShovelError.swift */; };
+		4DCE66D11CE087EB00C9FBBC /* DomainPackagingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE66D01CE087EB00C9FBBC /* DomainPackagingMessage.swift */; };
+		4DCE66D31CE0977700C9FBBC /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DCE66D21CE0977700C9FBBC /* NetworkExtension.framework */; };
+		4DCE66D51CE09D4300C9FBBC /* NETunnelProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE66D41CE09D4300C9FBBC /* NETunnelProviderManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,6 +92,13 @@
 			remoteGlobalIDString = 4D4C420E1CBB5B5C00055D86;
 			remoteInfo = CResolver;
 		};
+		4D6E12551CE2CE8F00A889C0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D0D55C31CB3722F008CB981 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D4C420E1CBB5B5C00055D86;
+			remoteInfo = CResolver;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -80,6 +108,7 @@
 			dstPath = "";
 			dstSubfolderSpec = 13;
 			files = (
+				4DAE80441CE2B4FD00735599 /* BurrowTunnel-iOS.appex in Embed App Extensions */,
 			);
 			name = "Embed App Extensions";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -101,6 +130,8 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
+				4D6E12541CE2CE8F00A889C0 /* CResolver.framework in Embed Frameworks */,
+				4D6E12511CE2CD9400A889C0 /* Shovel.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -126,10 +157,11 @@
 		4D0D56351CB3739C008CB981 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D0D56361CB3739C008CB981 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		4D0D564A1CB37862008CB981 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
+		4D4A1DC41CD7C041003AF9AD /* SessionIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionIdentifier.swift; sourceTree = "<group>"; };
+		4D4A1DC91CD7C38F003AF9AD /* DeserializationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeserializationError.swift; path = ../Shovel/DeserializationError.swift; sourceTree = "<group>"; };
 		4D4B136B1CBB9FE1008EC7CD /* Burrow-iOS.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Burrow-iOS.entitlements"; sourceTree = "<group>"; };
 		4D4B136D1CBB9FE9008EC7CD /* Burrow-Mac.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Burrow-Mac.entitlements"; sourceTree = "<group>"; };
 		4D4B136F1CBBA00B008EC7CD /* BurrowTunnel-Extension-Mac.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "BurrowTunnel-Extension-Mac.entitlements"; sourceTree = "<group>"; };
-		4D4B13711CBBA00F008EC7CD /* BurrowTunnel-Extension-iOS.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "BurrowTunnel-Extension-iOS.entitlements"; sourceTree = "<group>"; };
 		4D4B13731CBBA0AE008EC7CD /* ServerMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerMessage.m; sourceTree = "<group>"; };
 		4D4B13741CBBA0AE008EC7CD /* ServerMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerMessage.h; sourceTree = "<group>"; };
 		4D4B13781CBBA0C4008EC7CD /* ServerMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMessage.swift; sourceTree = "<group>"; };
@@ -150,10 +182,20 @@
 		4D4C42241CBB646B00055D86 /* ResourceRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceRecord.h; sourceTree = "<group>"; };
 		4D4C42251CBB646B00055D86 /* ResourceRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceRecord.m; sourceTree = "<group>"; };
 		4D4C42281CBB73A300055D86 /* ResourceRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceRecord.swift; sourceTree = "<group>"; };
+		4D6768131CE994A30079E173 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
+		4D6768151CE995160079E173 /* ServerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
+		4D77F9F01CD7D95400F2586C /* MessageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
+		4D77F9F41CD7DA1500F2586C /* ServerMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMessage.swift; sourceTree = "<group>"; };
+		4D77FA021CD7ED1E00F2586C /* SessionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionController.swift; sourceTree = "<group>"; };
+		4D77FA081CD81C1D00F2586C /* BurrowTunnel-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "BurrowTunnel-iOS.entitlements"; path = "../BurrowTunnel-iOS.entitlements"; sourceTree = "<group>"; };
+		4D9788091CCDBD1700774E3F /* ClientMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientMessage.swift; sourceTree = "<group>"; };
 		4DBD0AA21CC465F6003BC82C /* TransmissionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionManager.swift; sourceTree = "<group>"; };
 		4DBD0AA41CC4ACD3003BC82C /* Domain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Domain.swift; sourceTree = "<group>"; };
 		4DBD0AA61CC4B66E003BC82C /* TransmissionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionTests.swift; sourceTree = "<group>"; };
 		4DBD0AAD1CC4CA56003BC82C /* ShovelError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShovelError.swift; sourceTree = "<group>"; };
+		4DCE66D01CE087EB00C9FBBC /* DomainPackagingMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainPackagingMessage.swift; sourceTree = "<group>"; };
+		4DCE66D21CE0977700C9FBBC /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/NetworkExtension.framework; sourceTree = DEVELOPER_DIR; };
+		4DCE66D41CE09D4300C9FBBC /* NETunnelProviderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NETunnelProviderManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -177,6 +219,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DAE805B1CE2CBF200735599 /* Shovel.framework in Frameworks */,
+				4DCE66D31CE0977700C9FBBC /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -184,6 +228,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D6B46151CE117DE007ADB37 /* NetworkExtension.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -246,6 +291,7 @@
 			children = (
 				4D0D56191CB37390008CB981 /* AppDelegate.swift */,
 				4D0D56201CB37390008CB981 /* ViewController.swift */,
+				4DCE66D41CE09D4300C9FBBC /* NETunnelProviderManager.swift */,
 				4D0D561D1CB37390008CB981 /* Main.storyboard */,
 				4D0D564E1CB378B3008CB981 /* Supporting Files */,
 			);
@@ -267,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				4D0D56361CB3739C008CB981 /* PacketTunnelProvider.swift */,
+				4D77F9F31CD7D9E300F2586C /* Communication */,
 				4D0D56501CB3798F008CB981 /* Supporting Files */,
 			);
 			path = Extension;
@@ -275,6 +322,7 @@
 		4D0D564D1CB3789C008CB981 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				4DCE66D21CE0977700C9FBBC /* NetworkExtension.framework */,
 				4D4C421C1CBB5D4100055D86 /* libresolv.tbd */,
 				4D0D564A1CB37862008CB981 /* NetworkExtension.framework */,
 			);
@@ -305,7 +353,7 @@
 		4D0D56501CB3798F008CB981 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
-				4D4B13711CBBA00F008EC7CD /* BurrowTunnel-Extension-iOS.entitlements */,
+				4D77FA081CD81C1D00F2586C /* BurrowTunnel-iOS.entitlements */,
 				4D4B136F1CBBA00B008EC7CD /* BurrowTunnel-Extension-Mac.entitlements */,
 				4D0D56351CB3739C008CB981 /* Info.plist */,
 			);
@@ -328,10 +376,12 @@
 				4D4C41EE1CBB52D500055D86 /* Shovel.h */,
 				4DBD0AA41CC4ACD3003BC82C /* Domain.swift */,
 				4DBD0AA21CC465F6003BC82C /* TransmissionManager.swift */,
+				4DCE66D01CE087EB00C9FBBC /* DomainPackagingMessage.swift */,
 				4D4B13771CBBA0B5008EC7CD /* ServerMessage */,
 				4D4C422A1CBB73A600055D86 /* ResourceRecord */,
 				4DBD0AAC1CC4C609003BC82C /* TXT */,
 				4DBD0AAD1CC4CA56003BC82C /* ShovelError.swift */,
+				4D6768131CE994A30079E173 /* Result.swift */,
 				4D4C41D81CBB50C000055D86 /* Info.plist */,
 			);
 			path = Shovel;
@@ -367,6 +417,36 @@
 				4D4C42281CBB73A300055D86 /* ResourceRecord.swift */,
 			);
 			name = ResourceRecord;
+			sourceTree = "<group>";
+		};
+		4D77F9F31CD7D9E300F2586C /* Communication */ = {
+			isa = PBXGroup;
+			children = (
+				4D77FA021CD7ED1E00F2586C /* SessionController.swift */,
+				4D4A1DC41CD7C041003AF9AD /* SessionIdentifier.swift */,
+				4D77FA071CD7F77D00F2586C /* Messages */,
+				4D77F9FA1CD7DB5000F2586C /* Errors */,
+			);
+			name = Communication;
+			sourceTree = "<group>";
+		};
+		4D77F9FA1CD7DB5000F2586C /* Errors */ = {
+			isa = PBXGroup;
+			children = (
+				4D4A1DC91CD7C38F003AF9AD /* DeserializationError.swift */,
+				4D6768151CE995160079E173 /* ServerError.swift */,
+			);
+			name = Errors;
+			sourceTree = "<group>";
+		};
+		4D77FA071CD7F77D00F2586C /* Messages */ = {
+			isa = PBXGroup;
+			children = (
+				4D77F9F01CD7D95400F2586C /* MessageType.swift */,
+				4D9788091CCDBD1700774E3F /* ClientMessage.swift */,
+				4D77F9F41CD7DA1500F2586C /* ServerMessage.swift */,
+			);
+			name = Messages;
 			sourceTree = "<group>";
 		};
 		4DBD0AAC1CC4C609003BC82C /* TXT */ = {
@@ -414,6 +494,7 @@
 			);
 			dependencies = (
 				4D0D55FF1CB372F3008CB981 /* PBXTargetDependency */,
+				4D6E12561CE2CE8F00A889C0 /* PBXTargetDependency */,
 			);
 			name = "Burrow-iOS";
 			productName = "Burrow-iOS";
@@ -541,6 +622,9 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = PLYLXBYCEQ;
 						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
 							com.apple.VPNLite = {
 								enabled = 1;
 							};
@@ -550,8 +634,11 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = PLYLXBYCEQ;
 						SystemCapabilities = {
-							com.apple.Sandbox = {
+							com.apple.ApplicationGroups.Mac = {
 								enabled = 0;
+							};
+							com.apple.Sandbox = {
+								enabled = 1;
 							};
 							com.apple.VPNLite = {
 								enabled = 1;
@@ -561,9 +648,29 @@
 					4D0D55F61CB372F3008CB981 = {
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = PLYLXBYCEQ;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.iOS = {
+								enabled = 1;
+							};
+							com.apple.VPNLite = {
+								enabled = 1;
+							};
+						};
 					};
 					4D0D56081CB37302008CB981 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = PLYLXBYCEQ;
+						SystemCapabilities = {
+							com.apple.ApplicationGroups.Mac = {
+								enabled = 0;
+							};
+							com.apple.Sandbox = {
+								enabled = 1;
+							};
+							com.apple.VPNLite = {
+								enabled = 1;
+							};
+						};
 					};
 					4D4C41D31CBB50C000055D86 = {
 						CreatedOnToolsVersion = 7.3;
@@ -573,6 +680,7 @@
 					};
 					4D4C420E1CBB5B5C00055D86 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = PLYLXBYCEQ;
 					};
 				};
 			};
@@ -605,12 +713,9 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D4B13721CBBA00F008EC7CD /* BurrowTunnel-Extension-iOS.entitlements in Resources */,
 				4D0D56381CB3739C008CB981 /* Info.plist in Resources */,
 				4D0D56241CB37390008CB981 /* Main.storyboard in Resources */,
-				4D4B13701CBBA00B008EC7CD /* BurrowTunnel-Extension-Mac.entitlements in Resources */,
 				4D4B136C1CBB9FE1008EC7CD /* Burrow-iOS.entitlements in Resources */,
-				4D4B136E1CBB9FE9008EC7CD /* Burrow-Mac.entitlements in Resources */,
 				4D0D56231CB37390008CB981 /* LaunchScreen.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -666,6 +771,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4DCE66D51CE09D4300C9FBBC /* NETunnelProviderManager.swift in Sources */,
 				4D0D56261CB37390008CB981 /* ViewController.swift in Sources */,
 				4D0D56211CB37390008CB981 /* AppDelegate.swift in Sources */,
 			);
@@ -677,6 +783,7 @@
 			files = (
 				4D0D563E1CB3743A008CB981 /* ViewController.swift in Sources */,
 				4D0D563B1CB3742B008CB981 /* AppDelegate.swift in Sources */,
+				4D6B46141CE11738007ADB37 /* NETunnelProviderManager.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -684,7 +791,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D97880A1CCDBD1700774E3F /* ClientMessage.swift in Sources */,
 				4D4C41AC1CBB4C8D00055D86 /* PacketTunnelProvider.swift in Sources */,
+				4D77FA031CD7ED1E00F2586C /* SessionController.swift in Sources */,
+				4D77F9F51CD7DA1500F2586C /* ServerMessage.swift in Sources */,
+				4D77F9F11CD7D95400F2586C /* MessageType.swift in Sources */,
+				4D4A1DC71CD7C138003AF9AD /* SessionIdentifier.swift in Sources */,
+				4D4A1DCA1CD7C38F003AF9AD /* DeserializationError.swift in Sources */,
+				4D6768161CE995160079E173 /* ServerError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -692,7 +806,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D97880B1CCDBD1700774E3F /* ClientMessage.swift in Sources */,
 				4D4C41AB1CBB4C8C00055D86 /* PacketTunnelProvider.swift in Sources */,
+				4D77FA041CD7ED1E00F2586C /* SessionController.swift in Sources */,
+				4D77F9F61CD7DA1500F2586C /* ServerMessage.swift in Sources */,
+				4D77F9F21CD7D95400F2586C /* MessageType.swift in Sources */,
+				4D4A1DC81CD7C139003AF9AD /* SessionIdentifier.swift in Sources */,
+				4D4A1DCB1CD7C38F003AF9AD /* DeserializationError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -706,7 +826,10 @@
 				4D4C42291CBB73A300055D86 /* ResourceRecord.swift in Sources */,
 				4DBD0AA31CC465F6003BC82C /* TransmissionManager.swift in Sources */,
 				4D4C421F1CBB5F7600055D86 /* TXTRecord.swift in Sources */,
+				4D6768141CE994A30079E173 /* Result.swift in Sources */,
 				4D4C42271CBB646B00055D86 /* ResourceRecord.m in Sources */,
+				4D4A1DCC1CD7C38F003AF9AD /* DeserializationError.swift in Sources */,
+				4DCE66D11CE087EB00C9FBBC /* DomainPackagingMessage.swift in Sources */,
 				4DBD0AA51CC4ACD3003BC82C /* Domain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -749,6 +872,11 @@
 			isa = PBXTargetDependency;
 			target = 4D4C420E1CBB5B5C00055D86 /* CResolver */;
 			targetProxy = 4D4C42201CBB605F00055D86 /* PBXContainerItemProxy */;
+		};
+		4D6E12561CE2CE8F00A889C0 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D4C420E1CBB5B5C00055D86 /* CResolver */;
+			targetProxy = 4D6E12551CE2CE8F00A889C0 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
 
@@ -816,8 +944,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = "iOS/Burrow-iOS.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jaden Geller (6ZM83JD223)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaden Geller (6ZM83JD223)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -843,7 +971,10 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.ios;
 				PRODUCT_NAME = Burrow;
+				PROVISIONING_PROFILE = "f9354ae4-2c2f-4d35-9e4e-5c9d4993d2b2";
 				SDKROOT = iphoneos;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -869,8 +1000,8 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = "iOS/Burrow-iOS.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jaden Geller (6ZM83JD223)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaden Geller (6ZM83JD223)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -889,7 +1020,10 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.ios;
 				PRODUCT_NAME = Burrow;
+				PROVISIONING_PROFILE = "f9354ae4-2c2f-4d35-9e4e-5c9d4993d2b2";
 				SDKROOT = iphoneos;
+				SWIFT_INSTALL_OBJC_HEADER = NO;
+				SWIFT_OBJC_BRIDGING_HEADER = "";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -942,9 +1076,9 @@
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.mac;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.macos;
 				PRODUCT_NAME = Burrow;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0fda97b6-3b98-4d1a-9127-74e62b8f9cd6";
 				SDKROOT = macosx;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -990,9 +1124,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks";
 				MACOSX_DEPLOYMENT_TARGET = 10.11;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.mac;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.macos;
 				PRODUCT_NAME = Burrow;
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "0fda97b6-3b98-4d1a-9127-74e62b8f9cd6";
 				SDKROOT = macosx;
 			};
 			name = Release;
@@ -1015,9 +1149,9 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "Extension/BurrowTunnel-Extension-iOS.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "BurrowTunnel-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jaden Geller (6ZM83JD223)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaden Geller (6ZM83JD223)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1043,7 +1177,7 @@
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.ios.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ee885058-9b60-4f23-a150-224d18836f5b";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -1069,9 +1203,9 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "Extension/BurrowTunnel-Extension-iOS.entitlements";
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_ENTITLEMENTS = "BurrowTunnel-iOS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jaden Geller (6ZM83JD223)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaden Geller (6ZM83JD223)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1090,7 +1224,7 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.ios.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "ee885058-9b60-4f23-a150-224d18836f5b";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -1117,7 +1251,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = "Extension/BurrowTunnel-Extension-Mac.entitlements";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Mac Developer: Jaden Geller (6ZM83JD223)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1140,8 +1274,9 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.mac.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.macos.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "10455d27-9ed0-473f-a3fa-c87b2f45efb6";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -1168,7 +1303,7 @@
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				CODE_SIGN_ENTITLEMENTS = "Extension/BurrowTunnel-Extension-Mac.entitlements";
-				CODE_SIGN_IDENTITY = "Mac Developer";
+				CODE_SIGN_IDENTITY = "Mac Developer: Jaden Geller (6ZM83JD223)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1184,8 +1319,9 @@
 				INFOPLIST_FILE = Extension/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @executable_path/../../../../Frameworks";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.mac.extension;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.client.macos.extension;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "10455d27-9ed0-473f-a3fa-c87b2f45efb6";
 				SDKROOT = macosx;
 				SKIP_INSTALL = YES;
 				SWIFT_OBJC_BRIDGING_HEADER = "";
@@ -1243,7 +1379,7 @@
 				MODULEMAP_FILE = "";
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.JadenGeller.Shovel;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.shovel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1299,7 +1435,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MODULEMAP_FILE = "";
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.JadenGeller.Shovel;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.shovel;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1424,7 +1560,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jaden Geller (6ZM83JD223)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaden Geller (6ZM83JD223)";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1455,7 +1592,7 @@
 				MACH_O_TYPE = mh_dylib;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PRODUCT_BUNDLE_IDENTIFIER = com.JadenGeller.CResolver;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.resolv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -1485,7 +1622,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Developer: Jaden Geller (6ZM83JD223)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaden Geller (6ZM83JD223)";
 				COPY_PHASE_STRIP = NO;
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1509,7 +1647,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				MACH_O_TYPE = mh_dylib;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PRODUCT_BUNDLE_IDENTIFIER = com.JadenGeller.CResolver;
+				PRODUCT_BUNDLE_IDENTIFIER = tech.burrow.resolv;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;

@@ -13,22 +13,12 @@ internal struct DomainPackagingMessage {
     private let domainFormat: DomainFormat
     
     // Will not encode data.
-    init(domainSafeString string: String, underDomain domainFormat: DomainFormat) {
-        precondition(string.rangeOfCharacterFromSet(domainSafeCharacterSet.invertedSet) == nil,
+    init(domainSafeMessage message: String, underDomain domainFormat: DomainFormat) {
+        precondition(message.rangeOfCharacterFromSet(domainSafeCharacterSet.invertedSet) == nil,
                      "String to package is not domain safe.")
-        precondition(string.characters.first != "-" && string.characters.last != "-",
-                     "String may not start or end with dash.")
-        precondition(string.characters.count > 0, "String must have length greater than zero.")
+        precondition(message.characters.count > 0, "String must have length greater than zero.")
 
-        self.dataString = string.utf8
-        self.domainFormat = domainFormat
-    }
-    
-    // Will encode data making it 25% longer.
-    init(arbitraryData data: NSData, underDomain domainFormat: DomainFormat) {
-        precondition(data.length > 0, "Data must have length greater than zero.")
-
-        self.dataString = data.base64EncodedStringWithOptions([]).utf8
+        self.dataString = message.utf8
         self.domainFormat = domainFormat
     }
 }
@@ -68,6 +58,10 @@ extension DomainPackagingMessage: SequenceType {
                 // Prepend the component
                 domain.prepend(String(self.dataString[dataIndex..<labelEndIndex]), atLevel: level)
             }
+
+            // TODO: Is it a problem in practice that we might start with a dash?
+//            precondition(domain.characters.first != "-" && domain.characters.last != "-",
+//                "String may not start or end with dash.")
 
             return domain
         }

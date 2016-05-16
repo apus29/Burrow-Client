@@ -43,7 +43,7 @@ extension TransmissionManager {
 }
 
 extension TransmissionManager {
-    private func begin() throws -> String {
+    internal func begin() throws -> String {
         let message = try ServerMessage.withQuery(
             domain: domain.prepending("begin").prepending(NSUUID().UUIDString),
             recordClass: .internet,
@@ -59,7 +59,7 @@ extension TransmissionManager {
         return transmissionId
     }
     
-    private func end(transmissionId: String, count: Int) throws -> NSData {
+    internal func end(transmissionId: String, count: Int) throws -> String {
         let message = try ServerMessage.withQuery(
             domain: domain.prepending("end").prepending(transmissionId).prepending(String(count)),
             recordClass: .internet,
@@ -70,22 +70,14 @@ extension TransmissionManager {
         let attributes = try TXTRecord.parseAttributes(message.value)
         try requireValue("True", from: attributes, forExpectedKey: "success")
 
-        let contents = try value(from: attributes, forExpectedKey: "contents")
-        guard let data = NSData(base64EncodedString: contents, options: []) else {
-            throw ShovelError(
-                code: .unexpectedServerResponse,
-                reason: "Unable to decode contents as Base64.",
-                object: contents
-            )
-        }
-        return data
+        return try value(from: attributes, forExpectedKey: "contents")
     }
     
-    public func transmit(uncheckedDomainSafeData data: NSData) throws -> NSData {
+    internal func transmit(domainSafeMessage message: String) throws -> String {
         let transmissionId = try begin()
         
         let continueDomain = domain.prepending("continue").prepending(transmissionId)
-        let domains = DomainPackagingMessage(arbitraryData: data, underDomain: { index in
+        let domains = DomainPackagingMessage(domainSafeMessage: message, underDomain: { index in
             continueDomain.prepending(String(index))
         })
 
@@ -119,10 +111,10 @@ extension TransmissionManager {
         return response
     }
     
-    private func transmit(uncheckedDomainSafeData data: NSData, responseHandler: Result<NSData> -> ()) {
+    public func transmit(domainSafeMessage message: String, responseHandler: Result<String> -> ()) {
         dispatch_async(TransmissionManager.queue) {
             responseHandler(Result {
-                try self.transmit(uncheckedDomainSafeData: data)
+                try self.transmit(domainSafeMessage: message)
             })
         }
     }
