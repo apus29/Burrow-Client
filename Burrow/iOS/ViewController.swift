@@ -7,19 +7,54 @@
 //
 
 import UIKit
+import NetworkExtension
 
 class ViewController: UIViewController {
-
+    @IBOutlet weak var toggleSwitch: UISwitch!
+    
+    var tunnelProviderManager: NETunnelProviderManager!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view, typically from a nib.
+            
+        NETunnelProviderManager.sharedBurrowTunnelProviderManager { result in
+            do {
+                let manager = try result.unwrap()
+                self.tunnelProviderManager = manager
+                print("Successfull retrived tunnel provider manager.")
+                
+                manager.loadFromPreferencesWithCompletionHandler { error in
+                    if let error = error {
+                        print("Unable to load tunnel provider manager.", error)
+                    } else {
+                        print("Successfull loaded tunnel provider manager.")
+                        
+                        if !manager.enabled {
+                            manager.enabled = true
+                            manager.saveToPreferencesWithCompletionHandler { error in
+                                if let error = error {
+                                    print("Unable to save tunnel provider manager.", error)
+                                } else {
+                                    self.toggleSwitch.enabled = true
+                                }
+                            }
+                        } else {
+                            self.toggleSwitch.enabled = true
+                        }
+                    }
+                }
+            } catch let error {
+                // TODO: This might fail the first time the app is launched.
+                print("Unable to load tunnel provider manager.", error)
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
     
     @IBAction func tunnelToggle(sender: UISwitch) {
         // THIS CODE IS LITERALLY BARF
@@ -41,6 +76,18 @@ class ViewController: UIViewController {
                 self.title = "Burrow (Enabled)"
             }
             print("User enabled tunnel.")
+            
+            // TODO: Listen for notifications
+            do {
+                assert(tunnelProviderManager.enabled)
+                tunnelProviderManager.saveToPreferencesWithCompletionHandler {
+                    error in
+                    try! self.tunnelProviderManager.connection.startVPNTunnel()
+                }
+            } catch let error as NSError {
+                print("ERROR!!!", error, NEVPNError(rawValue: error.code)! == .ConfigurationInvalid)
+            }
+            
         } else {
             UIView.animateWithDuration(animationDuration) {
                 self.view.backgroundColor = .whiteColor()
