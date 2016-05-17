@@ -15,8 +15,8 @@ internal struct DomainPackagingMessage {
     // Will not encode data.
     init(domainSafeMessage message: String, underDomain domainFormat: DomainFormat) {
         precondition(message.rangeOfCharacterFromSet(domainSafeCharacterSet.invertedSet) == nil,
-                     "String to package is not domain safe.")
-        precondition(message.characters.count > 0, "String must have length greater than zero.")
+                     "Message to package is not domain safe: \(message)")
+        precondition(message.characters.count > 0, "Message must have length greater than zero: \(message)")
 
         self.dataString = message.utf8
         self.domainFormat = domainFormat
@@ -75,6 +75,8 @@ extension DomainPackagingMessage: SequenceType {
 private let domainSafeCharacterSet: NSCharacterSet = {
     let set = NSMutableCharacterSet()
     set.formUnionWithCharacterSet(NSCharacterSet.alphanumericCharacterSet())
+    set.addCharactersInString("+")
+    set.addCharactersInString("/")
     set.addCharactersInString("-")
     set.addCharactersInString("=")
     return set

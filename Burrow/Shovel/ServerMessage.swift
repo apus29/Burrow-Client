@@ -28,27 +28,38 @@ extension ServerMessage {
     /// valid when while the buffer exists, otherwise a segmentation fault may occur.
 
     static func withQuery(domain domain: Domain, recordClass: RecordClass, recordType: RecordType, useTCP: Bool, bufferSize: Int) throws -> ManagedBuffer<ServerMessage, UInt8> {
-        var status: Int = 0
-        
-        let result = ManagedBuffer<ServerMessage, UInt8>.create(bufferSize, initialValue: { buffer in
-            var serverMessage = ServerMessage()
-            status = buffer.withUnsafeMutablePointerToElements { bufferPointer in
-                String(domain).nulTerminatedUTF8.withUnsafeBufferPointer { domainBuffer in
-                    Int(ServerMessageFromQuery(
-                        UnsafePointer(domainBuffer.baseAddress),
-                        recordClass,
-                        recordType,
-                        useTCP,
-                        UnsafeMutablePointer(bufferPointer),
-                        Int32(bufferSize),
-                        &serverMessage
-                    ))
+        do {
+            var status: Int = 0
+            
+            let result = ManagedBuffer<ServerMessage, UInt8>.create(bufferSize, initialValue: { buffer in
+                var serverMessage = ServerMessage()
+                status = buffer.withUnsafeMutablePointerToElements { bufferPointer in
+                    String(domain).nulTerminatedUTF8.withUnsafeBufferPointer { domainBuffer in
+                        Int(ServerMessageFromQuery(
+                            UnsafePointer(domainBuffer.baseAddress),
+                            recordClass,
+                            recordType,
+                            useTCP,
+                            UnsafeMutablePointer(bufferPointer),
+                            Int32(bufferSize),
+                            &serverMessage
+                            ))
+                    }
+                }
+                return serverMessage
+            })
+            
+            guard status == 0 else {
+                if h_errno != 0 {
+                    throw NSError(domain: "NetDBErrorDomain", code: Int(h_errno), userInfo: nil)
+                } else {
+                    throw NSError(domain: NSPOSIXErrorDomain, code: Int(errno), userInfo: nil)
                 }
             }
-            return serverMessage
-        })
-        
-        guard status == 0 else { throw NSError(domain: NSPOSIXErrorDomain, code: Int(errno), userInfo: nil) }
-        return result
+            return result
+        } catch let error as NSError where error.domain == "NetDBErrorDomain" && error.code == 2 {
+            // Try again!
+            return try withQuery(domain: domain, recordClass: recordClass, recordType: recordType, useTCP: useTCP, bufferSize: bufferSize)
+        }
     }
 }

@@ -31,10 +31,10 @@ private func requireSuccess(expectedValue: String, from attributes: [String : St
     }
 }
 
-private func requireValue(expectedValue: String, from attributes: [String : String], forExpectedKey key: String) throws {
+private func requireValue(expectedValue: String, from attributes: [String : String], forExpectedKey key: String, object: NSObject? = nil) throws {
     let foundValue = try value(from: attributes, forExpectedKey: key)
     guard foundValue == expectedValue else {
-        throw ShovelError(code: .unexpectedServerResponse, reason: "Expected \"\(expectedValue)\" value for \"\(key)\" key. Found \"\(foundValue)\".")
+        throw ShovelError(code: .unexpectedServerResponse, reason: "Expected \"\(expectedValue)\" value for \"\(key)\" key. Found \"\(foundValue)\".", object: object)
     }
 }
 
@@ -68,7 +68,11 @@ extension TransmissionManager {
             bufferSize: 4096
         )
         let attributes = try TXTRecord.parseAttributes(message.value)
-        try requireValue("True", from: attributes, forExpectedKey: "success")
+        // TODO: Also print transmission id on failure?
+        try requireValue("True", from: attributes, forExpectedKey: "success", object: [
+            "transmissionId" : transmissionId,
+            "message" : message
+        ] as NSDictionary)
 
         return try value(from: attributes, forExpectedKey: "contents")
     }
@@ -85,33 +89,52 @@ extension TransmissionManager {
         var count = 0
         for domain in domains {
             count += 1
-            dispatch_group_async(group, TransmissionManager.queue) {
-                do {
-                    let message = try ServerMessage.withQuery(
-                        domain: domain,
-                        recordClass: .internet,
-                        recordType: .txt,
-                        useTCP: true,
-                        bufferSize: 4096
-                    )
-                    let attributes = try TXTRecord.parseAttributes(message.value)
-                    try requireValue("True", from: attributes, forExpectedKey: "success")
-                } catch let error {
-                    // TODO: Handle more elegantly by passing the error back up, somehow.
-                    fatalError("Failed data transfer: \(error)")
+            // TODO: MAKE ASYNC
+//            dispatch_group_aync(group, TransmissionManager.queue) {
+                func sendMessage() {
+                    do {
+                        let message = try ServerMessage.withQuery(
+                            domain: domain,
+                            recordClass: .internet,
+                            recordType: .txt,
+                            useTCP: true,
+                            bufferSize: 4096
+                        )
+                        let attributes = try TXTRecord.parseAttributes(message.value)
+                        try requireValue("True", from: attributes, forExpectedKey: "success")
+                    } catch let error {
+                        // TODO: Handle more elegantly by passing the error back up, somehow.
+                        fatalError("Failed data transfer: \(error)")
+                        // Try again?
+                        // TODO: Limit number of tries
+                        // TODO: what if the failure is bad format?
+//                        sendMessage()
+                    }
                 }
-            }
+                
+                // TODO: Barf
+                sendMessage()
+//            }
         }
         
         // TODO: Should we have a timeout in case the server ceases to exist or something?
         dispatch_group_wait(group, DISPATCH_TIME_FOREVER)
         
         // TODO: Waiting to send this might be adding significat delays.
-        let response = try end(transmissionId, count: count)
-        return response
+        do {
+            let response = try end(transmissionId, count: count)
+            return response
+        } catch {
+            // TODO: This catch shoudln't be here! At least not a catch all. Adding
+            // to test if it fixes something...
+            // TODO: Shouldn't retry infinite times...
+            print("Failed transmit, so trying again...")
+            return try transmit(domainSafeMessage: message)
+        }
     }
     
     public func transmit(domainSafeMessage message: String, responseHandler: Result<String> -> ()) {
+        // TODO: MAKE ASYNC
         dispatch_async(TransmissionManager.queue) {
             responseHandler(Result {
                 try self.transmit(domainSafeMessage: message)
