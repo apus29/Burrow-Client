@@ -61,6 +61,7 @@
 		4DCE66D11CE087EB00C9FBBC /* DomainPackagingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE66D01CE087EB00C9FBBC /* DomainPackagingMessage.swift */; };
 		4DCE66D31CE0977700C9FBBC /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DCE66D21CE0977700C9FBBC /* NetworkExtension.framework */; };
 		4DCE66D51CE09D4300C9FBBC /* NETunnelProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE66D41CE09D4300C9FBBC /* NETunnelProviderManager.swift */; };
+		C9159AC61CEBB0B700AFB55C /* NetDBErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9159AC51CEBB0B700AFB55C /* NetDBErrorCode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +197,7 @@
 		4DCE66D01CE087EB00C9FBBC /* DomainPackagingMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainPackagingMessage.swift; sourceTree = "<group>"; };
 		4DCE66D21CE0977700C9FBBC /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/NetworkExtension.framework; sourceTree = DEVELOPER_DIR; };
 		4DCE66D41CE09D4300C9FBBC /* NETunnelProviderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NETunnelProviderManager.swift; sourceTree = "<group>"; };
+		C9159AC51CEBB0B700AFB55C /* NetDBErrorCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetDBErrorCode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -382,6 +384,7 @@
 				4DBD0AAC1CC4C609003BC82C /* TXT */,
 				4DBD0AAD1CC4CA56003BC82C /* ShovelError.swift */,
 				4D6768131CE994A30079E173 /* Result.swift */,
+				C9159AC51CEBB0B700AFB55C /* NetDBErrorCode.swift */,
 				4D4C41D81CBB50C000055D86 /* Info.plist */,
 			);
 			path = Shovel;
@@ -825,6 +828,7 @@
 				4D4B13751CBBA0AE008EC7CD /* ServerMessage.m in Sources */,
 				4D4C42291CBB73A300055D86 /* ResourceRecord.swift in Sources */,
 				4DBD0AA31CC465F6003BC82C /* TransmissionManager.swift in Sources */,
+				C9159AC61CEBB0B700AFB55C /* NetDBErrorCode.swift in Sources */,
 				4D4C421F1CBB5F7600055D86 /* TXTRecord.swift in Sources */,
 				4D6768141CE994A30079E173 /* Result.swift in Sources */,
 				4D4C42271CBB646B00055D86 /* ResourceRecord.m in Sources */,
