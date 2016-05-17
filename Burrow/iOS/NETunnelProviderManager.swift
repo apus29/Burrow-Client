@@ -7,7 +7,7 @@
 //
 
 import NetworkExtension
-//import Shovel // TODO: Refactor Result into separate module.
+import Shovel // TODO: Refactor Result into separate module?
 
 // TODO: Share between iOS and OS X.
 extension NETunnelProviderManager {
@@ -18,6 +18,8 @@ extension NETunnelProviderManager {
                 completionHandler(.Failure(error))
             }
             else if let manager = managers?.first {
+                precondition(managers!.count == 1)
+                
                 // Return the existing manager
                 completionHandler(.Success(manager))
             } else {
@@ -25,7 +27,7 @@ extension NETunnelProviderManager {
                 let manager = NETunnelProviderManager()
                 manager.protocolConfiguration = {
                     let configuration = NETunnelProviderProtocol()
-                    configuration.providerConfiguration = ["lol": 1]
+                    configuration.providerConfiguration = [:]
                     configuration.providerBundleIdentifier = "tech.burrow.client.ios.extension"
                     configuration.serverAddress = "burrow.tech"
                     return configuration

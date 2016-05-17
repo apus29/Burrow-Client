@@ -22,8 +22,9 @@ class ViewController: UIViewController {
             do {
                 let manager = try result.unwrap()
                 self.tunnelProviderManager = manager
-                print("Successfull retrived tunnel provider manager.")
+                print("Successfully retrived tunnel provider manager.")
                 
+                // TODO: Is this necessary?
                 manager.loadFromPreferencesWithCompletionHandler { error in
                     if let error = error {
                         print("Unable to load tunnel provider manager.", error)
@@ -80,12 +81,12 @@ class ViewController: UIViewController {
             // TODO: Listen for notifications
             do {
                 assert(tunnelProviderManager.enabled)
+                assert(tunnelProviderManager.routingMethod == .DestinationIP)
+                assert(tunnelProviderManager.copyAppRules() == nil)
                 tunnelProviderManager.saveToPreferencesWithCompletionHandler {
                     error in
                     try! self.tunnelProviderManager.connection.startVPNTunnel()
                 }
-            } catch let error as NSError {
-                print("ERROR!!!", error, NEVPNError(rawValue: error.code)! == .ConfigurationInvalid)
             }
             
         } else {
