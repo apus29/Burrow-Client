@@ -10,14 +10,17 @@ import Foundation
 
 enum ServerMessage {
     case beginSession(SessionIdentifier)
-    case forwardPacket
-    case requestPacket(NSData)
+    case forwardPackets
+    case requestPackets([NSData])
     case endSession
 }
 
 extension ServerMessage {
     init(type: MessageType, deserializing string: String) throws {
-        var components = string.characters.split("-").map{ String($0) }.generate()
+        // anyGenerator gives us reference semantics so we consume the generator
+        // when we create an array with the remaining elements
+        // TODO: Is this inefficient?
+        var components = AnyGenerator(string.characters.split("-").map{ String($0) }.generate())
         let success: Bool = try Bool(deserializing: try components.next(failure: "Missing type", object: string))
         
         if success {
@@ -25,23 +28,40 @@ extension ServerMessage {
             case .beginSession:
                 let sessionIdentifier = try components.next(failure: "Missing session identifier", object: string)
                 self = .beginSession(SessionIdentifier(sessionIdentifier))
-            case .forwardPacket:
-                self = .forwardPacket
-            case .requestPacket:
-                let packetDataString = try components.next(failure: "Missing packet data", object: string)
-                self = .requestPacket(try NSData(deserializing: packetDataString))
+            case .forwardPackets:
+                self = .forwardPackets
+            case .requestPackets:
+                let packetsDataStrings = Array(components)
+                self = .requestPackets(try packetsDataStrings.map(NSData.init(deserializing:)))
             case .endSession:
                 self = .endSession
             }
+            
+            let remaining = Array(components)
+            guard remaining.isEmpty else {
+                throw DeserializationError(
+                    code: .invalidMessageFormat,
+                    reason: "Too many components in server message.",
+                    object: [
+                        "type_identifier" : type.identifier,
+                        "message" : string
+                    ] as NSDictionary
+                )
+            }
+            
         } else {
             let code = try Int(deserializing: components.next(failure: "Missing error code", object: string))
             let reason = try components.next(failure: "Missing reason", object: string)
-            let object = try components.next(failure: "Missing object", object: string)
             
+            // TODO: Decide if the object is required. Right now, the server is misbehaved.
+            let object = components.next() //try components.next(failure: "Missing object", object: string)
+            
+            precondition(components.next() == nil)
+
             throw ServerError(
                 code: ServerError.Code(code),
                 reason: reason.isEmpty ? nil : reason,
-                object: object.isEmpty ? nil : object
+                object: object//.isEmpty ? nil : object
             )
         }
     }
@@ -69,7 +89,7 @@ extension NSData {
 extension Bool {
     private init(deserializing string: String) throws {
         switch string {
-        case "t": self = true
+        case "s": self = true
         case "f": self = false
         default: throw DeserializationError(
             code: .invalidMessageContents,

@@ -8,17 +8,32 @@
 
 enum MessageType {
     case beginSession
-    case forwardPacket
-    case requestPacket
+    case forwardPackets
+    case requestPackets
     case endSession
+}
+
+extension MessageType {
+    var identifier: String {
+        switch self {
+        case .beginSession:
+            return "b"
+        case .forwardPackets:
+            return "f"
+        case .requestPackets:
+            return "r"
+        case .endSession:
+            return "e"
+        }
+    }
 }
 
 extension ClientMessage {
     var type: MessageType {
         switch self {
         case .beginSession:  return .beginSession
-        case .forwardPacket: return .forwardPacket
-        case .requestPacket: return .requestPacket
+        case .forwardPackets: return .forwardPackets
+        case .requestPackets: return .requestPackets
         case .endSession:    return .endSession
         }
     }
@@ -28,8 +43,8 @@ extension ServerMessage {
     var type: MessageType {
         switch self {
         case .beginSession:  return .beginSession
-        case .forwardPacket: return .forwardPacket
-        case .requestPacket: return .requestPacket
+        case .forwardPackets: return .forwardPackets
+        case .requestPackets: return .requestPackets
         case .endSession:    return .endSession
         }
     }

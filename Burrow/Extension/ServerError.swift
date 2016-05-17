@@ -12,12 +12,14 @@ public struct ServerError: ErrorType {
     public enum Code: String {
         case unknownError = "Unknown Error"
         case unknownMessageType = "Unknown Message Type"
+        case unknownSessionIdentifier = "Unknown Session Identifier"
         case undefinedError = "Undefined Error"
         
         init(_ rawValue: Int) {
             switch rawValue {
             case 0:  self = .unknownError
             case 1:  self = .unknownMessageType
+            case 2:  self = .unknownSessionIdentifier
             default: self = .undefinedError
             }
         }

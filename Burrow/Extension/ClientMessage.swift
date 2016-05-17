@@ -10,26 +10,26 @@ import Foundation
 
 enum ClientMessage {
     case beginSession
-    case forwardPacket(SessionIdentifier, NSData)
-    case requestPacket(SessionIdentifier)
+    case forwardPackets(SessionIdentifier, [NSData])
+    case requestPackets(SessionIdentifier)
     case endSession(SessionIdentifier)
 }
 
 extension String {
     init(serializing message: ClientMessage) {
-        let components: [String] = {
+        let arguments: [String] = {
             switch message {
             case .beginSession:
-                return ["b"]
-            case .forwardPacket(let identifier, let packet):
-                return ["f", String(identifier), packet.base64EncodedStringWithOptions([])]
-            case .requestPacket(let identifier):
-                return ["r", "-", String(identifier)]
+                return []
+            case .forwardPackets(let sessionIdentifier, let packets):
+                return [String(sessionIdentifier)] + packets.map{ $0.base64EncodedStringWithOptions([]) }
+            case .requestPackets(let identifier):
+                return [String(identifier)]
             case .endSession(let identifier):
-                return ["e", String(identifier)]
+                return [String(identifier)]
             }
         }()
-        self = components.joinWithSeparator("-")
+        self = ([message.type.identifier] + arguments).joinWithSeparator("-")
     }
 }
 

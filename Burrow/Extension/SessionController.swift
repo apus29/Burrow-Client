@@ -12,11 +12,15 @@ extension TransmissionManager {
     func send(message: ClientMessage, responseHandler: Result<ServerMessage> -> ()) {
         // TODO: Don't double encode the data. It's inefficient.
         transmit(domainSafeMessage: String(serializing: message)) { response in
-            response.map { responseData in
+            responseHandler(response.map { responseData in
                 try ServerMessage(type: message.type, deserializing: responseData)
-            }
+            })
         }
     }
+}
+
+protocol SessionControllerDelegate: class {
+    func handleReceived(packets packets: Result<[NSData]>)
 }
 
 class SessionController {
@@ -29,8 +33,9 @@ class SessionController {
     }
     
     // MARK: Properties
-    
     private var sessionIdentifier: SessionIdentifier?
+    
+    weak var delegate: SessionControllerDelegate?
 
     var running: Bool {
         return sessionIdentifier != nil
@@ -44,6 +49,7 @@ class SessionController {
             completion(result.map { response in
                 guard case .beginSession(let identifier) = response else { fatalError() }
                 self.sessionIdentifier = identifier
+                self.poll()
             }.recover { error in
                 // TODO: Recover from certain kinds of failures
                 throw error
@@ -51,11 +57,11 @@ class SessionController {
         }
     }
     
-    func forwardPacket(packet: NSData, completion: (Result<()>) -> ()) {
+    func forward(packets packets: [NSData], completion: (Result<()>) -> ()) {
         guard let identifier = sessionIdentifier else { preconditionFailure() }
-        transmissionManager.send(.forwardPacket(identifier, packet)) { result in
+        transmissionManager.send(.forwardPackets(identifier, packets)) { result in
             completion(result.map { response in
-                guard case .forwardPacket = response else { fatalError() }
+                guard case .forwardPackets = response else { fatalError() }
             }.recover { error in
                 // TODO: Recover from certain kinds of failures
                 throw error
@@ -63,12 +69,26 @@ class SessionController {
         }
     }
     
-    func requestPacket(completion: (Result<NSData>) -> ()) {
+    // TODO: Do we really need a queue? We will have 1 thread, I think :P
+    static let pollQueue = dispatch_queue_create("SessionController", DISPATCH_QUEUE_CONCURRENT)
+    
+    private func poll() {
+        // TODO: Worry about synchronization issues where running is set to false.
+        // TODO: Should any of this shit be weak?
+        request { packet in
+            self.request { packet in
+                self.delegate?.handleReceived(packets: packet)
+            }
+            if self.running { self.poll() }
+        }
+    }
+    
+    private func request(completion: (packets: Result<[NSData]>) -> ()) {
         guard let identifier = sessionIdentifier else { preconditionFailure() }
-        transmissionManager.send(.requestPacket(identifier)) { result in
-            completion(result.map { response in
-                guard case .requestPacket(let packet) = response else { fatalError() }
-                return packet
+        transmissionManager.send(.requestPackets(identifier)) { result in
+            completion(packets: result.map { response in
+                guard case .requestPackets(let packets) = response else { fatalError() }
+                return packets
             }.recover { error in
                 // TODO: Recover from certain kinds of failures
                 throw error
