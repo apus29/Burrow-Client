@@ -9,7 +9,7 @@
 import XCTest
 @testable import Shovel
 
-let parentDomain: Domain = "bacon.tech"
+let parentDomain: Domain = "burrow.tech"
 
 // This message must be domain safe.
 // Note that message MUST start with "test-" to indicate that we're
@@ -29,21 +29,21 @@ class TransmissionTests: XCTestCase {
                 "test-The-quick-brown-fox-jumped-over-the-lazy-dog-The-slow-gree",
                 "n-turtle-nibbled-on-the-tasty-ant-The-fluffy-gray-chinchilla-sq",
                 "ueaked-at-the-silly-hampster-The-perky-brown-puppy-sprinted-aro",
-                "und-the-grumpy-cat-The-quick-brown-fox-",
-                "0.continue.bacon.tech"
+                "und-the-grumpy-cat-The-quick-brown-fox",
+                "0.continue.burrow.tech"
             ],
             [
-                "jumped-over-the-lazy-dog-The-slow-green-turtle-nibbled-on-the-t",
-                "asty-ant-The-fluffy-gray-chinchilla-squeaked-at-the-silly-hamps",
-                "ter-The-perky-brown-puppy-sprinted-around-the-grumpy-cat-The-qu",
-                "ick-brown-fox-jumped-over-the-lazy-dog-",
-                "1.continue.bacon.tech"
+                "-jumped-over-the-lazy-dog-The-slow-green-turtle-nibbled-on-the-",
+                "tasty-ant-The-fluffy-gray-chinchilla-squeaked-at-the-silly-hamp",
+                "ster-The-perky-brown-puppy-sprinted-around-the-grumpy-cat-The-q",
+                "uick-brown-fox-jumped-over-the-lazy-do",
+                "1.continue.burrow.tech"
             ],
             [
-                "The-slow-green-turtle-nibbled-on-the-tasty-ant-The-fluffy-gray-",
-                "chinchilla-squeaked-at-the-silly-hampster-The-perky-brown-puppy",
-                "-sprinted-around-the-grumpy-cat",
-                "2.continue.bacon.tech"
+                "g-The-slow-green-turtle-nibbled-on-the-tasty-ant-The-fluffy-gra",
+                "y-chinchilla-squeaked-at-the-silly-hampster-The-perky-brown-pup",
+                "py-sprinted-around-the-grumpy-cat",
+                "2.continue.burrow.tech"
             ]
         ].map{ $0.joinWithSeparator(".") }
         XCTAssertEqual(expectedResult, domains.map{ String($0) })
