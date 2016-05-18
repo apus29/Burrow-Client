@@ -92,6 +92,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
         // Forward packets
 
         packetFlow.readPacketsWithCompletionHandler { packets, protocolIdentifiers in
+            print("Read \(packets.count) packets from device.", toStream: &AppleSystemLog.stream)
             
             // TODO: Refactor
             for (packet, protocolIdentifier) in zip(packets, protocolIdentifiers) {
@@ -104,9 +105,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
                 // TODO: Recover? Silently fail?
                 try! result.unwrap()
             }
-
-            print("TRYING AGAIN!!!", toStream: &AppleSystemLog.stream)
-
+            
+            sleep(1)
             self.forwardPackets()
         }
     }

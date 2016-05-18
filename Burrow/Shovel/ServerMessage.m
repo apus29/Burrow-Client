@@ -8,6 +8,7 @@
 
 #include "ServerMessage.h"
 extern res_state res_state_new();
+extern void res_client_close(res_state res);
 
 int ServerMessageGetCount(ServerMessage message, ServerMessageSection section) {
     return ns_msg_count(message, section);
@@ -21,13 +22,17 @@ int ServerMessageParse(ServerMessage message, ServerMessageSection section, int 
 }
 
 int ServerMessageFromQuery(const char *domain, RecordClass class, RecordType type, bool useTCP, u_char *answerBuffer, int bufferSize, ServerMessage *message) {
-    int answerLength;
+
+    // TODO: Shared pool? One per dispatch queue w/ pool of queues? idk man....
     res_state statp = res_state_new();
+
     if (statp == NULL) {
+        res_client_close(statp);
         return -1;
     }
     
     if (res_ninit(statp)) {
+        res_client_close(statp);
         return -1;
     }
     
@@ -40,11 +45,12 @@ int ServerMessageFromQuery(const char *domain, RecordClass class, RecordType typ
         // Unsetting the RES_USEVC flag makes it only use UDP
         statp->options &= ~RES_USEVC;
     }
-    if((answerLength = res_nquery(statp, domain, class, type, answerBuffer, bufferSize)) < 0) {
+    int answerLength = res_nquery(statp, domain, class, type, answerBuffer, bufferSize);
+    res_client_close(statp);
+
+    if (answerLength < 0) {
         return -1;
     }
-    // TODO: Necessary?
-//    res_client_close(statp);
     
     if (ns_initparse(answerBuffer, answerLength, message)) {
         return -1;
