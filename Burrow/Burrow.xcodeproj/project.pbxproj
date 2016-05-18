@@ -40,6 +40,7 @@
 		4D4C42291CBB73A300055D86 /* ResourceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C42281CBB73A300055D86 /* ResourceRecord.swift */; };
 		4D6768141CE994A30079E173 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6768131CE994A30079E173 /* Result.swift */; };
 		4D6768161CE995160079E173 /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6768151CE995160079E173 /* ServerError.swift */; };
+		4D67681A1CEBF8FD0079E173 /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6768191CEBF8FD0079E173 /* Logger.swift */; };
 		4D6B46141CE11738007ADB37 /* NETunnelProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE66D41CE09D4300C9FBBC /* NETunnelProviderManager.swift */; };
 		4D6B46151CE117DE007ADB37 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0D564A1CB37862008CB981 /* NetworkExtension.framework */; };
 		4D6E12511CE2CD9400A889C0 /* Shovel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4C41D41CBB50C000055D86 /* Shovel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -185,6 +186,7 @@
 		4D4C42281CBB73A300055D86 /* ResourceRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceRecord.swift; sourceTree = "<group>"; };
 		4D6768131CE994A30079E173 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		4D6768151CE995160079E173 /* ServerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
+		4D6768191CEBF8FD0079E173 /* Logger.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Logger.swift; sourceTree = "<group>"; };
 		4D77F9F01CD7D95400F2586C /* MessageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
 		4D77F9F41CD7DA1500F2586C /* ServerMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMessage.swift; sourceTree = "<group>"; };
 		4D77FA021CD7ED1E00F2586C /* SessionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionController.swift; sourceTree = "<group>"; };
@@ -426,6 +428,7 @@
 			isa = PBXGroup;
 			children = (
 				4D77FA021CD7ED1E00F2586C /* SessionController.swift */,
+				4D6768191CEBF8FD0079E173 /* Logger.swift */,
 				4D4A1DC41CD7C041003AF9AD /* SessionIdentifier.swift */,
 				4D77FA071CD7F77D00F2586C /* Messages */,
 				4D77F9FA1CD7DB5000F2586C /* Errors */,
@@ -832,6 +835,7 @@
 				4D4C421F1CBB5F7600055D86 /* TXTRecord.swift in Sources */,
 				4D6768141CE994A30079E173 /* Result.swift in Sources */,
 				4D4C42271CBB646B00055D86 /* ResourceRecord.m in Sources */,
+				4D67681A1CEBF8FD0079E173 /* Logger.swift in Sources */,
 				4D4A1DCC1CD7C38F003AF9AD /* DeserializationError.swift in Sources */,
 				4DCE66D11CE087EB00C9FBBC /* DomainPackagingMessage.swift in Sources */,
 				4DBD0AA51CC4ACD3003BC82C /* Domain.swift in Sources */,
