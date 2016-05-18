@@ -75,10 +75,8 @@ class SessionController {
     private func poll() {
         // TODO: Worry about synchronization issues where running is set to false.
         // TODO: Should any of this shit be weak?
-        request { packet in
-            self.request { packet in
-                self.delegate?.handleReceived(packets: packet)
-            }
+        request { packets in
+            self.delegate?.handleReceived(packets: packets)
             if self.running { self.poll() }
         }
     }
