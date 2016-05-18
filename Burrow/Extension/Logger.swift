@@ -8,15 +8,57 @@
 
 import Foundation
 
-public struct AppleSystemLog: OutputStreamType {
-    private init() { }
-    public static var stream = AppleSystemLog()
-    public func write(string: String) { NSLog(string) }
-}
-
 let verbose = true
 
-func log(message: String, requiresVerbose: Bool = false) {
-    guard verbose || !requiresVerbose else { return }
-    print(message, toStream: &AppleSystemLog.stream)
+protocol Loggable {
+    var logText: String { get }
+    var requiresVerbose: Bool { get }
 }
+
+extension String: Loggable {
+    var logText: String {
+        return self
+    }
+    
+    var requiresVerbose: Bool {
+        return false
+    }
+}
+
+func verbose(_ string: String) -> Loggable {
+    return LogMessage.verbose(string)
+}
+
+enum LogMessage: Loggable {
+    case normal(String)
+    case verbose(String)
+    
+    var logText: String {
+        switch self {
+        case let .normal(text):  return text
+        case let .verbose(text): return text
+        }
+    }
+    
+    var requiresVerbose: Bool {
+        switch self {
+        case .normal:  return false
+        case .verbose: return true
+        }
+    }
+}
+
+func log(messages: Loggable..., separator: String = " ", terminator: String = "\n") {
+    var fullMessage = ""
+    var first = true
+    for messageSegment in messages {
+        guard verbose || !messageSegment.requiresVerbose else { continue }
+        if first { first = false }
+        else { fullMessage += separator }
+        fullMessage += messageSegment.logText
+    }
+    fullMessage += terminator
+    NSLog(fullMessage)
+}
+
+

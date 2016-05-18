@@ -38,7 +38,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
     override func startTunnelWithOptions(options: [String : NSObject]?, completionHandler: (NSError?) -> Void) {
         while true && !VolatileCondition.sharedInstance.value {
             sleep(1)
-            print("SPAM!!!", toStream: &AppleSystemLog.stream)
+            log("Waiting for debug connection...")
         }
         log("Starting tunnel...")
 
@@ -57,21 +57,20 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
             log("Set tunnel network settings")
 
             if let error = error {
-                print("OH NOES!!! ERROR: \(error)", toStream: &AppleSystemLog.stream)
+                log("Unable to set tunnel network settings: \(error)")
                 fatalError()
             }
             
             self.sessionController.delegate = self
             self.sessionController.beginSession { result in
-                // TODO: Identifier should be printed. Should this code be in the session controller?
-                log("Began tunneling session with identifier")
-
                 // TODO: Convert to NSError and pass along?
                 // TODO: Recover? Silently fail?
                 logErrors{ try result.unwrap() }
+
+                // TODO: Identifier should be printed. Should this code be in the session controller?
+                log("Began tunneling session with identifier")
+
                 completionHandler(nil)
-                print("SUCCESSFULLY STARTED SESH!!! :D", toStream: &AppleSystemLog.stream)
-                
                 self.runTunnel()
             }
 
@@ -88,11 +87,9 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
     func forwardPackets() {
         // Forward packets
 
+        log(verbose("Attempting to read packets..."))
         packetFlow.readPacketsWithCompletionHandler { packets, protocolIdentifiers in
-            dispatch_async(dispatch_get_main_queue()) {
-                log("Read \(packets.count) packets from device.")
-                log("Read packets: \(packets)", requiresVerbose: true)
-            }
+            log("Read \(packets.count) packets from device", verbose("\(packets)"))
             
             // TODO: Handle other types of packets.
             protocolIdentifiers.forEach {
@@ -117,15 +114,14 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
         
         // TODO: MAKE THIS CLEANER
         dispatch_async(dispatch_get_main_queue()) {
-            log("Received \(packets.count) packets from server.")
-            log("Received packets: \(packets)", requiresVerbose: true)
+            log("Received \(packets.count) packets from server.", verbose("\(packets)"))
         }
 
         // TODO: What is this return value?
         let value = packetFlow.writePackets(packets, withProtocols: Array(Repeat(count: packets.count, repeatedValue: NSNumber(int: AF_INET))))
 
         // TODO: Handle protocol.
-        log("Writing packets... returned \(value)", requiresVerbose: true)
+        log(verbose("Writing packets... returned \(value)"))
     }
     
     override func stopTunnelWithReason(reason: NEProviderStopReason, completionHandler: () -> Void) {

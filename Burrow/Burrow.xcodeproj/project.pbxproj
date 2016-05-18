@@ -317,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				4D0D56361CB3739C008CB981 /* PacketTunnelProvider.swift */,
+				4D6768191CEBF8FD0079E173 /* Logger.swift */,
 				4D77F9F31CD7D9E300F2586C /* Communication */,
 				4D0D56501CB3798F008CB981 /* Supporting Files */,
 			);
@@ -428,7 +429,6 @@
 			isa = PBXGroup;
 			children = (
 				4D77FA021CD7ED1E00F2586C /* SessionController.swift */,
-				4D6768191CEBF8FD0079E173 /* Logger.swift */,
 				4D4A1DC41CD7C041003AF9AD /* SessionIdentifier.swift */,
 				4D77FA071CD7F77D00F2586C /* Messages */,
 				4D77F9FA1CD7DB5000F2586C /* Errors */,
