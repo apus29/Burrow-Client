@@ -48,13 +48,8 @@ extension ServerMessage {
                 }
                 return serverMessage
             })
-            
             guard status == 0 else {
-                if h_errno != 0 {
-                    throw NSError(domain: "NetDBErrorDomain", code: Int(h_errno), userInfo: nil)
-                } else {
-                    throw NSError(domain: NSPOSIXErrorDomain, code: Int(errno), userInfo: nil)
-                }
+                throw NSError.netDBError() ?? NSError.posixError()
             }
             return result
         } catch let error as NSError where error.domain == "NetDBErrorDomain" && error.code == 2 {

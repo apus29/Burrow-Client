@@ -6,6 +6,26 @@
 //
 //
 
+public let NetDBErrorDomain = "NetDBErrorDomain"
+
+extension NSError {
+    static func posixError() -> NSError {
+        return NSError(domain: NSPOSIXErrorDomain, code: Int(errno), userInfo: nil)
+    }
+    
+    static func netDBError() -> NSError? {
+        guard let code = NetDBErrorCode(rawValue: h_errno) else {
+            return nil
+        }
+        guard code != .`internal` else {
+            return NSError.posixError()
+        }
+        return NSError(domain: NetDBErrorDomain, code: Int(code.rawValue), userInfo: [
+            NSLocalizedDescriptionKey : code.description
+        ])
+    }
+}
+
 public enum NetDBErrorCode {
     case `internal`
     case hostNotFound
