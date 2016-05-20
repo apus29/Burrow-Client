@@ -64,11 +64,12 @@ class TransmissionTests: XCTestCase {
         waitForExpectationsWithTimeout(5) { error in
             if let error = error {
                 XCTFail("Failed with error: \(error)")
+            } else {
+                XCTAssertEqual(
+                    String(message.characters.reverse()),
+                    result
+                )
             }
         }
-        XCTAssertEqual(
-            String(message.characters.reverse()),
-            result
-        )
     }
 }
