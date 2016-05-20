@@ -35,6 +35,8 @@ func logErrors<T>(block: () throws -> T) -> T {
     @objc static let sharedInstance = VolatileCondition(false)
 }
 
+let waitForDebugConnection = false
+
 class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
     
     override init() {
@@ -45,7 +47,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
     let sessionController = SessionController(domain: "burrow.tech") // TODO: Should we read from config?
     
     override func startTunnelWithOptions(options: [String : NSObject]?, completionHandler: (NSError?) -> Void) {
-        while true && !VolatileCondition.sharedInstance.value {
+        while waitForDebugConnection && !VolatileCondition.sharedInstance.value {
             sleep(1)
             log.debug("Waiting for debug connection...")
         }

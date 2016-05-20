@@ -60,7 +60,7 @@ extension ServerMessage {
             log.info("Successfully queried `\(domain)`")
             return result
         } catch let error as NSError where error.domain == "NetDBErrorDomain" && error.code == 2 {
-            log.warning("Failed query for `\(domain)`; will retry...")
+            log.warning("Failed query for `\(domain)`: \(error); will retry...")
 
             // Try again!
             return try withQuery(domain: domain, recordClass: recordClass, recordType: recordType, useTCP: useTCP, bufferSize: bufferSize)
