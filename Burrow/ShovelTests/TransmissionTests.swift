@@ -66,7 +66,7 @@ class TransmissionTests: XCTestCase {
             expectation
         }
         
-        waitForExpectationsWithTimeout(10) { error in
+        waitForExpectationsWithTimeout(15) { error in
             if let error = error {
                 XCTFail("Failed with error: \(error)")
             } else {
