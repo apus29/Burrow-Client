@@ -8,12 +8,19 @@
 
 import Shovel
 
+import Logger
+extension Logger { public static let sessionControllerCategory = "SessionController" }
+private let log = Logger.category(Logger.sessionControllerCategory)
+
 extension TransmissionManager {
     func send(message: ClientMessage, responseHandler: Result<ServerMessage> -> ()) {
+        log.debug("Will send message: \(message)")
+        
         // TODO: Don't double encode the data. It's inefficient.
         transmit(domainSafeMessage: String(serializing: message)) { response in
             responseHandler(response.map { responseData in
-                try ServerMessage(type: message.type, deserializing: responseData)
+                log.info("Sent message: \(message)")
+                return try ServerMessage(type: message.type, deserializing: responseData)
             })
         }
     }
@@ -73,9 +80,15 @@ class SessionController {
     static let pollQueue = dispatch_queue_create("SessionController", DISPATCH_QUEUE_CONCURRENT)
     
     private func poll() {
+        log.verbose("Polling for packets...")
+
         // TODO: Worry about synchronization issues where running is set to false.
         // TODO: Should any of this shit be weak?
         request { packets in
+            if case let .Success(packets) = packets {
+                log.debug("Received \(packets.count) packets")
+                log.verbose("Received: \(packets)")
+            }
             self.delegate?.handleReceived(packets: packets)
             if self.running { self.poll() }
         }

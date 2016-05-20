@@ -6,6 +6,10 @@
 //
 //
 
+import Logger
+extension Logger { public static let serverMessageCategory = "SeverMessage" }
+private let log = Logger.category(Logger.serverMessageCategory)
+
 extension ServerMessage {
     /// The answers contained within the message.  Note that each answer is only
     /// valid while `self` exists, otherwise a segmentation fault may occur!
@@ -28,6 +32,8 @@ extension ServerMessage {
     /// valid when while the buffer exists, otherwise a segmentation fault may occur.
 
     static func withQuery(domain domain: Domain, recordClass: RecordClass, recordType: RecordType, useTCP: Bool, bufferSize: Int) throws -> ManagedBuffer<ServerMessage, UInt8> {
+        log.info("Will attempt to query `\(domain)`")
+        
         do {
             var status: Int = 0
             
@@ -43,7 +49,7 @@ extension ServerMessage {
                             UnsafeMutablePointer(bufferPointer),
                             Int32(bufferSize),
                             &serverMessage
-                            ))
+                        ))
                     }
                 }
                 return serverMessage
@@ -51,8 +57,11 @@ extension ServerMessage {
             guard status == 0 else {
                 throw NSError.netDBError() ?? NSError.posixError()
             }
+            log.info("Successfully queried `\(domain)`")
             return result
         } catch let error as NSError where error.domain == "NetDBErrorDomain" && error.code == 2 {
+            log.warning("Failed query for `\(domain)`; will retry...")
+
             // Try again!
             return try withQuery(domain: domain, recordClass: recordClass, recordType: recordType, useTCP: useTCP, bufferSize: bufferSize)
         }

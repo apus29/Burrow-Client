@@ -8,6 +8,7 @@
 
 import UIKit
 import NetworkExtension
+import Logger
 
 class ViewController: UIViewController {
     @IBOutlet weak var toggleSwitch: UISwitch!
