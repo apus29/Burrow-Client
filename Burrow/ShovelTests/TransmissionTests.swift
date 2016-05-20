@@ -8,6 +8,7 @@
 
 import XCTest
 @testable import Shovel
+import Logger
 
 let parentDomain: Domain = "burrow.tech"
 
@@ -16,6 +17,10 @@ let parentDomain: Domain = "burrow.tech"
 let message = "test-" + "The-quick-brown-fox-jumped-over-the-lazy-dog-The-slow-green-turtle-nibbled-on-the-tasty-ant-The-fluffy-gray-chinchilla-squeaked-at-the-silly-hampster-The-perky-brown-puppy-sprinted-around-the-grumpy-cat-The-quick-brown-fox-jumped-over-the-lazy-dog-The-slow-green-turtle-nibbled-on-the-tasty-ant-The-fluffy-gray-chinchilla-squeaked-at-the-silly-hampster-The-perky-brown-puppy-sprinted-around-the-grumpy-cat-The-quick-brown-fox-jumped-over-the-lazy-dog-The-slow-green-turtle-nibbled-on-the-tasty-ant-The-fluffy-gray-chinchilla-squeaked-at-the-silly-hampster-The-perky-brown-puppy-sprinted-around-the-grumpy-cat"
 
 class TransmissionTests: XCTestCase {
+    
+    override func setUp() {
+        Logger.enable(minimumSeverity: .debug)
+    }
     
     func testDomainPackaging() {
         let continueDomain = parentDomain.prepending("continue")
@@ -61,7 +66,7 @@ class TransmissionTests: XCTestCase {
             expectation
         }
         
-        waitForExpectationsWithTimeout(5) { error in
+        waitForExpectationsWithTimeout(10) { error in
             if let error = error {
                 XCTFail("Failed with error: \(error)")
             } else {
