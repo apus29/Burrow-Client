@@ -13,7 +13,7 @@ extension Logger { public static let dnsResolverCategory = "DNSResolver" }
 private let log = Logger.category(Logger.dnsResolverCategory)
 
 enum DNSResolveError: ErrorType {
-    case queryFailure(DNSServiceErrorCode?)
+    case queryFailure(DNSServiceErrorCode)
     case parseFailure(NSData)
 }
 
@@ -86,13 +86,12 @@ private func querySocketCallback(
     
     // Process the result
     log.verbose("Processing result for socket: \(socket)")
-    let error = DNSServiceProcessResult(queryContext.memory.service)
+    let status = DNSServiceProcessResult(queryContext.memory.service)
     
     // Respond to the caller
     queryContext.memory.responseHandler(Result {
-        if error != DNSServiceErrorType(kDNSServiceErr_NoError) {
-            let code = DNSServiceErrorCode(rawValue: Int(error))
-            throw DNSResolveError.queryFailure(code)
+        if let errorCode = DNSServiceErrorCode(rawValue: Int(status)) {
+            throw DNSResolveError.queryFailure(errorCode)
         } else {
             return try queryContext.memory.records.map { try $0.unwrap() }
         }
@@ -103,7 +102,7 @@ class DNSResolver {
     private init() { }
     
     /// Query a domain's TXT records asynchronously
-    static func resolveTXT(domain: Domain, responseHandler: Result<[TXTRecord]> -> ()) {
+    static func resolveTXT(domain: Domain, responseHandler: Result<[TXTRecord]> -> ()) throws {
         log.debug("Will resolve domain `\(domain)`")
         let domainData = String(domain).dataUsingEncoding(NSUTF8StringEncoding)!
         
@@ -119,7 +118,7 @@ class DNSResolver {
         
         // Create DNS Query
         var service: DNSServiceRef = nil
-        DNSServiceQueryRecord(
+        let status = DNSServiceQueryRecord(
             /* serviceRef: */ &service,
             /* flags: */ 0,
             /* interfaceIndex: */ 0,
@@ -129,6 +128,11 @@ class DNSResolver {
             /* callback: */ queryCallback,
             /* context: */ queryContext
         )
+        if let errorCode = DNSServiceErrorCode(rawValue: Int(status)) {
+            throw DNSResolveError.queryFailure(errorCode)
+        }
+        
+        assert(service != nil)
         queryContext.memory.service = service
         log.verbose("Created DNS query \(service) to domain `\(domain)`")
         

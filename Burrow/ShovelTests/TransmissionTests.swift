@@ -71,13 +71,12 @@ class TransmissionTests: XCTestCase {
         
         let manager = TransmissionManager(domain: parentDomain)
         
-        manager.transmit(domainSafeMessage: message) { response in
+        try! manager.transmit(domainSafeMessage: message) { response in
             result = try! response.unwrap()
             expectation.fulfill()
-            expectation
         }
         
-        waitForExpectationsWithTimeout(15) { error in
+        waitForExpectationsWithTimeout(35) { error in
             if let error = error {
                 XCTFail("Failed with error: \(error)")
             } else {
@@ -141,7 +140,7 @@ class TransmissionTests: XCTestCase {
         for (index, packet) in packets.enumerate() {
             let expectation = expectationWithDescription("Packet \(index)")
             
-            manager.transmit(domainSafeMessage: packet) { response in
+            try! manager.transmit(domainSafeMessage: packet) { response in
                 do {
                     let result = try response.unwrap()
                     let expected = String(packet.characters.reverse())

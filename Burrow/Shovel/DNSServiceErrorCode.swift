@@ -47,6 +47,8 @@ public enum DNSServiceErrorCode {
 extension DNSServiceErrorCode: RawRepresentable {
     public init?(rawValue: Int) {
         switch rawValue {
+        case kDNSServiceErr_NoError:
+            return nil
         case kDNSServiceErr_Unknown:
             self = unknown
         case kDNSServiceErr_NoSuchName:
@@ -110,7 +112,7 @@ extension DNSServiceErrorCode: RawRepresentable {
         case kDNSServiceErr_Timeout:
             self = timeout
         default:
-            return nil
+            self = unknown
         }
     }
     

@@ -50,11 +50,11 @@ extension TransmissionManager {
 
 extension TransmissionManager {
     
-    internal func begin(responseHandler: Result<String> -> ()) {
+    internal func begin(responseHandler: Result<String> -> ()) throws {
         log.debug("Attempting to begin tranmission...")
         
         let beginDomain = domain.prepending("begin").prepending(NSUUID().UUIDString)
-        DNSResolver.resolveTXT(beginDomain) { result in
+        try DNSResolver.resolveTXT(beginDomain) { result in
             responseHandler(result.map{ txtRecords in
                 let attributes = try TXTRecord.parse(attributes: txtRecords)
                 
@@ -67,11 +67,11 @@ extension TransmissionManager {
         }
     }
     
-    internal func end(transmissionId: String, count: Int, responseHandler: Result<String> -> ()) {
+    internal func end(transmissionId: String, count: Int, responseHandler: Result<String> -> ()) throws {
         log.debug("Attempting to end tranmission with id \(transmissionId), count \(count)...")
 
         let endDomain = domain.prepending("end").prepending(transmissionId).prepending(String(count))
-        DNSResolver.resolveTXT(endDomain) { result in
+        try DNSResolver.resolveTXT(endDomain) { result in
             responseHandler(result.map { txtRecords in
                 let attributes = try TXTRecord.parse(attributes: txtRecords)
 
@@ -89,13 +89,13 @@ extension TransmissionManager {
     }
     
     /// Send a domain-safe message to the server and asynchronously receive the response, or an error on failure
-    public func transmit(domainSafeMessage message: String, responseHandler: Result<String> -> ()) {
+    public func transmit(domainSafeMessage message: String, responseHandler: Result<String> -> ()) throws {
         log.verbose("Attempting to transmit message: \(message)")
         // TODO: Could we improve speed by reducing the RTT required to start and end a transmission?
         // TODO: The control flow here is more confusing than I'd like. It's not obvious how to fix it.
         
         // Begin transmission
-        begin { result in
+        try begin { result in
             do {
                 let transmissionId = try result.unwrap()
                 
@@ -111,7 +111,7 @@ extension TransmissionManager {
                 // Send payload of our message
                 var failures: [ErrorType] = []
                 for domain in domains {
-                    DNSResolver.resolveTXT(domain) { result in
+                    try DNSResolver.resolveTXT(domain) { result in
                         do {
                             let txtRecords = try result.unwrap()
                             let attributes = try TXTRecord.parse(attributes: txtRecords)
@@ -157,7 +157,7 @@ extension TransmissionManager {
                 log.debug("Transmitted entire message for id \(transmissionId)")
                 
                 // Let the server know that the transmission is finished
-                self.end(transmissionId, count: domains.count) { result in
+                try self.end(transmissionId, count: domains.count) { result in
                     responseHandler(Result {
                         let response = try result.unwrap()
                         
