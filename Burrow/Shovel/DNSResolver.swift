@@ -140,9 +140,11 @@ class DNSResolver {
             release: nil,
             copyDescription: nil
         )
+        let socketIdentifier = DNSServiceRefSockFD(service)
+        assert(socketIdentifier >= 0)
         let socket = CFSocketCreateWithNative(
             /* allocator: */ nil,
-            /* socket: */ DNSServiceRefSockFD(service),
+            /* socket: */ socketIdentifier,
             /* callbackTypes: */ CFSocketCallBackType.ReadCallBack.rawValue,
             /* callout: */ querySocketCallback,
             /* context: */ &socketContext
