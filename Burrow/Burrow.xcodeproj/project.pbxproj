@@ -24,9 +24,6 @@
 		4D4A1DCB1CD7C38F003AF9AD /* DeserializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A1DC91CD7C38F003AF9AD /* DeserializationError.swift */; };
 		4D4A1DCC1CD7C38F003AF9AD /* DeserializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A1DC91CD7C38F003AF9AD /* DeserializationError.swift */; };
 		4D4B136C1CBB9FE1008EC7CD /* Burrow-iOS.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 4D4B136B1CBB9FE1008EC7CD /* Burrow-iOS.entitlements */; };
-		4D4B13751CBBA0AE008EC7CD /* ServerMessage.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4B13731CBBA0AE008EC7CD /* ServerMessage.m */; };
-		4D4B13761CBBA0AE008EC7CD /* ServerMessage.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4B13741CBBA0AE008EC7CD /* ServerMessage.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4D4B13791CBBA0C4008EC7CD /* ServerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4B13781CBBA0C4008EC7CD /* ServerMessage.swift */; };
 		4D4C41AB1CBB4C8C00055D86 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0D56361CB3739C008CB981 /* PacketTunnelProvider.swift */; };
 		4D4C41AC1CBB4C8D00055D86 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0D56361CB3739C008CB981 /* PacketTunnelProvider.swift */; };
 		4D4C41DE1CBB50C000055D86 /* Shovel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4C41D41CBB50C000055D86 /* Shovel.framework */; };
@@ -35,9 +32,6 @@
 		4D4C42181CBB5B8000055D86 /* CResolver.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4D4C42171CBB5B8000055D86 /* CResolver.xcconfig */; };
 		4D4C421F1CBB5F7600055D86 /* TXTRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C421E1CBB5F7600055D86 /* TXTRecord.swift */; };
 		4D4C42231CBB609400055D86 /* CResolver.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4C420F1CBB5B5C00055D86 /* CResolver.framework */; settings = {ATTRIBUTES = (Required, ); }; };
-		4D4C42261CBB646B00055D86 /* ResourceRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4C42241CBB646B00055D86 /* ResourceRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		4D4C42271CBB646B00055D86 /* ResourceRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C42251CBB646B00055D86 /* ResourceRecord.m */; };
-		4D4C42291CBB73A300055D86 /* ResourceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C42281CBB73A300055D86 /* ResourceRecord.swift */; };
 		4D62BB711CFA458200F0A2C3 /* DNSServiceDiscovery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D62BB6A1CFA458100F0A2C3 /* DNSServiceDiscovery.framework */; };
 		4D62BB721CFA458200F0A2C3 /* DNSServiceDiscovery.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4D62BB6A1CFA458100F0A2C3 /* DNSServiceDiscovery.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		4D62BB7A1CFA463300F0A2C3 /* DNSServiceDiscovery.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4D62BB761CFA463300F0A2C3 /* DNSServiceDiscovery.xcconfig */; };
@@ -203,9 +197,6 @@
 		4D4B136B1CBB9FE1008EC7CD /* Burrow-iOS.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Burrow-iOS.entitlements"; sourceTree = "<group>"; };
 		4D4B136D1CBB9FE9008EC7CD /* Burrow-Mac.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Burrow-Mac.entitlements"; sourceTree = "<group>"; };
 		4D4B136F1CBBA00B008EC7CD /* BurrowTunnel-Extension-Mac.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "BurrowTunnel-Extension-Mac.entitlements"; sourceTree = "<group>"; };
-		4D4B13731CBBA0AE008EC7CD /* ServerMessage.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerMessage.m; sourceTree = "<group>"; };
-		4D4B13741CBBA0AE008EC7CD /* ServerMessage.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerMessage.h; sourceTree = "<group>"; };
-		4D4B13781CBBA0C4008EC7CD /* ServerMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMessage.swift; sourceTree = "<group>"; };
 		4D4C41D41CBB50C000055D86 /* Shovel.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Shovel.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D4C41D81CBB50C000055D86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D4C41DD1CBB50C000055D86 /* ShovelTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ShovelTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -220,9 +211,6 @@
 		4D4C421B1CBB5BE600055D86 /* macosx.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = macosx.modulemap; sourceTree = "<group>"; };
 		4D4C421C1CBB5D4100055D86 /* libresolv.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libresolv.tbd; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/usr/lib/libresolv.tbd; sourceTree = DEVELOPER_DIR; };
 		4D4C421E1CBB5F7600055D86 /* TXTRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TXTRecord.swift; sourceTree = "<group>"; };
-		4D4C42241CBB646B00055D86 /* ResourceRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceRecord.h; sourceTree = "<group>"; };
-		4D4C42251CBB646B00055D86 /* ResourceRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceRecord.m; sourceTree = "<group>"; };
-		4D4C42281CBB73A300055D86 /* ResourceRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceRecord.swift; sourceTree = "<group>"; };
 		4D62BB6A1CFA458100F0A2C3 /* DNSServiceDiscovery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DNSServiceDiscovery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4D62BB6C1CFA458200F0A2C3 /* DNSServiceDiscovery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNSServiceDiscovery.h; sourceTree = "<group>"; };
 		4D62BB6E1CFA458200F0A2C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -436,17 +424,6 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
-		4D4B13771CBBA0B5008EC7CD /* ServerMessage */ = {
-			isa = PBXGroup;
-			children = (
-				4D4B13741CBBA0AE008EC7CD /* ServerMessage.h */,
-				4D4B13731CBBA0AE008EC7CD /* ServerMessage.m */,
-				4D4B13781CBBA0C4008EC7CD /* ServerMessage.swift */,
-				4D62BB7E1CFA795B00F0A2C3 /* DNSResolver.swift */,
-			);
-			name = ServerMessage;
-			sourceTree = "<group>";
-		};
 		4D4C41D51CBB50C000055D86 /* Shovel */ = {
 			isa = PBXGroup;
 			children = (
@@ -454,9 +431,8 @@
 				4DBD0AA41CC4ACD3003BC82C /* Domain.swift */,
 				4DBD0AA21CC465F6003BC82C /* TransmissionManager.swift */,
 				4DCE66D01CE087EB00C9FBBC /* DomainPackagingMessage.swift */,
-				4D4B13771CBBA0B5008EC7CD /* ServerMessage */,
-				4D4C422A1CBB73A600055D86 /* ResourceRecord */,
-				4DBD0AAC1CC4C609003BC82C /* TXT */,
+				4D62BB7E1CFA795B00F0A2C3 /* DNSResolver.swift */,
+				4D4C421E1CBB5F7600055D86 /* TXTRecord.swift */,
 				4DBD0AAD1CC4CA56003BC82C /* ShovelError.swift */,
 				C9159AC51CEBB0B700AFB55C /* NetDBErrorCode.swift */,
 				4D6768131CE994A30079E173 /* Result.swift */,
@@ -485,16 +461,6 @@
 				4D4C42131CBB5B5D00055D86 /* Info.plist */,
 			);
 			path = CResolver;
-			sourceTree = "<group>";
-		};
-		4D4C422A1CBB73A600055D86 /* ResourceRecord */ = {
-			isa = PBXGroup;
-			children = (
-				4D4C42241CBB646B00055D86 /* ResourceRecord.h */,
-				4D4C42251CBB646B00055D86 /* ResourceRecord.m */,
-				4D4C42281CBB73A300055D86 /* ResourceRecord.swift */,
-			);
-			name = ResourceRecord;
 			sourceTree = "<group>";
 		};
 		4D62BB6B1CFA458200F0A2C3 /* DNSServiceDiscovery */ = {
@@ -540,14 +506,6 @@
 			name = Messages;
 			sourceTree = "<group>";
 		};
-		4DBD0AAC1CC4C609003BC82C /* TXT */ = {
-			isa = PBXGroup;
-			children = (
-				4D4C421E1CBB5F7600055D86 /* TXTRecord.swift */,
-			);
-			name = TXT;
-			sourceTree = "<group>";
-		};
 		4DCB4EC21CEEF71F006BC0AF /* Logger */ = {
 			isa = PBXGroup;
 			children = (
@@ -565,8 +523,6 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D4C42261CBB646B00055D86 /* ResourceRecord.h in Headers */,
-				4D4B13761CBBA0AE008EC7CD /* ServerMessage.h in Headers */,
 				4D4C41F01CBB531400055D86 /* Shovel.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1002,14 +958,10 @@
 			files = (
 				4DBD0AAE1CC4CA56003BC82C /* ShovelError.swift in Sources */,
 				4D62BB7F1CFA795B00F0A2C3 /* DNSResolver.swift in Sources */,
-				4D4B13791CBBA0C4008EC7CD /* ServerMessage.swift in Sources */,
-				4D4B13751CBBA0AE008EC7CD /* ServerMessage.m in Sources */,
-				4D4C42291CBB73A300055D86 /* ResourceRecord.swift in Sources */,
 				4DBD0AA31CC465F6003BC82C /* TransmissionManager.swift in Sources */,
 				C9159AC61CEBB0B700AFB55C /* NetDBErrorCode.swift in Sources */,
 				4D4C421F1CBB5F7600055D86 /* TXTRecord.swift in Sources */,
 				4D6768141CE994A30079E173 /* Result.swift in Sources */,
-				4D4C42271CBB646B00055D86 /* ResourceRecord.m in Sources */,
 				4D4A1DCC1CD7C38F003AF9AD /* DeserializationError.swift in Sources */,
 				4DCE66D11CE087EB00C9FBBC /* DomainPackagingMessage.swift in Sources */,
 				4DBD0AA51CC4ACD3003BC82C /* Domain.swift in Sources */,

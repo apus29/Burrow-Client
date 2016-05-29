@@ -22,12 +22,9 @@ extension TXTRecord {
 }
 
 extension TXTRecord {
-    static func parseAttributes(message: ServerMessage) throws -> [String : String] {
+    static func parse(attributes records: [TXTRecord]) throws -> [String : String] {
         var result: [String : String] = [:]
-        for answer in message.answers {
-            guard let record = TXTRecord(answer) else {
-                throw ShovelError(code: .unexpectedRecordType, reason: "Expected TXT record.")
-            }
+        for record in records {
             guard let (key, value) = record.attribute else {
                 throw ShovelError(
                     code: .unexpectedRecordFormat,
@@ -61,18 +58,11 @@ extension TXTRecord {
                 baseAddress: UnsafePointer(componentBase),
                 length: componentLength,
                 encoding: NSUTF8StringEncoding
-                )!
+            )!
             
             componentIndex += Int(1 + componentLength)
         }
         
         self.init(contents: contents)
-    }
-    
-    /// Extracts the TXT record data from a `ResourceRecord`, copying its contents.
-    /// Returns `nil` if the record was not of type TXT.
-    init?(_ resourceRecord: ResourceRecord) {
-        guard ResourceRecordGetType(resourceRecord) == ns_t_txt else { return nil }
-        self.init(buffer: resourceRecord.dataBuffer)
     }
 }

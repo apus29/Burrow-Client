@@ -6,17 +6,22 @@
 //
 //
 
+// TODO: This is a grab bag now.
+// TODO: Are we even using all of these codes anymore?
 public struct ShovelError: ErrorType {
     public enum Code: String {
         case unexpectedRecordType = "Unexpected record type."
         case unexpectedRecordFormat = "Unexpected record format."
         case unexpectedServerResponse = "Unexpected server response."
         case serverErrorResponse = "Server error response."
+        case transmissionTimeout = "Transmission timeout."
+        case payloadFailure = "Transmission of payload failed."
     }
     
     public var code: Code
     public var reason: String?
     public var object: NSObject?
+    // TODO: Standardize keys for dictionary, don't use object.
     
     init(code: Code, reason: String? = nil, object: NSObject? = nil) {
         self.code = code
