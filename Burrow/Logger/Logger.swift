@@ -39,6 +39,7 @@ public final class Logger {
     
     private init(named name: String?) {
         self.name = name
+        self.minimumSeverity = Logger.defaultMinimumSeverity
     }
 }
 
@@ -93,7 +94,7 @@ extension Logger {
         }
     }
     
-    public static var defaultMinimumSeverity: Severity?
+    public static var defaultMinimumSeverity: Severity? = .warning
     public static func enable(minimumSeverity severity: Severity) {
         defaultMinimumSeverity = severity
         log.enable(minimumSeverity: severity)
