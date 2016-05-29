@@ -65,6 +65,7 @@ private func querySocketCallback(
     assert(callbackType == .ReadCallBack)
     log.verbose("Callback of type \(callbackType) on socket: \(socket)")
     let queryContext = UnsafeMutablePointer<QueryInfo>(info)
+    log.verbose("Current context is \(queryContext.memory)")
     assert(socket === queryContext.memory.socket)
     
     // Clean up resources
@@ -85,8 +86,7 @@ private func querySocketCallback(
     
     // Process the result
     log.verbose("Processing result for socket: \(socket)")
-    let serviceRef = DNSServiceRef(info)
-    let error = DNSServiceProcessResult(serviceRef)
+    let error = DNSServiceProcessResult(queryContext.memory.service)
     
     // Respond to the caller
     queryContext.memory.responseHandler(Result {
