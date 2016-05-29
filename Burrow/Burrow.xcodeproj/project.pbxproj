@@ -37,6 +37,7 @@
 		4D62BB7A1CFA463300F0A2C3 /* DNSServiceDiscovery.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4D62BB761CFA463300F0A2C3 /* DNSServiceDiscovery.xcconfig */; };
 		4D62BB7B1CFA74A000F0A2C3 /* DNSServiceDiscovery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D62BB6A1CFA458100F0A2C3 /* DNSServiceDiscovery.framework */; };
 		4D62BB7F1CFA795B00F0A2C3 /* DNSResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D62BB7E1CFA795B00F0A2C3 /* DNSResolver.swift */; };
+		4D62BB921CFACFB200F0A2C3 /* DNSServiceErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D62BB911CFACFB200F0A2C3 /* DNSServiceErrorCode.swift */; };
 		4D6768141CE994A30079E173 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6768131CE994A30079E173 /* Result.swift */; };
 		4D6768161CE995160079E173 /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6768151CE995160079E173 /* ServerError.swift */; };
 		4D6B46141CE11738007ADB37 /* NETunnelProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE66D41CE09D4300C9FBBC /* NETunnelProviderManager.swift */; };
@@ -65,7 +66,6 @@
 		4DCE66D11CE087EB00C9FBBC /* DomainPackagingMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE66D01CE087EB00C9FBBC /* DomainPackagingMessage.swift */; };
 		4DCE66D31CE0977700C9FBBC /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4DCE66D21CE0977700C9FBBC /* NetworkExtension.framework */; };
 		4DCE66D51CE09D4300C9FBBC /* NETunnelProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE66D41CE09D4300C9FBBC /* NETunnelProviderManager.swift */; };
-		C9159AC61CEBB0B700AFB55C /* NetDBErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = C9159AC51CEBB0B700AFB55C /* NetDBErrorCode.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -219,6 +219,7 @@
 		4D62BB781CFA463300F0A2C3 /* iphonesimulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphonesimulator.modulemap; sourceTree = "<group>"; };
 		4D62BB791CFA463300F0A2C3 /* macosx.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = macosx.modulemap; sourceTree = "<group>"; };
 		4D62BB7E1CFA795B00F0A2C3 /* DNSResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSResolver.swift; sourceTree = "<group>"; };
+		4D62BB911CFACFB200F0A2C3 /* DNSServiceErrorCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSServiceErrorCode.swift; sourceTree = "<group>"; };
 		4D6768131CE994A30079E173 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		4D6768151CE995160079E173 /* ServerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
 		4D77F9F01CD7D95400F2586C /* MessageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
@@ -237,7 +238,6 @@
 		4DCE66D01CE087EB00C9FBBC /* DomainPackagingMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DomainPackagingMessage.swift; sourceTree = "<group>"; };
 		4DCE66D21CE0977700C9FBBC /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = Platforms/iPhoneOS.platform/Developer/SDKs/iPhoneOS9.3.sdk/System/Library/Frameworks/NetworkExtension.framework; sourceTree = DEVELOPER_DIR; };
 		4DCE66D41CE09D4300C9FBBC /* NETunnelProviderManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NETunnelProviderManager.swift; sourceTree = "<group>"; };
-		C9159AC51CEBB0B700AFB55C /* NetDBErrorCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NetDBErrorCode.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -433,9 +433,7 @@
 				4DCE66D01CE087EB00C9FBBC /* DomainPackagingMessage.swift */,
 				4D62BB7E1CFA795B00F0A2C3 /* DNSResolver.swift */,
 				4D4C421E1CBB5F7600055D86 /* TXTRecord.swift */,
-				4DBD0AAD1CC4CA56003BC82C /* ShovelError.swift */,
-				C9159AC51CEBB0B700AFB55C /* NetDBErrorCode.swift */,
-				4D6768131CE994A30079E173 /* Result.swift */,
+				4D62BB931CFACFBA00F0A2C3 /* Error Handling */,
 				4D4C41D81CBB50C000055D86 /* Info.plist */,
 			);
 			path = Shovel;
@@ -474,6 +472,16 @@
 				4D62BB6E1CFA458200F0A2C3 /* Info.plist */,
 			);
 			path = DNSServiceDiscovery;
+			sourceTree = "<group>";
+		};
+		4D62BB931CFACFBA00F0A2C3 /* Error Handling */ = {
+			isa = PBXGroup;
+			children = (
+				4DBD0AAD1CC4CA56003BC82C /* ShovelError.swift */,
+				4D62BB911CFACFB200F0A2C3 /* DNSServiceErrorCode.swift */,
+				4D6768131CE994A30079E173 /* Result.swift */,
+			);
+			name = "Error Handling";
 			sourceTree = "<group>";
 		};
 		4D77F9F31CD7D9E300F2586C /* Communication */ = {
@@ -956,10 +964,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D62BB921CFACFB200F0A2C3 /* DNSServiceErrorCode.swift in Sources */,
 				4DBD0AAE1CC4CA56003BC82C /* ShovelError.swift in Sources */,
 				4D62BB7F1CFA795B00F0A2C3 /* DNSResolver.swift in Sources */,
 				4DBD0AA31CC465F6003BC82C /* TransmissionManager.swift in Sources */,
-				C9159AC61CEBB0B700AFB55C /* NetDBErrorCode.swift in Sources */,
 				4D4C421F1CBB5F7600055D86 /* TXTRecord.swift in Sources */,
 				4D6768141CE994A30079E173 /* Result.swift in Sources */,
 				4D4A1DCC1CD7C38F003AF9AD /* DeserializationError.swift in Sources */,
@@ -2145,6 +2153,7 @@
 				4D62BB751CFA458200F0A2C3 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		4DCB4EC81CEEF71F006BC0AF /* Build configuration list for PBXNativeTarget "Logger" */ = {
 			isa = XCConfigurationList;

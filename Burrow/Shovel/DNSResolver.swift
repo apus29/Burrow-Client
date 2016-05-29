@@ -13,7 +13,7 @@ extension Logger { public static let dnsResolverCategory = "DNSResolver" }
 private let log = Logger.category(Logger.dnsResolverCategory)
 
 enum DNSResolveError: ErrorType {
-    case queryFailure(DNSServiceErrorType)
+    case queryFailure(DNSServiceErrorCode?)
     case parseFailure(NSData)
 }
 
@@ -91,7 +91,8 @@ private func querySocketCallback(
     // Respond to the caller
     queryContext.memory.responseHandler(Result {
         if error != DNSServiceErrorType(kDNSServiceErr_NoError) {
-            throw DNSResolveError.queryFailure(error)
+            let code = DNSServiceErrorCode(rawValue: Int(error))
+            throw DNSResolveError.queryFailure(code)
         } else {
             return try queryContext.memory.records.map { try $0.unwrap() }
         }
