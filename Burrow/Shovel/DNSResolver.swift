@@ -62,13 +62,14 @@ private func querySocketCallback(
     data: UnsafePointer<Void>,
     info: UnsafeMutablePointer<Void>
 ) {
-    log.debug("Callback of type \(callbackType) on socket \(socket)")
+    assert(callbackType == .ReadCallBack)
+    log.verbose("Callback of type \(callbackType) on socket: \(socket)")
     let queryContext = UnsafeMutablePointer<QueryInfo>(info)
     assert(socket === queryContext.memory.socket)
     
     // Clean up resources
     defer {
-        log.verbose("Cleaning up resources for query with socket \(socket)")
+        log.verbose("Cleaning up resources for query with socket: \(socket)")
         
         // Remove socket listener from run look, destory socket, and deallocate service
         CFRunLoopRemoveSource(CFRunLoopGetCurrent(), queryContext.memory.runLoopSource, kCFRunLoopDefaultMode)
@@ -83,7 +84,7 @@ private func querySocketCallback(
     }
     
     // Process the result
-    log.debug("Processing result for socket \(socket)")
+    log.verbose("Processing result for socket: \(socket)")
     let serviceRef = DNSServiceRef(info)
     let error = DNSServiceProcessResult(serviceRef)
     
@@ -147,7 +148,7 @@ class DNSResolver {
         )
         // TODO: Is this socket retained here? If not, it crashes. If so, it leaks.
         queryContext.memory.socket = socket
-        log.debug("Created socket \(socket) for query to domain `\(domain)`")
+        log.verbose("Created socket for query to domain `\(domain)`: \(socket)")
 
         // Add socket listener to run loop
         let runLoopSource = CFSocketCreateRunLoopSource(
