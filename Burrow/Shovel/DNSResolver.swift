@@ -7,6 +7,10 @@
 //
 
 import DNSServiceDiscovery
+import Logger
+
+extension Logger { public static let dnsResolverCategory = "DNSResolver" }
+private let log = Logger.category(Logger.dnsResolverCategory)
 
 enum DNSResolveError: ErrorType {
     case queryFailure(DNSServiceErrorType)
@@ -34,6 +38,7 @@ private func queryCallback(
     ttl: UInt32,
     context: UnsafeMutablePointer<Void>
 ) {
+    log.debug("Callback for query \(sdref)")
     let queryContext = UnsafeMutablePointer<QueryInfo>(context)
     
     // Append record rresult
@@ -44,33 +49,41 @@ private func queryCallback(
         guard let txtRecord = TXTRecord(buffer: txtBuffer) else {
             throw DNSResolveError.parseFailure(NSData(bytes: rdata, length: Int(rdlen)))
         }
+        
+        log.info("Received TXT record \(txtRecord) from domain \(String(CString: UnsafePointer(fullname), encoding: NSUTF8StringEncoding))")
         return txtRecord
     })
 }
 
 private func querySocketCallback(
     socket: CFSocket!,
-    callbackTime: CFSocketCallBackType,
+    callbackType: CFSocketCallBackType,
     address: CFData!,
     data: UnsafePointer<Void>,
     info: UnsafeMutablePointer<Void>
 ) {
+    log.debug("Callback of type \(callbackType) on socket \(socket)")
     let queryContext = UnsafeMutablePointer<QueryInfo>(info)
+    assert(socket === queryContext.memory.socket)
+    
+    // Clean up resources
     defer {
-        // Clean up resources
+        log.verbose("Cleaning up resources for query with socket \(socket)")
+        
+        // Remove socket listener from run look, destory socket, and deallocate service
         CFRunLoopRemoveSource(CFRunLoopGetCurrent(), queryContext.memory.runLoopSource, kCFRunLoopDefaultMode)
         CFSocketInvalidate(queryContext.memory.socket)
         DNSServiceRefDeallocate(queryContext.memory.service)
+        
+        // Deallocate context info
         queryContext.destroy()
         queryContext.dealloc(1)
+        
         // TODO: Is stuff leaking?
     }
     
-    // Close the socket
-    assert(socket === queryContext.memory.socket)
-    CFSocketInvalidate(socket)
-    
     // Process the result
+    log.debug("Processing result for socket \(socket)")
     let serviceRef = DNSServiceRef(info)
     let error = DNSServiceProcessResult(serviceRef)
     
@@ -89,6 +102,7 @@ class DNSResolver {
     
     /// Query a domain's TXT records asynchronously
     static func resolveTXT(domain: Domain, responseHandler: Result<[TXTRecord]> -> ()) {
+        log.debug("Will resolve domain `\(domain)`")
         let domainData = String(domain).dataUsingEncoding(NSUTF8StringEncoding)!
         
         // Create space on the heap for the context
@@ -114,6 +128,7 @@ class DNSResolver {
             /* context: */ queryContext
         )
         queryContext.memory.service = service
+        log.verbose("Created DNS query \(service) to domain `\(domain)`")
         
         // Create socket to query
         var socketContext = CFSocketContext(
@@ -132,7 +147,8 @@ class DNSResolver {
         )
         // TODO: Is this socket retained here? If not, it crashes. If so, it leaks.
         queryContext.memory.socket = socket
-        
+        log.debug("Created socket \(socket) for query to domain `\(domain)`")
+
         // Add socket listener to run loop
         let runLoopSource = CFSocketCreateRunLoopSource(
             /* allocator: */ nil,
@@ -142,5 +158,6 @@ class DNSResolver {
         // TODO: Is this run loop retained here? If not, it crashes. If so, it leaks.
         queryContext.memory.runLoopSource = runLoopSource
         CFRunLoopAddSource(CFRunLoopGetMain(), runLoopSource, kCFRunLoopDefaultMode)
+        log.verbose("Added run loop source \(runLoopSource) for query to domain `\(domain)`")
     }
 }
