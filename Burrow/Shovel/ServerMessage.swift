@@ -6,6 +6,8 @@
 //
 //
 
+import DNSServiceDiscovery
+
 import Logger
 extension Logger { public static let serverMessageCategory = "SeverMessage" }
 private let log = Logger.category(Logger.serverMessageCategory)

@@ -50,13 +50,8 @@ extension String {
 }
 
 extension TXTRecord {
-    /// Extracts the TXT record data from a `ResourceRecord`, copying its contents.
-    /// Returns `nil` if the record was not of type TXT.
-    init?(_ resourceRecord: ResourceRecord) {
-        guard ResourceRecordGetType(resourceRecord) == ns_t_txt else { return nil }
-        
+    init?(buffer: UnsafeBufferPointer<UInt8>) {
         var contents = ""
-        let buffer = resourceRecord.dataBuffer
         var componentIndex = buffer.startIndex
         while componentIndex < buffer.endIndex {
             let componentLength = Int(buffer[componentIndex])
@@ -66,11 +61,18 @@ extension TXTRecord {
                 baseAddress: UnsafePointer(componentBase),
                 length: componentLength,
                 encoding: NSUTF8StringEncoding
-            )!
+                )!
             
             componentIndex += Int(1 + componentLength)
         }
         
         self.init(contents: contents)
+    }
+    
+    /// Extracts the TXT record data from a `ResourceRecord`, copying its contents.
+    /// Returns `nil` if the record was not of type TXT.
+    init?(_ resourceRecord: ResourceRecord) {
+        guard ResourceRecordGetType(resourceRecord) == ns_t_txt else { return nil }
+        self.init(buffer: resourceRecord.dataBuffer)
     }
 }

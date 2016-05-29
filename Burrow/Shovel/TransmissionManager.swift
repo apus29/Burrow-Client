@@ -102,7 +102,7 @@ extension TransmissionManager {
         for domain in domains {
             count += 1
             // TODO: MAKE ASYNC
-//            dispatch_group_aync(group, TransmissionManager.queue) {
+            dispatch_group_async(group, TransmissionManager.queue) {
                 func sendMessage() {
                     do {
                         log.verbose("Attempting to continue tranmission with id \(transmissionId), index \(count)...")
@@ -131,7 +131,7 @@ extension TransmissionManager {
                 
                 // TODO: Barf
                 sendMessage()
-//            }
+            }
         }
         
         // TODO: Should we have a timeout in case the server ceases to exist or something?

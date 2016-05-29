@@ -1,0 +1,11 @@
+//
+//  Config.xcconfig
+//  DNSServiceDiscovery
+//
+//  Created by Jaden Geller on 4/10/16.
+//
+//
+
+MODULEMAP_FILE[sdk=iphoneos*]        = $(SRCROOT)/DNSServiceDiscovery/iphoneos.modulemap
+MODULEMAP_FILE[sdk=iphonesimulator*] = $(SRCROOT)/DNSServiceDiscovery/iphonesimulator.modulemap
+MODULEMAP_FILE[sdk=macosx*]          = $(SRCROOT)/DNSServiceDiscovery/macosx.modulemap

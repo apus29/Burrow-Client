@@ -38,6 +38,11 @@
 		4D4C42261CBB646B00055D86 /* ResourceRecord.h in Headers */ = {isa = PBXBuildFile; fileRef = 4D4C42241CBB646B00055D86 /* ResourceRecord.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4D4C42271CBB646B00055D86 /* ResourceRecord.m in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C42251CBB646B00055D86 /* ResourceRecord.m */; };
 		4D4C42291CBB73A300055D86 /* ResourceRecord.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4C42281CBB73A300055D86 /* ResourceRecord.swift */; };
+		4D62BB711CFA458200F0A2C3 /* DNSServiceDiscovery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D62BB6A1CFA458100F0A2C3 /* DNSServiceDiscovery.framework */; };
+		4D62BB721CFA458200F0A2C3 /* DNSServiceDiscovery.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4D62BB6A1CFA458100F0A2C3 /* DNSServiceDiscovery.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		4D62BB7A1CFA463300F0A2C3 /* DNSServiceDiscovery.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4D62BB761CFA463300F0A2C3 /* DNSServiceDiscovery.xcconfig */; };
+		4D62BB7B1CFA74A000F0A2C3 /* DNSServiceDiscovery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D62BB6A1CFA458100F0A2C3 /* DNSServiceDiscovery.framework */; };
+		4D62BB7F1CFA795B00F0A2C3 /* DNSResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D62BB7E1CFA795B00F0A2C3 /* DNSResolver.swift */; };
 		4D6768141CE994A30079E173 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6768131CE994A30079E173 /* Result.swift */; };
 		4D6768161CE995160079E173 /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6768151CE995160079E173 /* ServerError.swift */; };
 		4D6B46141CE11738007ADB37 /* NETunnelProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE66D41CE09D4300C9FBBC /* NETunnelProviderManager.swift */; };
@@ -98,6 +103,20 @@
 			remoteGlobalIDString = 4D4C420E1CBB5B5C00055D86;
 			remoteInfo = CResolver;
 		};
+		4D62BB6F1CFA458200F0A2C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D0D55C31CB3722F008CB981 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D62BB691CFA458100F0A2C3;
+			remoteInfo = DNSServiceDiscovery;
+		};
+		4D62BB7C1CFA74B100F0A2C3 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 4D0D55C31CB3722F008CB981 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 4D62BB691CFA458100F0A2C3;
+			remoteInfo = DNSServiceDiscovery;
+		};
 		4DCB4ECE1CEF110B006BC0AF /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 4D0D55C31CB3722F008CB981 /* Project object */;
@@ -153,6 +172,7 @@
 				4DCB4ECB1CEF0CFF006BC0AF /* Logger.framework in Embed Frameworks */,
 				4D6E12541CE2CE8F00A889C0 /* CResolver.framework in Embed Frameworks */,
 				4D6E12511CE2CD9400A889C0 /* Shovel.framework in Embed Frameworks */,
+				4D62BB721CFA458200F0A2C3 /* DNSServiceDiscovery.framework in Embed Frameworks */,
 			);
 			name = "Embed Frameworks";
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,6 +223,14 @@
 		4D4C42241CBB646B00055D86 /* ResourceRecord.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ResourceRecord.h; sourceTree = "<group>"; };
 		4D4C42251CBB646B00055D86 /* ResourceRecord.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ResourceRecord.m; sourceTree = "<group>"; };
 		4D4C42281CBB73A300055D86 /* ResourceRecord.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResourceRecord.swift; sourceTree = "<group>"; };
+		4D62BB6A1CFA458100F0A2C3 /* DNSServiceDiscovery.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = DNSServiceDiscovery.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		4D62BB6C1CFA458200F0A2C3 /* DNSServiceDiscovery.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DNSServiceDiscovery.h; sourceTree = "<group>"; };
+		4D62BB6E1CFA458200F0A2C3 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		4D62BB761CFA463300F0A2C3 /* DNSServiceDiscovery.xcconfig */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xcconfig; path = DNSServiceDiscovery.xcconfig; sourceTree = "<group>"; };
+		4D62BB771CFA463300F0A2C3 /* iphoneos.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphoneos.modulemap; sourceTree = "<group>"; };
+		4D62BB781CFA463300F0A2C3 /* iphonesimulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphonesimulator.modulemap; sourceTree = "<group>"; };
+		4D62BB791CFA463300F0A2C3 /* macosx.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = macosx.modulemap; sourceTree = "<group>"; };
+		4D62BB7E1CFA795B00F0A2C3 /* DNSResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSResolver.swift; sourceTree = "<group>"; };
 		4D6768131CE994A30079E173 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		4D6768151CE995160079E173 /* ServerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
 		4D77F9F01CD7D95400F2586C /* MessageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
@@ -230,6 +258,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D0D564C1CB37893008CB981 /* NetworkExtension.framework in Frameworks */,
+				4D62BB711CFA458200F0A2C3 /* DNSServiceDiscovery.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -263,6 +292,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4D62BB7B1CFA74A000F0A2C3 /* DNSServiceDiscovery.framework in Frameworks */,
 				4DCB4ECD1CEF0E41006BC0AF /* Logger.framework in Frameworks */,
 				4D4C42231CBB609400055D86 /* CResolver.framework in Frameworks */,
 			);
@@ -277,6 +307,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4D4C420B1CBB5B5C00055D86 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D62BB661CFA458100F0A2C3 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -299,10 +336,11 @@
 				4D0D56181CB37390008CB981 /* iOS */,
 				4D0D56271CB37394008CB981 /* Mac */,
 				4D0D56331CB3739C008CB981 /* Extension */,
-				4D4C42101CBB5B5D00055D86 /* CResolver */,
 				4D4C41D51CBB50C000055D86 /* Shovel */,
 				4D4C41E11CBB50C000055D86 /* ShovelTests */,
 				4DCB4EC21CEEF71F006BC0AF /* Logger */,
+				4D4C42101CBB5B5D00055D86 /* CResolver */,
+				4D62BB6B1CFA458200F0A2C3 /* DNSServiceDiscovery */,
 				4D0D564D1CB3789C008CB981 /* Frameworks */,
 				4D0D55CE1CB37274008CB981 /* Products */,
 			);
@@ -319,6 +357,7 @@
 				4D4C41DD1CBB50C000055D86 /* ShovelTests.xctest */,
 				4D4C420F1CBB5B5C00055D86 /* CResolver.framework */,
 				4DCB4EC11CEEF71F006BC0AF /* Logger.framework */,
+				4D62BB6A1CFA458100F0A2C3 /* DNSServiceDiscovery.framework */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -403,6 +442,7 @@
 				4D4B13741CBBA0AE008EC7CD /* ServerMessage.h */,
 				4D4B13731CBBA0AE008EC7CD /* ServerMessage.m */,
 				4D4B13781CBBA0C4008EC7CD /* ServerMessage.swift */,
+				4D62BB7E1CFA795B00F0A2C3 /* DNSResolver.swift */,
 			);
 			name = ServerMessage;
 			sourceTree = "<group>";
@@ -418,8 +458,8 @@
 				4D4C422A1CBB73A600055D86 /* ResourceRecord */,
 				4DBD0AAC1CC4C609003BC82C /* TXT */,
 				4DBD0AAD1CC4CA56003BC82C /* ShovelError.swift */,
-				4D6768131CE994A30079E173 /* Result.swift */,
 				C9159AC51CEBB0B700AFB55C /* NetDBErrorCode.swift */,
+				4D6768131CE994A30079E173 /* Result.swift */,
 				4D4C41D81CBB50C000055D86 /* Info.plist */,
 			);
 			path = Shovel;
@@ -455,6 +495,19 @@
 				4D4C42281CBB73A300055D86 /* ResourceRecord.swift */,
 			);
 			name = ResourceRecord;
+			sourceTree = "<group>";
+		};
+		4D62BB6B1CFA458200F0A2C3 /* DNSServiceDiscovery */ = {
+			isa = PBXGroup;
+			children = (
+				4D62BB761CFA463300F0A2C3 /* DNSServiceDiscovery.xcconfig */,
+				4D62BB771CFA463300F0A2C3 /* iphoneos.modulemap */,
+				4D62BB781CFA463300F0A2C3 /* iphonesimulator.modulemap */,
+				4D62BB791CFA463300F0A2C3 /* macosx.modulemap */,
+				4D62BB6C1CFA458200F0A2C3 /* DNSServiceDiscovery.h */,
+				4D62BB6E1CFA458200F0A2C3 /* Info.plist */,
+			);
+			path = DNSServiceDiscovery;
 			sourceTree = "<group>";
 		};
 		4D77F9F31CD7D9E300F2586C /* Communication */ = {
@@ -525,6 +578,13 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		4D62BB671CFA458100F0A2C3 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		4DCB4EBE1CEEF71F006BC0AF /* Headers */ = {
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
@@ -550,6 +610,7 @@
 			);
 			dependencies = (
 				4D0D55FF1CB372F3008CB981 /* PBXTargetDependency */,
+				4D62BB701CFA458200F0A2C3 /* PBXTargetDependency */,
 			);
 			name = "Burrow-iOS";
 			productName = "Burrow-iOS";
@@ -623,6 +684,7 @@
 			buildRules = (
 			);
 			dependencies = (
+				4D62BB7D1CFA74B100F0A2C3 /* PBXTargetDependency */,
 				4DCB4ED31CEF1117006BC0AF /* PBXTargetDependency */,
 				4D4C42211CBB605F00055D86 /* PBXTargetDependency */,
 			);
@@ -665,6 +727,24 @@
 			name = CResolver;
 			productName = CResolver;
 			productReference = 4D4C420F1CBB5B5C00055D86 /* CResolver.framework */;
+			productType = "com.apple.product-type.framework";
+		};
+		4D62BB691CFA458100F0A2C3 /* DNSServiceDiscovery */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 4D62BB731CFA458200F0A2C3 /* Build configuration list for PBXNativeTarget "DNSServiceDiscovery" */;
+			buildPhases = (
+				4D62BB651CFA458100F0A2C3 /* Sources */,
+				4D62BB661CFA458100F0A2C3 /* Frameworks */,
+				4D62BB671CFA458100F0A2C3 /* Headers */,
+				4D62BB681CFA458100F0A2C3 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = DNSServiceDiscovery;
+			productName = DNSServiceDiscovery;
+			productReference = 4D62BB6A1CFA458100F0A2C3 /* DNSServiceDiscovery.framework */;
 			productType = "com.apple.product-type.framework";
 		};
 		4DCB4EC01CEEF71F006BC0AF /* Logger */ = {
@@ -758,6 +838,10 @@
 						CreatedOnToolsVersion = 7.3;
 						DevelopmentTeam = PLYLXBYCEQ;
 					};
+					4D62BB691CFA458100F0A2C3 = {
+						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = PLYLXBYCEQ;
+					};
 					4DCB4EC01CEEF71F006BC0AF = {
 						CreatedOnToolsVersion = 7.3.1;
 					};
@@ -780,10 +864,11 @@
 				4D0D55E31CB37297008CB981 /* Burrow-Mac */,
 				4D0D55F61CB372F3008CB981 /* BurrowTunnel-iOS */,
 				4D0D56081CB37302008CB981 /* BurrowTunnel-Mac */,
-				4D4C420E1CBB5B5C00055D86 /* CResolver */,
 				4D4C41D31CBB50C000055D86 /* Shovel */,
 				4D4C41DC1CBB50C000055D86 /* ShovelTests */,
 				4DCB4EC01CEEF71F006BC0AF /* Logger */,
+				4D4C420E1CBB5B5C00055D86 /* CResolver */,
+				4D62BB691CFA458100F0A2C3 /* DNSServiceDiscovery */,
 			);
 		};
 /* End PBXProject section */
@@ -841,6 +926,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				4D4C42181CBB5B8000055D86 /* CResolver.xcconfig in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D62BB681CFA458100F0A2C3 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				4D62BB7A1CFA463300F0A2C3 /* DNSServiceDiscovery.xcconfig in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -908,6 +1001,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				4DBD0AAE1CC4CA56003BC82C /* ShovelError.swift in Sources */,
+				4D62BB7F1CFA795B00F0A2C3 /* DNSResolver.swift in Sources */,
 				4D4B13791CBBA0C4008EC7CD /* ServerMessage.swift in Sources */,
 				4D4B13751CBBA0AE008EC7CD /* ServerMessage.m in Sources */,
 				4D4C42291CBB73A300055D86 /* ResourceRecord.swift in Sources */,
@@ -932,6 +1026,13 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 		4D4C420A1CBB5B5C00055D86 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		4D62BB651CFA458100F0A2C3 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
@@ -968,6 +1069,16 @@
 			isa = PBXTargetDependency;
 			target = 4D4C420E1CBB5B5C00055D86 /* CResolver */;
 			targetProxy = 4D4C42201CBB605F00055D86 /* PBXContainerItemProxy */;
+		};
+		4D62BB701CFA458200F0A2C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D62BB691CFA458100F0A2C3 /* DNSServiceDiscovery */;
+			targetProxy = 4D62BB6F1CFA458200F0A2C3 /* PBXContainerItemProxy */;
+		};
+		4D62BB7D1CFA74B100F0A2C3 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 4D62BB691CFA458100F0A2C3 /* DNSServiceDiscovery */;
+			targetProxy = 4D62BB7C1CFA74B100F0A2C3 /* PBXContainerItemProxy */;
 		};
 		4DCB4ECF1CEF110B006BC0AF /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
@@ -1766,6 +1877,127 @@
 			};
 			name = Release;
 		};
+		4D62BB741CFA458200F0A2C3 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = DNSServiceDiscovery/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				"MODULEMAP_FILE[sdk=iphoneos*]" = "$(SRCROOT)/DNSServiceDiscovery/iphoneos.modulemap";
+				"MODULEMAP_FILE[sdk=iphonesimulator*]" = "$(SRCROOT)/DNSServiceDiscovery/iphonesimulator.modulemap";
+				"MODULEMAP_FILE[sdk=macosx*]" = "$(SRCROOT)/DNSServiceDiscovery/macosx.modulemap";
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.DNSServiceDiscovery;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Debug;
+		};
+		4D62BB751CFA458200F0A2C3 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				APPLICATION_EXTENSION_API_ONLY = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				COPY_PHASE_STRIP = NO;
+				CURRENT_PROJECT_VERSION = 1;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEFINES_MODULE = YES;
+				DYLIB_COMPATIBILITY_VERSION = 1;
+				DYLIB_CURRENT_VERSION = 1;
+				DYLIB_INSTALL_NAME_BASE = "@rpath";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				INFOPLIST_FILE = DNSServiceDiscovery/Info.plist;
+				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				"MODULEMAP_FILE[sdk=iphoneos*]" = "$(SRCROOT)/DNSServiceDiscovery/iphoneos.modulemap";
+				"MODULEMAP_FILE[sdk=iphonesimulator*]" = "$(SRCROOT)/DNSServiceDiscovery/iphonesimulator.modulemap";
+				"MODULEMAP_FILE[sdk=macosx*]" = "$(SRCROOT)/DNSServiceDiscovery/macosx.modulemap";
+				MTL_ENABLE_DEBUG_INFO = NO;
+				PRODUCT_BUNDLE_IDENTIFIER = com.jadengeller.DNSServiceDiscovery;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = iphoneos;
+				SKIP_INSTALL = YES;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+				VERSIONING_SYSTEM = "apple-generic";
+				VERSION_INFO_PREFIX = "";
+			};
+			name = Release;
+		};
 		4DCB4EC61CEEF71F006BC0AF /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -1953,6 +2185,14 @@
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
+		};
+		4D62BB731CFA458200F0A2C3 /* Build configuration list for PBXNativeTarget "DNSServiceDiscovery" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				4D62BB741CFA458200F0A2C3 /* Debug */,
+				4D62BB751CFA458200F0A2C3 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
 		};
 		4DCB4EC81CEEF71F006BC0AF /* Build configuration list for PBXNativeTarget "Logger" */ = {
 			isa = XCConfigurationList;
