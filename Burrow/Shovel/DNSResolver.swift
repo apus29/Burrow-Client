@@ -15,9 +15,10 @@ enum DNSResolveError: ErrorType {
 
 private struct QueryInfo {
     var service: DNSServiceRef
-    var socket: CFSocketRef
-    var runLoopSource: CFRunLoopSourceRef
-    var responseHandler: Result<TXTRecord> -> ()
+    var socket: CFSocketRef!
+    var runLoopSource: CFRunLoopSourceRef!
+    var records: [Result<TXTRecord>]
+    var responseHandler: Result<[TXTRecord]> -> ()
 }
 
 private func queryCallback(
@@ -33,10 +34,10 @@ private func queryCallback(
     ttl: UInt32,
     context: UnsafeMutablePointer<Void>
 ) {
-    let queryContext = UnsafePointer<QueryInfo>(context)
+    let queryContext = UnsafeMutablePointer<QueryInfo>(context)
     
-    // Send response callback
-    queryContext.memory.responseHandler(Result {
+    // Append record rresult
+    queryContext.memory.records.append(Result {
         
         // Parse the TXT record
         let txtBuffer = UnsafeBufferPointer<UInt8>(start: UnsafePointer(rdata), count: Int(rdlen))
@@ -54,13 +55,14 @@ private func querySocketCallback(
     data: UnsafePointer<Void>,
     info: UnsafeMutablePointer<Void>
 ) {
-    let queryContext = UnsafePointer<QueryInfo>(info)
+    let queryContext = UnsafeMutablePointer<QueryInfo>(info)
     defer {
         // Clean up resources
         CFRunLoopRemoveSource(CFRunLoopGetCurrent(), queryContext.memory.runLoopSource, kCFRunLoopDefaultMode)
         CFSocketInvalidate(queryContext.memory.socket)
         DNSServiceRefDeallocate(queryContext.memory.service)
-        UnsafeMutablePointer<QueryInfo>(queryContext).dealloc(1)
+        queryContext.destroy()
+        queryContext.dealloc(1)
         // TODO: Is stuff leaking?
     }
     
@@ -72,22 +74,32 @@ private func querySocketCallback(
     let serviceRef = DNSServiceRef(info)
     let error = DNSServiceProcessResult(serviceRef)
     
-    // In case of an error, report it
-    if error != DNSServiceErrorType(kDNSServiceErr_NoError) {
-        queryContext.memory.responseHandler(Result{ throw DNSResolveError.queryFailure(error) })
-    }
+    // Respond to the caller
+    queryContext.memory.responseHandler(Result {
+        if error != DNSServiceErrorType(kDNSServiceErr_NoError) {
+            throw DNSResolveError.queryFailure(error)
+        } else {
+            return try queryContext.memory.records.map { try $0.unwrap() }
+        }
+    })
 }
 
 class DNSResolver {
     private init() { }
     
     /// Query a domain's TXT records asynchronously
-    static func resolveTXT(domain: Domain, responseHandler: Result<TXTRecord> -> ()) {
+    static func resolveTXT(domain: Domain, responseHandler: Result<[TXTRecord]> -> ()) {
         let domainData = String(domain).dataUsingEncoding(NSUTF8StringEncoding)!
         
         // Create space on the heap for the context
         let queryContext = UnsafeMutablePointer<QueryInfo>.alloc(1)
-        queryContext.memory.responseHandler = responseHandler
+        queryContext.initialize(QueryInfo(
+            service: nil,
+            socket: nil,
+            runLoopSource: nil,
+            records: [],
+            responseHandler: responseHandler
+        ))
         
         // Create DNS Query
         var service: DNSServiceRef = nil
