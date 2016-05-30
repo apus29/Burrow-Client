@@ -38,6 +38,8 @@
 		4D62BB7B1CFA74A000F0A2C3 /* DNSServiceDiscovery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D62BB6A1CFA458100F0A2C3 /* DNSServiceDiscovery.framework */; };
 		4D62BB7F1CFA795B00F0A2C3 /* DNSResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D62BB7E1CFA795B00F0A2C3 /* DNSResolver.swift */; };
 		4D62BB921CFACFB200F0A2C3 /* DNSServiceErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D62BB911CFACFB200F0A2C3 /* DNSServiceErrorCode.swift */; };
+		4D62BB951CFC108F00F0A2C3 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D62BB941CFC108F00F0A2C3 /* Future.swift */; };
+		4D62BB981CFC10A300F0A2C3 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D62BB971CFC10A300F0A2C3 /* Resolver.swift */; };
 		4D6768141CE994A30079E173 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6768131CE994A30079E173 /* Result.swift */; };
 		4D6768161CE995160079E173 /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6768151CE995160079E173 /* ServerError.swift */; };
 		4D6B46141CE11738007ADB37 /* NETunnelProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE66D41CE09D4300C9FBBC /* NETunnelProviderManager.swift */; };
@@ -220,6 +222,8 @@
 		4D62BB791CFA463300F0A2C3 /* macosx.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = macosx.modulemap; sourceTree = "<group>"; };
 		4D62BB7E1CFA795B00F0A2C3 /* DNSResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSResolver.swift; sourceTree = "<group>"; };
 		4D62BB911CFACFB200F0A2C3 /* DNSServiceErrorCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSServiceErrorCode.swift; sourceTree = "<group>"; };
+		4D62BB941CFC108F00F0A2C3 /* Future.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
+		4D62BB971CFC10A300F0A2C3 /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
 		4D6768131CE994A30079E173 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
 		4D6768151CE995160079E173 /* ServerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
 		4D77F9F01CD7D95400F2586C /* MessageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
@@ -433,6 +437,7 @@
 				4DCE66D01CE087EB00C9FBBC /* DomainPackagingMessage.swift */,
 				4D62BB7E1CFA795B00F0A2C3 /* DNSResolver.swift */,
 				4D4C421E1CBB5F7600055D86 /* TXTRecord.swift */,
+				4D62BB961CFC109200F0A2C3 /* Futures */,
 				4D62BB931CFACFBA00F0A2C3 /* Error Handling */,
 				4D4C41D81CBB50C000055D86 /* Info.plist */,
 			);
@@ -482,6 +487,15 @@
 				4D6768131CE994A30079E173 /* Result.swift */,
 			);
 			name = "Error Handling";
+			sourceTree = "<group>";
+		};
+		4D62BB961CFC109200F0A2C3 /* Futures */ = {
+			isa = PBXGroup;
+			children = (
+				4D62BB971CFC10A300F0A2C3 /* Resolver.swift */,
+				4D62BB941CFC108F00F0A2C3 /* Future.swift */,
+			);
+			name = Futures;
 			sourceTree = "<group>";
 		};
 		4D77F9F31CD7D9E300F2586C /* Communication */ = {
@@ -967,11 +981,13 @@
 				4D62BB921CFACFB200F0A2C3 /* DNSServiceErrorCode.swift in Sources */,
 				4DBD0AAE1CC4CA56003BC82C /* ShovelError.swift in Sources */,
 				4D62BB7F1CFA795B00F0A2C3 /* DNSResolver.swift in Sources */,
+				4D62BB981CFC10A300F0A2C3 /* Resolver.swift in Sources */,
 				4DBD0AA31CC465F6003BC82C /* TransmissionManager.swift in Sources */,
 				4D4C421F1CBB5F7600055D86 /* TXTRecord.swift in Sources */,
 				4D6768141CE994A30079E173 /* Result.swift in Sources */,
 				4D4A1DCC1CD7C38F003AF9AD /* DeserializationError.swift in Sources */,
 				4DCE66D11CE087EB00C9FBBC /* DomainPackagingMessage.swift in Sources */,
+				4D62BB951CFC108F00F0A2C3 /* Future.swift in Sources */,
 				4DBD0AA51CC4ACD3003BC82C /* Domain.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
