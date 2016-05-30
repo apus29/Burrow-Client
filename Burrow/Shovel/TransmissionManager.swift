@@ -108,6 +108,7 @@ extension TransmissionManager {
                 // Use a semaphore to ensure we wait until all records are resolved
                 let finished = dispatch_semaphore_create(domains.count)
                 
+                log.verbose("Will send \(domains.count) continue messages for tranmission with id \(transmissionId)")
                 // Send payload of our message
                 var failures: [ErrorType] = []
                 for domain in domains {
@@ -129,6 +130,7 @@ extension TransmissionManager {
                         dispatch_semaphore_signal(finished)
                     }
                 }
+                log.verbose("Waiting for continue responses for tranmission with id \(transmissionId)")
                 
                 // Wait until all the continues are sent, throwing an error on timeout
                 let failureTime = dispatch_time(DISPATCH_TIME_NOW, transmissionTimeout * 10_000_000_000)
