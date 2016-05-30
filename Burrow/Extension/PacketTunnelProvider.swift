@@ -13,15 +13,14 @@ import Logger
 extension Logger { public static let packetTunnelProviderCategory = "PacketTunnelProvider" }
 private let log = Logger.category(Logger.packetTunnelProviderCategory)
 
-// TODO: This might not be necessarily if we figure out what file descriptor print
-//       normally goes to and redirect it to AppleSystemLog.
-// https://github.com/iCepa/iCepa/blob/5c6de63a9ca91edc8ae76c9d177325f353747271/Extension/TunnelInterface.swift#L28-L31
-func logErrors<T>(@noescape block: () throws -> T) -> T {
-    do {
-        return try block()
-    } catch let error {
-        log.error("Unrecoverable error: \(error)")
-        fatalError()
+extension Logger {
+    func caught<T>(@noescape block: () throws -> T) -> T {
+        do {
+            return try block()
+        } catch let error {
+            log.error("Unrecoverable error: \(error)")
+            fatalError()
+        }
     }
 }
 
@@ -72,10 +71,10 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
             }
             
             self.sessionController.delegate = self
-            logErrors { try self.sessionController.beginSession().then { result in
+            log.caught { try self.sessionController.beginSession().then { result in
                 // TODO: Convert to NSError and pass along?
                 // TODO: Recover? Silently fail?
-                logErrors{ try result.unwrap() }
+                log.caught{ try result.unwrap() }
 
                 // TODO: Identifier should be printed. Should this code be in the session controller?
                 log.info("Began tunneling session with identifier")
@@ -107,9 +106,9 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
                 assert($0.intValue == AF_INET, "Unkown protocol \($0)")
             }
             
-            logErrors { try self.sessionController.forward(packets: packets).then { result in
+            log.caught { try self.sessionController.forward(packets: packets).then { result in
                 // TODO: Recover? Silently fail?
-                logErrors{ try result.unwrap() }
+                log.caught{ try result.unwrap() }
             } }
             
             // TODO: We probably shouldn't instantly ask for more...
@@ -121,7 +120,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
     
     func handleReceived(packets packets: Result<[NSData]>) {
         // TODO: Handle errors
-        let packets = logErrors{ try packets.unwrap() }
+        let packets = log.caught{ try packets.unwrap() }
         
         log.debug("Received \(packets.count) packets from server.")
         log.verbose("Received: \(packets)")
@@ -138,9 +137,9 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
         
         // TODO: We have to deal with syncronization issues.
         //       Best solution: Runloop acquires lock, and checks `release` bool each loop.
-        logErrors { try sessionController.endSesssion().then { result in
+        log.caught { try sessionController.endSesssion().then { result in
             // TODO: Recover? Silently fail?
-            logErrors{ try result.unwrap() }
+            log.caught{ try result.unwrap() }
             log.info("Successfully tore down session")
             completionHandler()
         } }

@@ -75,7 +75,7 @@ class SessionController {
         // TODO: Worry about synchronization issues where running is set to false.
         // TODO: Should any of this shit be weak?
         // TODO: Handle errors that happen synchronously?
-        logErrors { try request().then { packets in
+        log.caught { try request().then { packets in
             if case let .Success(packets) = packets {
                 log.debug("Received \(packets.count) packets")
                 log.verbose("Received: \(packets)")
