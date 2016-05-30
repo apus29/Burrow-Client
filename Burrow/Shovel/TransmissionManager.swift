@@ -76,7 +76,7 @@ extension TransmissionManager {
             try requireValue("True", from: attributes, forExpectedKey: "success", object: [
                 "transmissionId" : transmissionId,
                 "attributes" : attributes
-                ] as NSDictionary)
+            ] as NSDictionary)
             let contents = try value(from: attributes, forExpectedKey: "contents")
             
             log.info("Ended tranmission with id \(transmissionId)")

@@ -30,7 +30,7 @@ struct RandomSequence<C: CollectionType where C.Index.Distance == Int>: Sequence
 class TransmissionTests: XCTestCase {
     
     override func setUp() {
-        Logger.category(Logger.transmissionCategory).enable(minimumSeverity: .verbose)
+//        Logger.category(Logger.transmissionCategory).enable(minimumSeverity: .verbose)
     }
     
     func testDomainPackaging() {
