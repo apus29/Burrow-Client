@@ -104,7 +104,6 @@ class DNSResolver {
     /// Query a domain's TXT records asynchronously
     static func resolveTXT(domain: Domain, responseHandler: Result<[TXTRecord]> -> ()) throws {
         log.debug("Will resolve domain `\(domain)`")
-        let domainData = String(domain).dataUsingEncoding(NSUTF8StringEncoding)!
         
         // Create space on the heap for the context
         let queryContext = UnsafeMutablePointer<QueryInfo>.alloc(1)
