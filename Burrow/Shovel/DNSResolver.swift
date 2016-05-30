@@ -118,16 +118,18 @@ class DNSResolver {
         
         // Create DNS Query
         var service: DNSServiceRef = nil
-        let status = DNSServiceQueryRecord(
-            /* serviceRef: */ &service,
-            /* flags: */ 0,
-            /* interfaceIndex: */ 0,
-            /* fullname: */ UnsafePointer<Int8>(domainData.bytes),
-            /* rrtype: */ UInt16(kDNSServiceType_TXT),
-            /* rrclass: */ UInt16(kDNSServiceClass_IN),
-            /* callback: */ queryCallback,
-            /* context: */ queryContext
-        )
+        let status = String(domain).withCString { fullname in
+            DNSServiceQueryRecord(
+                /* serviceRef: */ &service,
+                /* flags: */ 0,
+                /* interfaceIndex: */ 0,
+                /* fullname: */ fullname,
+                /* rrtype: */ UInt16(kDNSServiceType_TXT),
+                /* rrclass: */ UInt16(kDNSServiceClass_IN),
+                /* callback: */ queryCallback,
+                /* context: */ queryContext
+            )
+        }
         if let errorCode = DNSServiceErrorCode(rawValue: Int(status)) {
             throw DNSResolveError.queryFailure(errorCode)
         }
