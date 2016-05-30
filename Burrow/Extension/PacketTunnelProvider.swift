@@ -16,7 +16,7 @@ private let log = Logger.category(Logger.packetTunnelProviderCategory)
 // TODO: This might not be necessarily if we figure out what file descriptor print
 //       normally goes to and redirect it to AppleSystemLog.
 // https://github.com/iCepa/iCepa/blob/5c6de63a9ca91edc8ae76c9d177325f353747271/Extension/TunnelInterface.swift#L28-L31
-func logErrors<T>(block: () throws -> T) -> T {
+func logErrors<T>(@noescape block: () throws -> T) -> T {
     do {
         return try block()
     } catch let error {
@@ -72,7 +72,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
             }
             
             self.sessionController.delegate = self
-            self.sessionController.beginSession { result in
+            logErrors { try self.sessionController.beginSession().then { result in
                 // TODO: Convert to NSError and pass along?
                 // TODO: Recover? Silently fail?
                 logErrors{ try result.unwrap() }
@@ -82,7 +82,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
 
                 completionHandler(nil)
                 self.runTunnel()
-            }
+            } }
 
         }
     }
@@ -107,10 +107,10 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
                 assert($0.intValue == AF_INET, "Unkown protocol \($0)")
             }
             
-            self.sessionController.forward(packets: packets) { result in
+            logErrors { try self.sessionController.forward(packets: packets).then { result in
                 // TODO: Recover? Silently fail?
                 logErrors{ try result.unwrap() }
-            }
+            } }
             
             // TODO: We probably shouldn't instantly ask for more...
             self.forwardPackets()
@@ -138,12 +138,12 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
         
         // TODO: We have to deal with syncronization issues.
         //       Best solution: Runloop acquires lock, and checks `release` bool each loop.
-        sessionController.endSesssion { result in
+        logErrors { try sessionController.endSesssion().then { result in
             // TODO: Recover? Silently fail?
             logErrors{ try result.unwrap() }
             log.info("Successfully tore down session")
             completionHandler()
-        }
+        } }
     }
     
     override func sleepWithCompletionHandler(completionHandler: () -> Void) {

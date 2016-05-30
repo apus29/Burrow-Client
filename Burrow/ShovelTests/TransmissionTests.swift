@@ -30,7 +30,7 @@ struct RandomSequence<C: CollectionType where C.Index.Distance == Int>: Sequence
 class TransmissionTests: XCTestCase {
     
     override func setUp() {
-        Logger.enable(minimumSeverity: .verbose)
+        Logger.category(Logger.transmissionCategory).enable(minimumSeverity: .verbose)
     }
     
     func testDomainPackaging() {
@@ -71,12 +71,12 @@ class TransmissionTests: XCTestCase {
         
         let manager = TransmissionManager(domain: parentDomain)
         
-        try! manager.transmit(domainSafeMessage: message) { response in
+        try! manager.transmit(domainSafeMessage: message).then { response in
             result = try! response.unwrap()
             expectation.fulfill()
         }
         
-        waitForExpectationsWithTimeout(35) { error in
+        waitForExpectationsWithTimeout(100) { error in
             if let error = error {
                 XCTFail("Failed with error: \(error)")
             } else {
@@ -140,7 +140,7 @@ class TransmissionTests: XCTestCase {
         for (index, packet) in packets.enumerate() {
             let expectation = expectationWithDescription("Packet \(index)")
             
-            try! manager.transmit(domainSafeMessage: packet) { response in
+            try! manager.transmit(domainSafeMessage: packet).then { response in
                 do {
                     let result = try response.unwrap()
                     let expected = String(packet.characters.reverse())
@@ -149,7 +149,7 @@ class TransmissionTests: XCTestCase {
                             "index" : index,
                             "expected" : expected,
                             "received" : result
-                            ])
+                        ])
                     }
                 } catch let error {
                     errors.append(error)

@@ -102,71 +102,73 @@ class DNSResolver {
     private init() { }
     
     /// Query a domain's TXT records asynchronously
-    static func resolveTXT(domain: Domain, responseHandler: Result<[TXTRecord]> -> ()) throws {
-        log.debug("Will resolve domain `\(domain)`")
-        
-        // Create space on the heap for the context
-        let queryContext = UnsafeMutablePointer<QueryInfo>.alloc(1)
-        queryContext.initialize(QueryInfo(
-            service: nil,
-            socket: nil,
-            runLoopSource: nil,
-            records: [],
-            responseHandler: responseHandler
-        ))
-        
-        // Create DNS Query
-        var service: DNSServiceRef = nil
-        let status = String(domain).withCString { fullname in
-            DNSServiceQueryRecord(
-                /* serviceRef: */ &service,
-                /* flags: */ 0,
-                /* interfaceIndex: */ 0,
-                /* fullname: */ fullname,
-                /* rrtype: */ UInt16(kDNSServiceType_TXT),
-                /* rrclass: */ UInt16(kDNSServiceClass_IN),
-                /* callback: */ queryCallback,
-                /* context: */ queryContext
+    static func resolveTXT(domain: Domain) throws -> Future<Result<[TXTRecord]>> {
+        return try Future { resolve in
+            log.debug("Will resolve domain `\(domain)`")
+            
+            // Create space on the heap for the context
+            let queryContext = UnsafeMutablePointer<QueryInfo>.alloc(1)
+            queryContext.initialize(QueryInfo(
+                service: nil,
+                socket: nil,
+                runLoopSource: nil,
+                records: [],
+                responseHandler: resolve
+                ))
+            
+            // Create DNS Query
+            var service: DNSServiceRef = nil
+            let status = String(domain).withCString { fullname in
+                DNSServiceQueryRecord(
+                    /* serviceRef: */ &service,
+                    /* flags: */ 0,
+                    /* interfaceIndex: */ 0,
+                    /* fullname: */ fullname,
+                    /* rrtype: */ UInt16(kDNSServiceType_TXT),
+                    /* rrclass: */ UInt16(kDNSServiceClass_IN),
+                    /* callback: */ queryCallback,
+                    /* context: */ queryContext
+                )
+            }
+            if let errorCode = DNSServiceErrorCode(rawValue: Int(status)) {
+                throw DNSResolveError.queryFailure(errorCode)
+            }
+            
+            assert(service != nil)
+            queryContext.memory.service = service
+            log.verbose("Created DNS query \(service) to domain `\(domain)`")
+            
+            // Create socket to query
+            var socketContext = CFSocketContext(
+                version: 0,
+                info: queryContext,
+                retain: nil,
+                release: nil,
+                copyDescription: nil
             )
+            let socketIdentifier = DNSServiceRefSockFD(service)
+            assert(socketIdentifier >= 0)
+            let socket = CFSocketCreateWithNative(
+                /* allocator: */ nil,
+                /* socket: */ socketIdentifier,
+                /* callbackTypes: */ CFSocketCallBackType.ReadCallBack.rawValue,
+                /* callout: */ querySocketCallback,
+                /* context: */ &socketContext
+            )
+            // TODO: Is this socket retained here? If not, it crashes. If so, it leaks.
+            queryContext.memory.socket = socket
+            log.verbose("Created socket for query to domain `\(domain)`: \(socket)")
+            
+            // Add socket listener to run loop
+            let runLoopSource = CFSocketCreateRunLoopSource(
+                /* allocator: */ nil,
+                /* socket: */ socket,
+                /* order: */ 0
+            )
+            // TODO: Is this run loop retained here? If not, it crashes. If so, it leaks.
+            queryContext.memory.runLoopSource = runLoopSource
+            CFRunLoopAddSource(CFRunLoopGetMain(), runLoopSource, kCFRunLoopDefaultMode)
+            log.verbose("Added run loop source \(runLoopSource) for query to domain `\(domain)`")
         }
-        if let errorCode = DNSServiceErrorCode(rawValue: Int(status)) {
-            throw DNSResolveError.queryFailure(errorCode)
-        }
-        
-        assert(service != nil)
-        queryContext.memory.service = service
-        log.verbose("Created DNS query \(service) to domain `\(domain)`")
-        
-        // Create socket to query
-        var socketContext = CFSocketContext(
-            version: 0,
-            info: queryContext,
-            retain: nil,
-            release: nil,
-            copyDescription: nil
-        )
-        let socketIdentifier = DNSServiceRefSockFD(service)
-        assert(socketIdentifier >= 0)
-        let socket = CFSocketCreateWithNative(
-            /* allocator: */ nil,
-            /* socket: */ socketIdentifier,
-            /* callbackTypes: */ CFSocketCallBackType.ReadCallBack.rawValue,
-            /* callout: */ querySocketCallback,
-            /* context: */ &socketContext
-        )
-        // TODO: Is this socket retained here? If not, it crashes. If so, it leaks.
-        queryContext.memory.socket = socket
-        log.verbose("Created socket for query to domain `\(domain)`: \(socket)")
-
-        // Add socket listener to run loop
-        let runLoopSource = CFSocketCreateRunLoopSource(
-            /* allocator: */ nil,
-            /* socket: */ socket,
-            /* order: */ 0
-        )
-        // TODO: Is this run loop retained here? If not, it crashes. If so, it leaks.
-        queryContext.memory.runLoopSource = runLoopSource
-        CFRunLoopAddSource(CFRunLoopGetMain(), runLoopSource, kCFRunLoopDefaultMode)
-        log.verbose("Added run loop source \(runLoopSource) for query to domain `\(domain)`")
     }
 }

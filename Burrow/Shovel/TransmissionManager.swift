@@ -50,129 +50,95 @@ extension TransmissionManager {
 
 extension TransmissionManager {
     
-    internal func begin(responseHandler: Result<String> -> ()) throws {
+    internal func begin() throws -> Future<Result<String>> {
         log.debug("Attempting to begin tranmission...")
         
         let beginDomain = domain.prepending("begin").prepending(NSUUID().UUIDString)
-        try DNSResolver.resolveTXT(beginDomain) { result in
-            responseHandler(result.map{ txtRecords in
-                let attributes = try TXTRecord.parse(attributes: txtRecords)
-                
-                try requireValue("True", from: attributes, forExpectedKey: "success")
-                let transmissionId = try value(from: attributes, forExpectedKey: "transmission_id")
-                
-                log.info("Began transmission with id \(transmissionId)")
-                return transmissionId
-            })
+        return try DNSResolver.resolveTXT(beginDomain).mapSuccess { txtRecords in
+            let attributes = try TXTRecord.parse(attributes: txtRecords)
+            
+            try requireValue("True", from: attributes, forExpectedKey: "success")
+            let transmissionId = try value(from: attributes, forExpectedKey: "transmission_id")
+            
+            log.info("Began transmission with id \(transmissionId)")
+            return transmissionId
         }
     }
     
-    internal func end(transmissionId: String, count: Int, responseHandler: Result<String> -> ()) throws {
+    internal func end(transmissionId: String, count: Int) throws -> Future<Result<String>> {
         log.debug("Attempting to end tranmission with id \(transmissionId), count \(count)...")
 
         let endDomain = domain.prepending("end").prepending(transmissionId).prepending(String(count))
-        try DNSResolver.resolveTXT(endDomain) { result in
-            responseHandler(result.map { txtRecords in
-                let attributes = try TXTRecord.parse(attributes: txtRecords)
-
-                // TODO: Also print transmission id on failure?
-                try requireValue("True", from: attributes, forExpectedKey: "success", object: [
-                    "transmissionId" : transmissionId,
-                    "attributes" : attributes
+        return try DNSResolver.resolveTXT(endDomain).mapSuccess { txtRecords in
+            let attributes = try TXTRecord.parse(attributes: txtRecords)
+            
+            // TODO: Also print transmission id on failure?
+            try requireValue("True", from: attributes, forExpectedKey: "success", object: [
+                "transmissionId" : transmissionId,
+                "attributes" : attributes
                 ] as NSDictionary)
-                let contents = try value(from: attributes, forExpectedKey: "contents")
-                
-                log.info("Ended tranmission with id \(transmissionId)")
-                return contents
-            })
+            let contents = try value(from: attributes, forExpectedKey: "contents")
+            
+            log.info("Ended tranmission with id \(transmissionId)")
+            return contents
         }
     }
     
     /// Send a domain-safe message to the server and asynchronously receive the response, or an error on failure
-    public func transmit(domainSafeMessage message: String, responseHandler: Result<String> -> ()) throws {
+    public func transmit(domainSafeMessage message: String) throws -> Future<Result<String>> {
         log.verbose("Attempting to transmit message: \(message)")
         // TODO: Could we improve speed by reducing the RTT required to start and end a transmission?
         // TODO: The control flow here is more confusing than I'd like. It's not obvious how to fix it.
-        
-        // Begin transmission
-        try begin { result in
-            do {
-                let transmissionId = try result.unwrap()
-                
-                // Encode message as a sequence of domains
-                let continueDomain = self.domain.prepending("continue").prepending(transmissionId)
-                let domains = Array(DomainPackagingMessage(domainSafeMessage: message, underDomain: { index in
-                    continueDomain.prepending(String(index))
-                }))
-                
-                // Use a semaphore to ensure we wait until all records are resolved
-                let finished = dispatch_semaphore_create(domains.count)
-                
-                log.verbose("Will send \(domains.count) continue messages for tranmission with id \(transmissionId)")
-                // Send payload of our message
-                var failures: [ErrorType] = []
-                for domain in domains {
-                    try DNSResolver.resolveTXT(domain) { result in
-                        do {
-                            let txtRecords = try result.unwrap()
-                            let attributes = try TXTRecord.parse(attributes: txtRecords)
-                            
-                            // Verify success
-                            try requireValue("True", from: attributes, forExpectedKey: "success")
-                            log.verbose("Continued tranmission with id \(transmissionId), index \(domains.count)...")
-                            
-                        } catch let error {
-                            
-                            // Record failure
-                            failures.append(error)
-                            log.error("Failed to continue tranmission with id \(transmissionId), index \(domains.count): \(error)")
-                        }
-                        dispatch_semaphore_signal(finished)
+
+        return try begin().flatMapSuccess { transmissionId in
+            // Encode message as a sequence of domains
+            let continueDomain = self.domain.prepending("continue").prepending(transmissionId)
+            let domains = Array(DomainPackagingMessage(domainSafeMessage: message, underDomain: { index in
+                continueDomain.prepending(String(index))
+            }))
+            log.verbose("Will send \(domains.count) continue messages for tranmission with id \(transmissionId)")
+
+            // TODO: It'd be nice to support waiting until a timeout.
+            return try Future.awaiting(allOf: domains.map { domain in
+                try DNSResolver.resolveTXT(domain).mapSuccess { txtRecords in
+                    let attributes = try TXTRecord.parse(attributes: txtRecords)
+                    
+                    // Verify success
+                    try requireValue("True", from: attributes, forExpectedKey: "success")
+                    log.verbose("Continued tranmission with id \(transmissionId), index \(domains.count)...")
+                }
+            }).map { results in
+                return Result {
+                    // TODO: This is gross.
+                    let failures = results.filter { $0.error != nil }.map { $0.error! }
+
+                    guard failures.isEmpty else {
+                        throw ShovelError(
+                            code: .payloadFailure,
+                            reason: "Failed to transmit payload.",
+                            object: [
+                                "message" : message,
+                                "transmissionId" : transmissionId,
+                                "payloadFailures" : failures.map { "\($0)" }
+                            ]
+                        )
                     }
+                    log.debug("Transmitted entire message for id \(transmissionId)")
+                    
+                    return
                 }
-                log.verbose("Waiting for continue responses for tranmission with id \(transmissionId)")
-                
-                // Wait until all the continues are sent, throwing an error on timeout
-                let failureTime = dispatch_time(DISPATCH_TIME_NOW, transmissionTimeout * 10_000_000_000)
-                let status = dispatch_semaphore_wait(finished, failureTime)
-                guard status == 0 else {
-                    throw ShovelError(
-                        code: .transmissionTimeout,
-                        reason: "Exceeded \(transmissionTimeout) second timeout for sending payload.",
-                        object: [
-                            "message" : message,
-                            "transmissionId" : transmissionId
-                        ]
-                    )
-                }
-                guard failures.isEmpty else {
-                    throw ShovelError(
-                        code: .payloadFailure,
-                        reason: "Failed to transmit payload.",
-                        object: [
-                            "message" : message,
-                            "transmissionId" : transmissionId,
-                            "payloadFailures" : failures.map { "\($0)" }
-                        ]
-                    )
-                }
-                log.debug("Transmitted entire message for id \(transmissionId)")
-                
+            }.flatMap { _ in
                 // Let the server know that the transmission is finished
-                try self.end(transmissionId, count: domains.count) { result in
-                    responseHandler(Result {
-                        let response = try result.unwrap()
-                        
+                do {
+                    return try self.end(transmissionId, count: domains.count).mapSuccess { response in
                         log.info("Successfully completed transmission for id \(transmissionId)")
                         log.debug("Received response for id \(transmissionId): \(response)")
                         
                         return response
-                    })
+                    }
+                } catch let error {
+                    return Future(value: .Failure(error))
                 }
-            }
-            catch let error {
-                // Propagate error through the response handler
-                responseHandler(.Failure(error))
             }
         }
     }

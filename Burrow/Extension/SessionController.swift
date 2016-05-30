@@ -13,15 +13,13 @@ extension Logger { public static let sessionControllerCategory = "SessionControl
 private let log = Logger.category(Logger.sessionControllerCategory)
 
 extension TransmissionManager {
-    func send(message: ClientMessage, responseHandler: Result<ServerMessage> -> ()) {
+    func send(message: ClientMessage) throws -> Future<Result<ServerMessage>> {
         log.debug("Will send message: \(message)")
         
         // TODO: Don't double encode the data. It's inefficient.
-        transmit(domainSafeMessage: String(serializing: message)) { response in
-            responseHandler(response.map { responseData in
-                log.info("Sent message: \(message)")
-                return try ServerMessage(type: message.type, deserializing: responseData)
-            })
+        return try transmit(domainSafeMessage: String(serializing: message)).mapSuccess { responseData in
+            log.info("Sent message: \(message)")
+            return try ServerMessage(type: message.type, deserializing: responseData)
         }
     }
 }
@@ -50,29 +48,21 @@ class SessionController {
     
     // MARK: Functions
     
-    func beginSession(completion: (Result<()>) -> ()) {
+    func beginSession() throws -> Future<Result<()>> {
         precondition(!running)
-        transmissionManager.send(.beginSession) { result in
-            completion(result.map { response in
-                guard case .beginSession(let identifier) = response else { fatalError() }
-                self.sessionIdentifier = identifier
-                self.poll()
-            }.recover { error in
-                // TODO: Recover from certain kinds of failures
-                throw error
-            })
+        // TODO: Recover from certain kinds of failures
+        return try transmissionManager.send(.beginSession).mapSuccess { response in
+            guard case .beginSession(let identifier) = response else { fatalError() }
+            self.sessionIdentifier = identifier
+            self.poll()
         }
     }
     
-    func forward(packets packets: [NSData], completion: (Result<()>) -> ()) {
+    func forward(packets packets: [NSData]) throws -> Future<Result<()>> {
         guard let identifier = sessionIdentifier else { preconditionFailure() }
-        transmissionManager.send(.forwardPackets(identifier, packets)) { result in
-            completion(result.map { response in
-                guard case .forwardPackets = response else { fatalError() }
-            }.recover { error in
-                // TODO: Recover from certain kinds of failures
-                throw error
-            })
+        // TODO: Recover from certain kinds of failures
+        return try transmissionManager.send(.forwardPackets(identifier, packets)).mapSuccess { response in
+            guard case .forwardPackets = response else { fatalError() } // TODO: Maybe throw an error...
         }
     }
     
@@ -84,35 +74,30 @@ class SessionController {
 
         // TODO: Worry about synchronization issues where running is set to false.
         // TODO: Should any of this shit be weak?
-        request { packets in
+        // TODO: Handle errors that happen synchronously?
+        logErrors { try request().then { packets in
             if case let .Success(packets) = packets {
                 log.debug("Received \(packets.count) packets")
                 log.verbose("Received: \(packets)")
             }
             self.delegate?.handleReceived(packets: packets)
             if self.running { self.poll() }
+        } }
+    }
+    
+    private func request() throws -> Future<Result<[NSData]>> {
+        guard let identifier = sessionIdentifier else { preconditionFailure() }
+        // TODO: Recover from certain kinds of failures
+        return try transmissionManager.send(.requestPackets(identifier)).mapSuccess { response in
+            guard case .requestPackets(let packets) = response else { fatalError() }
+            return packets
         }
     }
     
-    private func request(completion: (packets: Result<[NSData]>) -> ()) {
+    func endSesssion() throws -> Future<Result<()>> {
         guard let identifier = sessionIdentifier else { preconditionFailure() }
-        transmissionManager.send(.requestPackets(identifier)) { result in
-            completion(packets: result.map { response in
-                guard case .requestPackets(let packets) = response else { fatalError() }
-                return packets
-            }.recover { error in
-                // TODO: Recover from certain kinds of failures
-                throw error
-            })
-        }
-    }
-    
-    func endSesssion(completion: (Result<()>) -> ()) {
-        guard let identifier = sessionIdentifier else { preconditionFailure() }
-        transmissionManager.send(.endSession(identifier)) { result in
-            completion(result.map { response in
-                guard case .endSession = response else { fatalError() }
-            })
+        return try transmissionManager.send(.endSession(identifier)).mapSuccess { response in
+            guard case .endSession = response else { fatalError() }
         }
     }
 

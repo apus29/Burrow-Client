@@ -6,7 +6,13 @@
 //
 //
 
-public enum Result<Element> {
+public protocol ResultType {
+    associatedtype Element
+    init(@noescape _ closure: () throws -> Element)
+    func unwrap() throws -> Element
+}
+
+public enum Result<Element>: ResultType {
     case Success(Element)
     case Failure(ErrorType)
 }

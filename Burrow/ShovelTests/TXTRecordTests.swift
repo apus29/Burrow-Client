@@ -11,9 +11,6 @@ import XCTest
 import Logger
 
 class TXTRecordTests: XCTestCase {
-    override func setUp() {
-        Logger.enable(minimumSeverity: .verbose)
-    }
     
     func testConstant() {
         let expectation = expectationWithDescription("received")

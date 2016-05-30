@@ -13,28 +13,71 @@ public struct Future<Element> {
 }
 
 extension Future {
-    init(@noescape resolution: Callback -> ()) {
+    public init(@noescape resolution: Callback throws -> ()) rethrows {
         self.init()
         
         // Setup the resolution for the callback
-        resolution { value in
+        try resolution { value in
             self.resolver.resolve(with: value)
         }
     }
     
-    func then(block: Element -> ()) {
+    public init(value: Element) {
+        self.init()
+        self.resolver.resolve(with: value)
+    }
+    
+    public func then(block: Element -> ()) {
         self.resolver.register { value in block(value) }
     }
     
-    func map<V>(transform: Element -> V) -> Future<V> {
+    public func map<V>(transform: Element -> V) -> Future<V> {
         return Future<V> { resolve in
             then { resolve(transform($0)) }
         }
     }
     
-    func flatMap<V>(transform: Element -> Future<V>) -> Future<V> {
+    public func flatMap<V>(transform: Element -> Future<V>) -> Future<V> {
         return Future<V> { resolve in
             then { transform($0).then { resolve($0) } }
+        }
+    }
+}
+
+extension Future where Element: ResultType {
+    public func onSuccess(block: Element.Element -> ()) {
+        then { result in
+            if let successValue = try? result.unwrap() {
+                block(successValue)
+            }
+        }
+    }
+    
+    public func onFailure(block: ErrorType -> ()) {
+        then { result in
+            do {
+                try result.unwrap()
+            } catch let error {
+                block(error)
+            }
+        }
+    }
+    
+    public func mapSuccess<V>(transform: Element.Element throws -> V) -> Future<Result<V>> {
+        return Future<Result<V>> { resolve in
+            onSuccess { value in resolve(Result { try transform(value) }) }
+        }
+    }
+    
+    func flatMapSuccess<V>(transform: Element.Element throws -> Future<Result<V>>) -> Future<Result<V>> {
+        return Future<Result<V>> { resolve in
+            onSuccess { value in
+                do {
+                    try transform(value).then(resolve)
+                } catch let error {
+                    resolve(.Failure(error))
+                }
+            }
         }
     }
 }
@@ -57,3 +100,4 @@ extension Future {
         }
     }
 }
+
