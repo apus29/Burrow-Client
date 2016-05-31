@@ -56,7 +56,9 @@ class ViewController: UIViewController {
     }
     
     func statusChanged() {
-        toggleSwitch.enabled = tunnelProviderManager.connection.status.rawValue >= NEVPNStatus.Connecting.rawValue
+        if let tunnelProviderManager = tunnelProviderManager {
+            toggleSwitch.enabled = tunnelProviderManager.connection.status.rawValue >= NEVPNStatus.Connecting.rawValue
+        }
     }
     
     override func didReceiveMemoryWarning() {
