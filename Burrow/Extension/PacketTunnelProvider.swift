@@ -36,6 +36,10 @@ extension Logger {
 
 let waitForDebugConnection = false
 
+// Once this many or more than this many packets are in transit, will wait
+// to read more from the OS.
+let maximumNumberOfSimultaneousForwards = 1
+
 class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
     
     override init() {
@@ -92,11 +96,18 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
         }
     }
     
+    var currentNumberOfSimultaneousForwards = 0
     func forwardPackets() {
         // Forward packets
 
-        log.debug("Attempting to read packets...")
+        log.debug("Attempting to read packets for forwarding...")
+        guard currentNumberOfSimultaneousForwards < maximumNumberOfSimultaneousForwards else {
+            log.warning("Delaying packet forwarding: Too many packets already in transit.")
+            return
+        }
         packetFlow.readPacketsWithCompletionHandler { packets, protocolIdentifiers in
+            self.currentNumberOfSimultaneousForwards += packets.count
+            
             log.debug("Read \(packets.count) packets from device")
             log.verbose("Read \(packets)")
             
@@ -107,7 +118,10 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
             
             log.caught { try self.sessionController.forward(packets: packets).then { result in
                 // TODO: Recover? Silently fail?
-                log.caught{ try result.unwrap() }
+                log.caught{
+                    try result.unwrap()
+                    self.currentNumberOfSimultaneousForwards -= packets.count
+                }
             } }
         }
     }
