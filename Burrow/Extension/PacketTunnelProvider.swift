@@ -13,17 +13,6 @@ import Logger
 extension Logger { public static let packetTunnelProviderCategory = "PacketTunnelProvider" }
 private let log = Logger.category(Logger.packetTunnelProviderCategory)
 
-extension Logger {
-    func caught<T>(@noescape block: () throws -> T) -> T {
-        do {
-            return try block()
-        } catch let error {
-            log.error("Unrecoverable error: \(error)")
-            fatalError()
-        }
-    }
-}
-
 @objc class VolatileCondition: NSObject {
     @objc var value: Bool
     

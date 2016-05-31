@@ -107,3 +107,14 @@ extension Logger {
         loggers.values.forEach { $0.disable() }
     }
 }
+
+extension Logger {
+    public func caught<T>(fatal: Bool = true, @noescape block: () throws -> T) -> T {
+        do {
+            return try block()
+        } catch let error {
+            log.error("Unrecoverable error: \(error)")
+            fatalError()
+        }
+    }
+}
