@@ -93,6 +93,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
 
     }
     
+    // TODO: What about the run loop?
     func forwardPackets() {
         // Forward packets
 

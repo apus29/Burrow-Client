@@ -45,10 +45,6 @@ private func requireValue(expectedValue: String, from attributes: [String : Stri
 }
 
 extension TransmissionManager {
-    private static let queue = dispatch_queue_create("TransmissionManager", DISPATCH_QUEUE_CONCURRENT)
-}
-
-extension TransmissionManager {
     
     internal func begin() throws -> Future<Result<String>> {
         log.debug("Attempting to begin tranmission...")
