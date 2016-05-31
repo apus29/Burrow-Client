@@ -38,11 +38,15 @@ private func queryCallback(
     ttl: UInt32,
     context: UnsafeMutablePointer<Void>
 ) {
+    
     log.debug("Callback for query \(sdref)")
     let queryContext = UnsafeMutablePointer<QueryInfo>(context)
     
     // Append record rresult
     queryContext.memory.records.append(Result {
+        if let errorCode = DNSServiceErrorCode(rawValue: Int(errorCode)) {
+            throw DNSResolveError.queryFailure(errorCode)
+        }
         
         // Parse the TXT record
         let txtBuffer = UnsafeBufferPointer<UInt8>(start: UnsafePointer(rdata), count: Int(rdlen))
