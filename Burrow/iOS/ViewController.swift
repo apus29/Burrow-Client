@@ -51,8 +51,14 @@ class ViewController: UIViewController {
                 print("Unable to load tunnel provider manager.", error)
             }
         }
+        
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(statusChanged), name: NEVPNStatusDidChangeNotification, object: nil)
     }
-
+    
+    func statusChanged() {
+        toggleSwitch.enabled = tunnelProviderManager.connection.status.rawValue >= NEVPNStatus.Connecting.rawValue
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
