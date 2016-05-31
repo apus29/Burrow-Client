@@ -65,15 +65,15 @@ extension Future where Element: ResultType {
     
     public func mapSuccess<V>(transform: Element.Element throws -> V) -> Future<Result<V>> {
         return Future<Result<V>> { resolve in
-            onSuccess { value in resolve(Result { try transform(value) }) }
+            then { value in resolve(Result { try transform(value.unwrap()) }) }
         }
     }
     
     func flatMapSuccess<V>(transform: Element.Element throws -> Future<Result<V>>) -> Future<Result<V>> {
         return Future<Result<V>> { resolve in
-            onSuccess { value in
+            then { value in
                 do {
-                    try transform(value).then(resolve)
+                    try transform(value.unwrap()).then(resolve)
                 } catch let error {
                     resolve(.Failure(error))
                 }
