@@ -83,9 +83,10 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
                 completionHandler(nil)
                 
                 // Forward packets with each run loop.
-                CFRunLoopObserverCreateWithHandler(nil, CFRunLoopActivity.BeforeWaiting.rawValue, true, 0) { [weak self] _ in
+                let observer = CFRunLoopObserverCreateWithHandler(nil, CFRunLoopActivity.BeforeWaiting.rawValue, true, 0) { [weak self] _ in
                     self?.forwardPackets()
                 }
+                CFRunLoopAddObserver(CFRunLoopGetMain(), observer, kCFRunLoopDefaultMode)
             } }
 
         }
