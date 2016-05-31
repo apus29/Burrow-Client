@@ -66,15 +66,10 @@ class SessionController {
         }
     }
     
-    // TODO: Do we really need a queue? We will have 1 thread, I think :P
-    static let pollQueue = dispatch_queue_create("SessionController", DISPATCH_QUEUE_CONCURRENT)
-    
+    // TODO: On failure, retry.
+    // Requests packets from the server, and repeats once packets have been received.
     private func poll() {
         log.verbose("Polling for packets...")
-
-        // TODO: Worry about synchronization issues where running is set to false.
-        // TODO: Should any of this shit be weak?
-        // TODO: Handle errors that happen synchronously?
         log.caught { try request().then { packets in
             if case let .Success(packets) = packets {
                 log.debug("Received \(packets.count) packets")

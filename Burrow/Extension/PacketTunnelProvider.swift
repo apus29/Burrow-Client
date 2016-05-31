@@ -79,21 +79,18 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
                 // TODO: Identifier should be printed. Should this code be in the session controller?
                 log.info("Began tunneling session with identifier")
 
+                // Let the OS know that the VPN has successfully connected.
                 completionHandler(nil)
-                self.runTunnel()
+                
+                // Forward packets with each run loop.
+                CFRunLoopObserverCreateWithHandler(nil, CFRunLoopActivity.BeforeWaiting.rawValue, true, 0) { [weak self] _ in
+                    self?.forwardPackets()
+                }
             } }
 
         }
     }
     
-    func runTunnel() {
-
-        forwardPackets()
-        // TODO: Request packets
-
-    }
-    
-    // TODO: What about the run loop?
     func forwardPackets() {
         // Forward packets
 
@@ -111,11 +108,6 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
                 // TODO: Recover? Silently fail?
                 log.caught{ try result.unwrap() }
             } }
-            
-            // TODO: We probably shouldn't instantly ask for more...
-            self.forwardPackets()
-            
-            sleep(1)
         }
     }
     
