@@ -128,7 +128,7 @@ extension TransmissionManager {
                 do {
                     return try self.end(transmissionId, count: domains.count).mapSuccess { response in
                         log.info("Successfully completed transmission for id \(transmissionId)")
-                        log.debug("Received response for id \(transmissionId): \(response)")
+                        log.verbose("Received response for id \(transmissionId): \(response)")
                         
                         return response
                     }
