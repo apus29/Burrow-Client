@@ -27,12 +27,12 @@ let waitForDebugConnection = false
 
 // Once this many or more than this many packets are in transit, will wait
 // to read more from the OS.
-let maximumNumberOfSimultaneousForwards = 1
+let maximumNumberOfSimultaneousForwards = 50
 
 class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
     
     override init() {
-        Logger.enable(minimumSeverity: .verbose)
+        Logger.enable(minimumSeverity: .info)
         super.init()
     }
     
