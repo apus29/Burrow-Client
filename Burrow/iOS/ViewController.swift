@@ -57,7 +57,7 @@ class ViewController: UIViewController {
     
     func statusChanged() {
         if let tunnelProviderManager = tunnelProviderManager {
-            toggleSwitch.enabled = tunnelProviderManager.connection.status.rawValue >= NEVPNStatus.Connecting.rawValue
+            toggleSwitch.on = tunnelProviderManager.connection.status.rawValue >= NEVPNStatus.Connecting.rawValue
         }
     }
     
