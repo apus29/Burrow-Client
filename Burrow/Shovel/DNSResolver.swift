@@ -99,18 +99,13 @@ private func querySocketCallback(
     log.verbose("Current context is \(queryContext.memory)")
     assert(socket === queryContext.memory.socket)
     
-    // Clean up resources
-    defer {
-        queryContext.memory.performCleanUp()
-        // TODO: Is stuff leaking?
-    }
-    
     // Process the result
     log.verbose("Processing result for socket: \(socket)")
     let status = DNSServiceProcessResult(queryContext.memory.service)
     
     queryContext.memory.records.mutate { _ in
         if let errorCode = DNSServiceErrorCode(rawValue: Int(status)) {
+            queryContext.memory.performCleanUp()
             throw DNSResolveError.queryFailure(errorCode)
         }
     }
