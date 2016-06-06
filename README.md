@@ -1,5 +1,3 @@
-Burrow — Final Report
-
 # Abstract
 
 We designed and implemented a service that provides one-tap DNS tunneling to users. To achieve this, we built both an iPhone app and a DNS server that relays user traffic. We received an entitlement to use Apple’s new Network Extension API, and used it to create a one-button app that configures the iPhone’s operating system to tunnel all system traffic over DNS. We designed an abstraction layer for communicating arbitrary amounts of data between a client and a DNS server, and a packet forwarding protocol that is built atop it. We were successful in implementing all of the various components of the system, but were not able to successfully load network resources over the tunnel.
@@ -55,8 +53,7 @@ Sending a message to the server requires three steps:
     3.2a591c8b.end.burrow.tech
         "success=True"; "contents=<______>"
 
-
-https://lh5.googleusercontent.com/0YjSF6e3XQK4ZYk7vItNI6aRqXjY8mlpoT2B7_B61pSoZWFiiD3n5iyNlw-_BarZ_N9jzMoH5OoYFTESz1jm7wM0peNcvrvpGX3Jt9RNg-_4QAqAYRJCwC1PmOWtGfUIa2zvyjnxthE
+![Transmission Diagram](images/transmission.png)
 
 ## The Session Layer
 
@@ -77,8 +74,7 @@ This layer encapsulates the packet forwarding and polling logic. Session message
     message: e-c8e9471e
     response: s
 
-
-https://lh4.googleusercontent.com/xH80m-mMtJWuQAm1-y3GHUv6wUMghh8UQRRn7Nh3Uf_HMVgjuZ7ErQUs4Tu89cd0FixJ3Ux5h2bwmSnVFV2o0xcoHCQeBZe23B_-2y7u9JlTN_vrF_NNpUD1lM0EJUJM0B7NQ3QshB0
+![Transmission Diagram](images/session.png)
 
 ## Intercepting Client-Side Network Traffic
 
