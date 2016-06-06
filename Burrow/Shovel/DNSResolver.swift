@@ -12,7 +12,7 @@ import Logger
 extension Logger { public static let dnsResolverCategory = "DNSResolver" }
 private let log = Logger.category(Logger.dnsResolverCategory)
 
-private let timeoutDuration = 30.0 // seconds
+private let timeoutDuration = 60.0 // seconds
 
 enum DNSResolveError: ErrorType {
     case queryFailure(DNSServiceErrorCode)
@@ -124,6 +124,7 @@ private func querySocketCallback(
     // Ensure that we wait for all the records we expect to receive.
     if case .Success(let records) = queryContext.memory.records {
         guard records.count == queryContext.memory.totalPacketCount else { return }
+        queryContext.memory.performCleanUp()
     }
     
     log.debug("Freeing context with address \(info)")
@@ -138,7 +139,9 @@ private func timerCallback(timer: CFRunLoopTimer!, info: UnsafeMutablePointer<Vo
     let queryContext = UnsafeMutablePointer<QueryInfo>(info)
 
     log.debug("Freeing context with address \(info)")
-    queryContext.memory.responseHandler(.Failure(DNSResolveError.timeout))
+    queryContext.memory.responseHandler(Result {
+        throw DNSResolveError.timeout
+    })
     queryContext.memory.performCleanUp()
     queryContext.destroy()
     queryContext.dealloc(1)
