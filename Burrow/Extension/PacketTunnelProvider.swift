@@ -95,6 +95,8 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
             return
         }
         packetFlow.readPacketsWithCompletionHandler { packets, protocolIdentifiers in
+            guard !packets.isEmpty else { return }
+            
             self.currentNumberOfSimultaneousForwards += packets.count
             
             log.debug("Read \(packets.count) packets from device")
