@@ -64,15 +64,16 @@ This layer encapsulates the packet forwarding and polling logic. Session message
 3. The client will periodically poll for response packets from the server with the message `r-c8e9471e` . The server will return any packets it received as responses to previously forwarded packets from this session as `s-c8e9471e-<packet1>-<packet2>-...` 
 4. When the client is ready to disconnect, it will end the session with `e-c8e9471e`. The server will clean up the resources used to create the session and return `s`.
 
-
-    message: b
-    response: s-c8e9471e
-    message: f-c8e9471e-<packet1>-<packet2>-...
-    response: s
-    message: r-c8e9471e
-    response: s-<packet1>-<packet2>-...
-    message: e-c8e9471e
-    response: s
+```
+message: b
+response: s-c8e9471e
+message: f-c8e9471e-<packet1>-<packet2>-...
+response: s
+message: r-c8e9471e
+response: s-<packet1>-<packet2>-...
+message: e-c8e9471e
+response: s
+```
 
 ![Transmission Diagram](images/session.png)
 
@@ -89,23 +90,20 @@ A major challenge in performing DNS requests on the client was working with the 
 
 The other half of our project is the cloud service that actually accesses the Internet on behalf of our client devices. This is an always-on Debian 7-based dedicated virtual machine. We used Python and the dnslib library to create an DNS server that returns custom responses to lookups for burrow.tech domains. It handles each incoming lookup as a Transmission-layer message, and once it receives a complete Transmission it handles the data as a Session-layer message. To forward packets, we initially tried to use Python’s socket and asyncore modules, as it would allow us to send and receive packets asynchronously. However, we quickly switched to the ScaPy library, which has convenient functions for spoofing packets and recalculating header checksums, and for capturing response packets for outgoing packets. ScaPy’s send/receive function blocks until it finishes sending packets and receiving the answer packets, so to make the server able to resolve more than one packet at a time, we had to make use of Python’s multiprocessing library to create a thread for every call to the send/receive function.
 
-https://lh4.googleusercontent.com/9Hfewcdz698MgbmL330Pj8dgsVrwAVHa5s8GiWHZESfV3D6T2C6n1mCEmRt_hOhPwj7pXHCdngu9fwZ_aU-IRpBVDcS9LSLF_Qtp1wibUjSw83xtUfmGUTDBorY9UArk3BFgO64Yvig
+![Layer Stack Diagram](images/layerstack.png)
 
 # App Design
 
 The iOS app features a single switch to enable and disable the tunnel. When the switch is enabled, an animation occurs as the UI color changes to indicate connectivity. The user can also quickly enable the tunnel from the system Settings app. A VPN indicator displays in the status bar while tunneling is enabled.
 
-
-https://d2mxuefqeaa7sj.cloudfront.net/s_C3DD98A208436DBAABFB99916D6EAA51628D04BCB5B1F2408F01AFC6FA92B966_1465217920304_cute_screenshots.png
-
+![App Screenshots](images/cute_screenshots.png)
 
 The first time the app is launched, the app requests permission from the user to install a VPN configuration onto the device. The user simply needs to enter their password or use TouchID to authenticate, and then they are really to tunnel. No other setup is necessary.
 
 The app is designed to be very easy to use for users who know nothing about configuring servers. As such, we provide the server, and the user only needs to download the app from the App Store and start using it. The server uses NAT to support multiple users, so each user does not need to set up a server to use the app.
 
 # Performance
-https://d2mxuefqeaa7sj.cloudfront.net/s_0DB813B33B7CF089542B782A7D3E7DABD9642EA08CACBD29BFB7EA1F2D8A7086_1465221794184_Speed.svg
-
+![Performance Histogram](images/performance.png)
 
 This figure shows a histogram of 30 trials of transmitting 1400 bytes to our server directly across the Transmission layer and receiving those bytes back (in reversed order). It’s been normalized to 1KB, and we can see that the average time to transmit 1KB of data to the server and back is approximately 0.4 seconds. This is slow, but a huge improvement from our results when we first got data transmission working (80 seconds) and within the reasonable range of throughputs we expected to achieve.
 
@@ -149,9 +147,9 @@ In conclusion, we’re confident that we aren’t far off from a fully working p
 [8] http://blog.cloudmark.com/2014/10/07/dns-tunneling-abuses/
 
 # Appendices
-https://www.dropbox.com/s/vsfyy6vtdkvj0af/Server%20Diagram.png?dl=1
 
 ## **Server Modules**
+![Server Modules](images/server.png)
 
 **Module Name: **Transmission
 **Function: **Implements the Transmission class from the Transmission layer. It holds all the data from a single Transmission, defined by a transmissionID. Its functions are called by the resolver as it receives pieces of a Transmission to add data to the Transmission, and to put together and return the completed Transmission.
@@ -212,8 +210,7 @@ Transmission messages come in 3 types. A lookup to <randomdata>.begin.burrow.tec
 
 
 ## **Client Modules**
-https://www.dropbox.com/s/j9axk7svb1s12j3/Client%20Diagram.png?dl=1
-
+![Client Modules](images/client.png)
 
 **Module Name: **App
 **Function: **The app UI features a switch that is used to activate and deactivate the DNS tunnel. When activated, system-wide traffic is intercepted by our tunneling extension and sent through the server. The app code also configures the extension and uses basic animations to make the tunnel state clear.
