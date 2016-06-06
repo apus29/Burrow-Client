@@ -238,14 +238,16 @@ Transmission messages come in 3 types. A lookup to <randomdata>.begin.burrow.tec
 **Authorship:**  Jaden  
 **Language:**  Swift  
 **Workload:**  ~400 lines  
-**Possible Failure Conditions:** *Deserialization error:* The sever returned a response with either invalid formatting or invalid contents. *Server error:* The server was unable to fulfill a client request, and responded with an error message indicating unknown message type, unknown session id, or some undefined error.
+**Possible Failure Conditions:**  
+*Deserialization error:* The sever returned a response with either invalid formatting or invalid contents.  
+*Server error:* The server was unable to fulfill a client request, and responded with an error message indicating unknown message type, unknown session id, or some undefined error.
 
 **Module Name:** Transmission Manager  
 **Function:** This is the client’s complement to the server’s Transmission layer. It sends arbitrary data to the server by breaking the data up into domain name sized chunks, and encoding it in Base64. It will query <garbage>.begin.burrow.tech to begin a Transmission and get a Transmission ID, then send the data over multiple queries to continue.burrow.tech using the Transmission ID and the index of the chunk of data being sent. After the whole Transmission has been sent, it will query <# of pieces>.<transmission_ID>.end.burrow.tech. It uses the DNS resolver to perform the queries.  
 **Authorship:**  Jaden, Mimi  
 **Language:**  Swift  
 **Workload:**  ~230 lines  
-**Possible Failure Conditions:****** Throws an error if it is unable to handle a given TXT record. Reasons include unexpected server response, server failure response, and transmission timeout. Also propagates DNSResolver errors upwards.
+**Possible Failure Conditions:** Throws an error if it is unable to handle a given TXT record. Reasons include unexpected server response, server failure response, and transmission timeout. Also propagates DNSResolver errors upwards.
 
 **Module Name:** DNS Resolver  
 **Function:** Provides a high level API for asynchronous DNS resolution using the run loop rather than threads. This prevents a whole class of concurrency bugs that might’ve existed in our previous threaded implementation. Built on top of the low level DNS Service Discovery C module, this API returns a Future that will be executed when the DNS lookup resolves successfully. The Transmission Manager uses this class to encode messages to the server as DNS lookups, receiving TXT record responses. This API also handles collecting multiple TXT record responses from the server and returning them together to the caller. Further, it exposes methods for parsing TXT records into attribute dictionaries.  
