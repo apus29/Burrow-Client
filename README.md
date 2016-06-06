@@ -138,12 +138,19 @@ In conclusion, we’re confident that we aren’t far off from a fully working p
 # References
 
 [1] http://www.daemon.be/maarten/dnstunnel.html
+
 [2] https://www.vpnoverdns.com/faq.html
+
 [3] http://archives.neohapsis.com/archives/bugtraq/1998_2/0079.html
+
 [4] https://developer.apple.com/library/prerelease/ios/documentation/NetworkExtension/Reference/NETunnelProviderClassRef/index.html
+
 [5] https://developer.apple.com/videos/play/wwdc2015/717/
+
 [6] https://github.com/iCepa/iCepa
+
 [7] http://www.smartinsights.com/mobile-marketing/mobile-marketing-analytics/mobile-marketing-statistics/
+
 [8] http://blog.cloudmark.com/2014/10/07/dns-tunneling-abuses/
 
 # Appendices
@@ -213,59 +220,100 @@ Transmission messages come in 3 types. A lookup to <randomdata>.begin.burrow.tec
 ![Client Modules](images/client.png)
 
 **Module Name: **App
+
 **Function: **The app UI features a switch that is used to activate and deactivate the DNS tunnel. When activated, system-wide traffic is intercepted by our tunneling extension and sent through the server. The app code also configures the extension and uses basic animations to make the tunnel state clear.
+
 **Authorship: ** Jaden
+
 **Language: ** Swift
+
 **Workload: ** ~150 lines
+
 **Possible Failure Conditions: **Reports an error if it is unable to configure the tunnel provider. For example, if the user does not give Burrow VPN permissions, the app will be unable to configure the tunnel provider.
 
 **Module Name: **Burrow Tunnel Provider
+
 **Function: **Subclass of NETunnelProvider that utilizes the Session Controller module to set up and tear down a tunneling session in response to system events. While the extension is running, the tunnel provider will read packets from the device and forward them over the tunnel using the session controller with each run loop iteration. Further, the tunnel provider will implement the session controller delegate method to handle received packets and inject them into the device.
+
 **Authorship: ** Jaden
+
 **Language: ** Swift
+
 **Workload: ** ~150 lines
+
 **Possible Failure Conditions: **Receives errors from the session controller and propagates them upwards.
 
 **Module Name: **Session Controller
+
 **Function: **Handles the logic of communicating with the session layer on the server. Specifically, serializes messages and deserializes response from the server, sends messages over the transmission layer, and polls the server for packets ready to be sent back to the client, notifying the extension via a delegate method. Also handles tearing down server session once the client is finished tunneling.
+
 **Authorship: ** Jaden
+
 **Language: ** Swift
+
 **Workload: ** ~400 lines
+
 **Possible Failure Conditions:**
+
 *Deserialization error:* The sever returned a response with either invalid formatting or invalid contents. *Server error:* The server was unable to fulfill a client request, and responded with an error message indicating unknown message type, unknown session id, or some undefined error.
 
 **Module Name: **Transmission Manager
+
 **Function: **This is the client’s complement to the server’s Transmission layer. It sends arbitrary data to the server by breaking the data up into domain name sized chunks, and encoding it in Base64. It will query <garbage>.begin.burrow.tech to begin a Transmission and get a Transmission ID, then send the data over multiple queries to continue.burrow.tech using the Transmission ID and the index of the chunk of data being sent. After the whole Transmission has been sent, it will query <# of pieces>.<transmission_ID>.end.burrow.tech. It uses the DNS resolver to perform the queries.
+
 **Authorship: ** Jaden, Mimi
+
 **Language: ** Swift
+
 **Workload: ** ~230 lines
+
 **Possible Failure Conditions:**** **Throws an error if it is unable to handle a given TXT record. Reasons include unexpected server response, server failure response, and transmission timeout. Also propagates DNSResolver errors upwards.
 
 **Module Name: **DNS Resolver
+
 **Function: **Provides a high level API for asynchronous DNS resolution using the run loop rather than threads. This prevents a whole class of concurrency bugs that might’ve existed in our previous threaded implementation. Built on top of the low level DNS Service Discovery C module, this API returns a Future that will be executed when the DNS lookup resolves successfully. The Transmission Manager uses this class to encode messages to the server as DNS lookups, receiving TXT record responses. This API also handles collecting multiple TXT record responses from the server and returning them together to the caller. Further, it exposes methods for parsing TXT records into attribute dictionaries.
+
 **Authorship: ** Jaden
+
 **Language: ** Swift
+
 **Workload: ** ~350 lines
+
 **Possible Failure Conditions: **Throws an error if it cannot parse the TXT record. Also propagates DNS Service Discovery errors upwards.
 
 **Module Name: **DNS Service Discovery
+
 **Function: **DNS Service Discovery is an Apple API for discovering services over DNS. It is built as a C API, but we created a module-map to expose it to Swift. We ignore it’s service features and simply use it to resolve DNS lookups. Since it exposes the socket used by the lookup, we can wait until the socket is ready to read. This can be done asynchronously using a run loop event source. Note that we previously used the `lib resolver` API, but it blocked on DNS resolution, and spawning a new thread for each DNS lookup was bug-prone and inefficient.
+
 **Authorship: ** Apple (modularized by Jaden)
+
 **Language: ** C
+
 **Workload: ** N/A
+
 **Possible Failure Conditions: **OS-level failure conditions such as out of memory or no network connectivity https://developer.apple.com/library/ios/documentation/Networking/Reference/DNSServiceDiscovery_CRef/#//apple_ref/doc/constant_group/DNS_Error_Codes
 
 **Module Name: **Logger
+
 **Function: **Provides the capability to easily log messages with differing severities and later filter messages by module and severity. Each module or file can create a log object specific to itself such that all logs generated by this code will be labeled with the category. Each log is either an error, a warning, an info message, a debug message, or a verbose message. We can set our desired severity for each module such that only useful logs will print to the console. This makes debugging much easier since we don’t need to sift through unrelated messages. Further, it allows use to easily obtain more info about what’s happening when we observe a problem in a specific module.
+
 **Authorship: ** Jaden
+
 **Language: ** Swift
+
 **Workload: ** ~100 lines
+
 **Possible Failure Conditions: **N/A
 
 **Module Name: **Future (Promises)
+
 **Function: **Used instead of callbacks throughout the project in order to simplify the logic. Previously, it was easy to forget to call a callback on a certain code path, so we built this module to ensure correctness in our code. Further, it allows use to built combinators that operate on our callbacks. For example, we can build a callback that will only be called once all of its dependencies are called. This is useful in the Transmission Manager since we want to wait until all continue responses have been received before we send the end message.
+
 **Authorship: ** Jaden
+
 **Language: ** Swift
+
 **Workload: ** ~150 lines
+
 **Possible Failure Conditions: **N/A
 
