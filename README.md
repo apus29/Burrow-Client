@@ -155,7 +155,7 @@ In conclusion, we’re confident that we aren’t far off from a fully working p
 
 # Appendices
 
-##** Server Modules**
+## Server Modules
 ![Server Modules](images/server.png)
 
 **Module Name:** Transmission  
@@ -216,7 +216,7 @@ Transmission messages come in 3 types. A lookup to <randomdata>.begin.burrow.tec
 **Possible Failure Conditions:** N/A
 
 
-##** Client Modules**
+## Client Modules
 ![Client Modules](images/client.png)
 
 **Module Name:** App  
