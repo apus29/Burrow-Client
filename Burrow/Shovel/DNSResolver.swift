@@ -23,6 +23,19 @@ private struct QueryInfo {
     var runLoopSource: CFRunLoopSourceRef!
     var records: [Result<TXTRecord>]
     var responseHandler: Result<[TXTRecord]> -> ()
+extension QueryInfo {
+    static func destroy(queryContext: UnsafeMutablePointer<QueryInfo>) {
+        log.verbose("Cleaning up resources for query with socket: \(queryContext.memory.socket)")
+        
+        // Remove socket listener from run look, destory socket, and deallocate service
+        CFRunLoopRemoveSource(CFRunLoopGetCurrent(), queryContext.memory.runLoopSource, kCFRunLoopDefaultMode)
+        CFSocketInvalidate(queryContext.memory.socket)
+        DNSServiceRefDeallocate(queryContext.memory.service)
+        
+        // Deallocate context info
+        queryContext.destroy()
+        queryContext.dealloc(1)
+    }
 }
 
 private func queryCallback(
@@ -74,17 +87,7 @@ private func querySocketCallback(
     
     // Clean up resources
     defer {
-        log.verbose("Cleaning up resources for query with socket: \(socket)")
-        
-        // Remove socket listener from run look, destory socket, and deallocate service
-        CFRunLoopRemoveSource(CFRunLoopGetCurrent(), queryContext.memory.runLoopSource, kCFRunLoopDefaultMode)
-        CFSocketInvalidate(queryContext.memory.socket)
-        DNSServiceRefDeallocate(queryContext.memory.service)
-        
-        // Deallocate context info
-        queryContext.destroy()
-        queryContext.dealloc(1)
-        
+        QueryInfo.destroy(queryContext)
         // TODO: Is stuff leaking?
     }
     
