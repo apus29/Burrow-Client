@@ -16,7 +16,6 @@ extension TransmissionManager {
     func send(message: ClientMessage) throws -> Future<Result<ServerMessage>> {
         log.debug("Will send message: \(message)")
         
-        // TODO: Don't double encode the data. It's inefficient.
         return try transmit(domainSafeMessage: String(serializing: message)).mapSuccess { responseData in
             log.info("Sent message: \(message)")
             return try ServerMessage(type: message.type, deserializing: responseData)
@@ -50,7 +49,7 @@ class SessionController {
     
     func beginSession() throws -> Future<Result<()>> {
         log.precondition(!running)
-        // TODO: Recover from certain kinds of failures
+
         return try transmissionManager.send(.beginSession).mapSuccess { response in
             guard case .beginSession(let identifier) = response else { fatalError() }
             self.sessionIdentifier = identifier
@@ -62,15 +61,14 @@ class SessionController {
         log.debug("Will forward \(packets.count) packets=")
         log.verbose("Will forward packets: \(packets)")
         guard let identifier = sessionIdentifier else { log.preconditionFailure() }
-        // TODO: Recover from certain kinds of failures
+
         return try transmissionManager.send(.forwardPackets(identifier, packets)).mapSuccess { response in
-            guard case .forwardPackets = response else { fatalError() } // TODO: Maybe throw an error...
+            guard case .forwardPackets = response else { fatalError() }
             log.debug("Successfully forwarded \(packets.count) packets=")
             log.verbose("Successfully forwarded packets: \(packets)")
         }
     }
     
-    // TODO: On failure, retry.
     // Requests packets from the server, and repeats once packets have been received.
     private func poll() {
         log.verbose("Polling for packets...")
@@ -86,7 +84,7 @@ class SessionController {
     
     private func request() throws -> Future<Result<[NSData]>> {
         guard let identifier = sessionIdentifier else { log.preconditionFailure() }
-        // TODO: Recover from certain kinds of failures
+
         return try transmissionManager.send(.requestPackets(identifier)).mapSuccess { response in
             guard case .requestPackets(let packets) = response else { fatalError() }
             return packets

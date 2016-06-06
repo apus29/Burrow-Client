@@ -18,9 +18,8 @@ enum ServerMessage {
 
 extension ServerMessage {
     init(type: MessageType, deserializing string: String) throws {
-        // anyGenerator gives us reference semantics so we consume the generator
+        // AnyGenerator gives us reference semantics so we consume the generator
         // when we create an array with the remaining elements
-        // TODO: Is this inefficient?
         var components = AnyGenerator(string.characters.split("-").map{ String($0) }.generate())
         let success: Bool = try Bool(deserializing: try components.next(failure: "Missing type", object: string))
         
@@ -54,15 +53,14 @@ extension ServerMessage {
             let code = try Int(deserializing: components.next(failure: "Missing error code", object: string))
             let reason = try components.next(failure: "Missing reason", object: string)
             
-            // TODO: Decide if the object is required. Right now, the server is misbehaved.
-            let object = components.next() //try components.next(failure: "Missing object", object: string)
+            let object = try components.next(failure: "Missing object", object: string)
             
             log.precondition(components.next() == nil)
 
             throw ServerError(
                 code: ServerError.Code(code),
                 reason: reason.isEmpty ? nil : reason,
-                object: object//.isEmpty ? nil : object
+                object: object
             )
         }
     }

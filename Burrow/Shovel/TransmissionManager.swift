@@ -68,7 +68,6 @@ extension TransmissionManager {
         return try DNSResolver.resolveTXT(endDomain).mapSuccess { txtRecords in
             let attributes = try TXTRecord.parse(attributes: txtRecords)
             
-            // TODO: Also print transmission id on failure?
             try requireValue("True", from: attributes, forExpectedKey: "success", object: [
                 "transmissionId" : transmissionId,
                 "attributes" : attributes
@@ -83,8 +82,6 @@ extension TransmissionManager {
     /// Send a domain-safe message to the server and asynchronously receive the response, or an error on failure
     public func transmit(domainSafeMessage message: String) throws -> Future<Result<String>> {
         log.verbose("Attempting to transmit message: \(message)")
-        // TODO: Could we improve speed by reducing the RTT required to start and end a transmission?
-        // TODO: The control flow here is more confusing than I'd like. It's not obvious how to fix it.
 
         return try begin().flatMapSuccess { transmissionId in
             // Encode message as a sequence of domains
@@ -94,7 +91,6 @@ extension TransmissionManager {
             }))
             log.verbose("Will send \(domains.count) continue messages for tranmission with id \(transmissionId)")
 
-            // TODO: It'd be nice to support waiting until a timeout.
             return try Future.awaiting(allOf: domains.map { domain in
                 try DNSResolver.resolveTXT(domain).mapSuccess { txtRecords in
                     let attributes = try TXTRecord.parse(attributes: txtRecords)
@@ -105,7 +101,6 @@ extension TransmissionManager {
                 }
             }).map { results in
                 return Result {
-                    // TODO: This is gross.
                     let failures = results.filter { $0.error != nil }.map { $0.error! }
 
                     guard failures.isEmpty else {

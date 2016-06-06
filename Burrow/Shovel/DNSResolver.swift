@@ -215,7 +215,7 @@ class DNSResolver {
                 /* callout: */ querySocketCallback,
                 /* context: */ &socketContext
             )
-            // TODO: Is this socket retained here? If not, it crashes. If so, it leaks.
+
             queryContext.memory.socket = socket
             log.verbose("Created socket for query to domain `\(domain)`: \(socket)")
             
@@ -225,7 +225,7 @@ class DNSResolver {
                 /* socket: */ socket,
                 /* order: */ 0
             )
-            // TODO: Is this run loop retained here? If not, it crashes. If so, it leaks.
+
             queryContext.memory.socketSource = socketSource
             CFRunLoopAddSource(CFRunLoopGetMain(), socketSource, kCFRunLoopDefaultMode)
             log.verbose("Added run loop source \(socketSource) for query to domain `\(domain)`")

@@ -60,11 +60,7 @@ extension DomainPackagingMessage: SequenceType {
                 // Prepend the component
                 domain.prepend(String(self.dataString[dataIndex..<labelEndIndex]), atLevel: level)
             }
-
-            // TODO: Is it a problem in practice that we might start with a dash?
-//            log.precondition(domain.characters.first != "-" && domain.characters.last != "-",
-//                "String may not start or end with dash.")
-
+            
             return domain
         }
 
@@ -73,7 +69,6 @@ extension DomainPackagingMessage: SequenceType {
 
 // MARK: Helpers
 
-// TODO: Does this accurately represent this character set?
 private let domainSafeCharacterSet: NSCharacterSet = {
     let set = NSMutableCharacterSet()
     set.formUnionWithCharacterSet(NSCharacterSet.alphanumericCharacterSet())
