@@ -53,8 +53,7 @@ Sending a message to the server requires three steps:
     3.2a591c8b.end.burrow.tech
         "success=True"; "contents=<______>"
 
-
-https://lh5.googleusercontent.com/0YjSF6e3XQK4ZYk7vItNI6aRqXjY8mlpoT2B7_B61pSoZWFiiD3n5iyNlw-_BarZ_N9jzMoH5OoYFTESz1jm7wM0peNcvrvpGX3Jt9RNg-_4QAqAYRJCwC1PmOWtGfUIa2zvyjnxthE
+![Transmission Diagram](images/transmission.png)
 
 ## The Session Layer
 
@@ -75,8 +74,7 @@ This layer encapsulates the packet forwarding and polling logic. Session message
     message: e-c8e9471e
     response: s
 
-
-https://lh4.googleusercontent.com/xH80m-mMtJWuQAm1-y3GHUv6wUMghh8UQRRn7Nh3Uf_HMVgjuZ7ErQUs4Tu89cd0FixJ3Ux5h2bwmSnVFV2o0xcoHCQeBZe23B_-2y7u9JlTN_vrF_NNpUD1lM0EJUJM0B7NQ3QshB0
+![Transmission Diagram](images/session.png)
 
 ## Intercepting Client-Side Network Traffic
 
