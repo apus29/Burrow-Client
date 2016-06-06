@@ -64,15 +64,16 @@ This layer encapsulates the packet forwarding and polling logic. Session message
 3. The client will periodically poll for response packets from the server with the message `r-c8e9471e` . The server will return any packets it received as responses to previously forwarded packets from this session as `s-c8e9471e-<packet1>-<packet2>-...` 
 4. When the client is ready to disconnect, it will end the session with `e-c8e9471e`. The server will clean up the resources used to create the session and return `s`.
 
-
-    message: b
-    response: s-c8e9471e
-    message: f-c8e9471e-<packet1>-<packet2>-...
-    response: s
-    message: r-c8e9471e
-    response: s-<packet1>-<packet2>-...
-    message: e-c8e9471e
-    response: s
+```
+message: b
+response: s-c8e9471e
+message: f-c8e9471e-<packet1>-<packet2>-...
+response: s
+message: r-c8e9471e
+response: s-<packet1>-<packet2>-...
+message: e-c8e9471e
+response: s
+```
 
 ![Transmission Diagram](images/session.png)
 
