@@ -61,7 +61,7 @@ class SessionController {
     func forward(packets packets: [NSData]) throws -> Future<Result<()>> {
         log.debug("Will forward \(packets.count) packets=")
         log.verbose("Will forward packets: \(packets)")
-        guard let identifier = sessionIdentifier else { preconditionFailure() }
+        guard let identifier = sessionIdentifier else { log.preconditionFailure() }
         // TODO: Recover from certain kinds of failures
         return try transmissionManager.send(.forwardPackets(identifier, packets)).mapSuccess { response in
             guard case .forwardPackets = response else { fatalError() } // TODO: Maybe throw an error...
@@ -85,7 +85,7 @@ class SessionController {
     }
     
     private func request() throws -> Future<Result<[NSData]>> {
-        guard let identifier = sessionIdentifier else { preconditionFailure() }
+        guard let identifier = sessionIdentifier else { log.preconditionFailure() }
         // TODO: Recover from certain kinds of failures
         return try transmissionManager.send(.requestPackets(identifier)).mapSuccess { response in
             guard case .requestPackets(let packets) = response else { fatalError() }
@@ -94,7 +94,7 @@ class SessionController {
     }
     
     func endSesssion() throws -> Future<Result<()>> {
-        guard let identifier = sessionIdentifier else { preconditionFailure() }
+        guard let identifier = sessionIdentifier else { log.preconditionFailure() }
         return try transmissionManager.send(.endSession(identifier)).mapSuccess { response in
             guard case .endSession = response else { fatalError() }
         }

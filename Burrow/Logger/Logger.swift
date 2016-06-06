@@ -120,7 +120,12 @@ extension Logger {
     
     public func precondition(condition: Bool, @autoclosure _ message: () -> String = "", file: StaticString = #file, line: UInt = #line) {
         if !condition {
-            log.error("precondition failed: \(message()): file \(file), line \(line))")
+            self.preconditionFailure(message(), file: file, line: line)
         }
+    }
+    
+    @noreturn public func preconditionFailure(message: String = "", file: StaticString = #file, line: UInt = #line) {
+        log.error("precondition failed: \(message): file \(file), line \(line))")
+        fatalError()
     }
 }
