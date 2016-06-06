@@ -25,7 +25,6 @@ class ViewController: UIViewController {
                 self.tunnelProviderManager = manager
                 print("Successfully retrived tunnel provider manager.")
                 
-                // TODO: Is this necessary?
                 manager.loadFromPreferencesWithCompletionHandler { error in
                     if let error = error {
                         print("Unable to load tunnel provider manager.", error)
@@ -47,7 +46,6 @@ class ViewController: UIViewController {
                     }
                 }
             } catch let error {
-                // TODO: This might fail the first time the app is launched.
                 print("Unable to load tunnel provider manager.", error)
             }
         }
@@ -102,8 +100,6 @@ class ViewController: UIViewController {
         tunnelVisuallyEnabled(sender.on)
         if sender.on {
             print("User enabled tunnel.")
-            
-            // TODO: Listen for notifications
             do {
                 log.precondition(tunnelProviderManager.enabled)
                 log.precondition(tunnelProviderManager.routingMethod == .DestinationIP)

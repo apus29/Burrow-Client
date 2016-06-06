@@ -18,11 +18,18 @@
 		4D0D563E1CB3743A008CB981 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0D562D1CB37394008CB981 /* ViewController.swift */; };
 		4D0D564B1CB37862008CB981 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0D564A1CB37862008CB981 /* NetworkExtension.framework */; };
 		4D0D564C1CB37893008CB981 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0D564A1CB37862008CB981 /* NetworkExtension.framework */; };
-		4D4A1DC71CD7C138003AF9AD /* SessionIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A1DC41CD7C041003AF9AD /* SessionIdentifier.swift */; };
-		4D4A1DC81CD7C139003AF9AD /* SessionIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A1DC41CD7C041003AF9AD /* SessionIdentifier.swift */; };
-		4D4A1DCA1CD7C38F003AF9AD /* DeserializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A1DC91CD7C38F003AF9AD /* DeserializationError.swift */; };
-		4D4A1DCB1CD7C38F003AF9AD /* DeserializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A1DC91CD7C38F003AF9AD /* DeserializationError.swift */; };
-		4D4A1DCC1CD7C38F003AF9AD /* DeserializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D4A1DC91CD7C38F003AF9AD /* DeserializationError.swift */; };
+		4D3E25371D05C4D400478052 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3E25351D05C4D400478052 /* Future.swift */; };
+		4D3E25381D05C4D400478052 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3E25361D05C4D400478052 /* Resolver.swift */; };
+		4D3E253C1D05C4EC00478052 /* DNSServiceErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3E25391D05C4EC00478052 /* DNSServiceErrorCode.swift */; };
+		4D3E253D1D05C4EC00478052 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3E253A1D05C4EC00478052 /* Result.swift */; };
+		4D3E253E1D05C4EC00478052 /* ShovelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3E253B1D05C4EC00478052 /* ShovelError.swift */; };
+		4D3E25411D05C55C00478052 /* SessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3E253F1D05C55C00478052 /* SessionController.swift */; };
+		4D3E25421D05C55C00478052 /* SessionIdentifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3E25401D05C55C00478052 /* SessionIdentifier.swift */; };
+		4D3E25451D05C56400478052 /* DeserializationError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3E25431D05C56400478052 /* DeserializationError.swift */; };
+		4D3E25461D05C56400478052 /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3E25441D05C56400478052 /* ServerError.swift */; };
+		4D3E254A1D05C56B00478052 /* ClientMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3E25471D05C56B00478052 /* ClientMessage.swift */; };
+		4D3E254B1D05C56B00478052 /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3E25481D05C56B00478052 /* MessageType.swift */; };
+		4D3E254C1D05C56B00478052 /* ServerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D3E25491D05C56B00478052 /* ServerMessage.swift */; };
 		4D4B136C1CBB9FE1008EC7CD /* Burrow-iOS.entitlements in Resources */ = {isa = PBXBuildFile; fileRef = 4D4B136B1CBB9FE1008EC7CD /* Burrow-iOS.entitlements */; };
 		4D4C41AB1CBB4C8C00055D86 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0D56361CB3739C008CB981 /* PacketTunnelProvider.swift */; };
 		4D4C41AC1CBB4C8D00055D86 /* PacketTunnelProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D0D56361CB3739C008CB981 /* PacketTunnelProvider.swift */; };
@@ -35,28 +42,14 @@
 		4D62BB7A1CFA463300F0A2C3 /* DNSServiceDiscovery.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 4D62BB761CFA463300F0A2C3 /* DNSServiceDiscovery.xcconfig */; };
 		4D62BB7B1CFA74A000F0A2C3 /* DNSServiceDiscovery.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D62BB6A1CFA458100F0A2C3 /* DNSServiceDiscovery.framework */; };
 		4D62BB7F1CFA795B00F0A2C3 /* DNSResolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D62BB7E1CFA795B00F0A2C3 /* DNSResolver.swift */; };
-		4D62BB921CFACFB200F0A2C3 /* DNSServiceErrorCode.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D62BB911CFACFB200F0A2C3 /* DNSServiceErrorCode.swift */; };
-		4D62BB951CFC108F00F0A2C3 /* Future.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D62BB941CFC108F00F0A2C3 /* Future.swift */; };
-		4D62BB981CFC10A300F0A2C3 /* Resolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D62BB971CFC10A300F0A2C3 /* Resolver.swift */; };
-		4D6768141CE994A30079E173 /* Result.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6768131CE994A30079E173 /* Result.swift */; };
-		4D6768161CE995160079E173 /* ServerError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D6768151CE995160079E173 /* ServerError.swift */; };
 		4D6B46141CE11738007ADB37 /* NETunnelProviderManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCE66D41CE09D4300C9FBBC /* NETunnelProviderManager.swift */; };
 		4D6B46151CE117DE007ADB37 /* NetworkExtension.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D0D564A1CB37862008CB981 /* NetworkExtension.framework */; };
 		4D6E12511CE2CD9400A889C0 /* Shovel.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4C41D41CBB50C000055D86 /* Shovel.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
-		4D77F9F11CD7D95400F2586C /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77F9F01CD7D95400F2586C /* MessageType.swift */; };
-		4D77F9F21CD7D95400F2586C /* MessageType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77F9F01CD7D95400F2586C /* MessageType.swift */; };
-		4D77F9F51CD7DA1500F2586C /* ServerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77F9F41CD7DA1500F2586C /* ServerMessage.swift */; };
-		4D77F9F61CD7DA1500F2586C /* ServerMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77F9F41CD7DA1500F2586C /* ServerMessage.swift */; };
-		4D77FA031CD7ED1E00F2586C /* SessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77FA021CD7ED1E00F2586C /* SessionController.swift */; };
-		4D77FA041CD7ED1E00F2586C /* SessionController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D77FA021CD7ED1E00F2586C /* SessionController.swift */; };
-		4D97880A1CCDBD1700774E3F /* ClientMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9788091CCDBD1700774E3F /* ClientMessage.swift */; };
-		4D97880B1CCDBD1700774E3F /* ClientMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4D9788091CCDBD1700774E3F /* ClientMessage.swift */; };
 		4DAE80441CE2B4FD00735599 /* BurrowTunnel-iOS.appex in Embed App Extensions */ = {isa = PBXBuildFile; fileRef = 4D0D55F71CB372F3008CB981 /* BurrowTunnel-iOS.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		4DAE805B1CE2CBF200735599 /* Shovel.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D4C41D41CBB50C000055D86 /* Shovel.framework */; };
 		4DBD0AA31CC465F6003BC82C /* TransmissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AA21CC465F6003BC82C /* TransmissionManager.swift */; };
 		4DBD0AA51CC4ACD3003BC82C /* Domain.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AA41CC4ACD3003BC82C /* Domain.swift */; };
 		4DBD0AA71CC4B66E003BC82C /* TransmissionTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AA61CC4B66E003BC82C /* TransmissionTests.swift */; };
-		4DBD0AAE1CC4CA56003BC82C /* ShovelError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DBD0AAD1CC4CA56003BC82C /* ShovelError.swift */; };
 		4DCB4EC41CEEF71F006BC0AF /* Logger.h in Headers */ = {isa = PBXBuildFile; fileRef = 4DCB4EC31CEEF71F006BC0AF /* Logger.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		4DCB4ECA1CEEF734006BC0AF /* Logger.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4DCB4EC91CEEF734006BC0AF /* Logger.swift */; };
 		4DCB4ECB1CEF0CFF006BC0AF /* Logger.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 4DCB4EC11CEEF71F006BC0AF /* Logger.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
@@ -183,8 +176,18 @@
 		4D0D56351CB3739C008CB981 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		4D0D56361CB3739C008CB981 /* PacketTunnelProvider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PacketTunnelProvider.swift; sourceTree = "<group>"; };
 		4D0D564A1CB37862008CB981 /* NetworkExtension.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = NetworkExtension.framework; path = System/Library/Frameworks/NetworkExtension.framework; sourceTree = SDKROOT; };
-		4D4A1DC41CD7C041003AF9AD /* SessionIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionIdentifier.swift; sourceTree = "<group>"; };
-		4D4A1DC91CD7C38F003AF9AD /* DeserializationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeserializationError.swift; path = ../Shovel/DeserializationError.swift; sourceTree = "<group>"; };
+		4D3E25351D05C4D400478052 /* Future.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Future.swift; path = Futures/Future.swift; sourceTree = "<group>"; };
+		4D3E25361D05C4D400478052 /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Resolver.swift; path = Futures/Resolver.swift; sourceTree = "<group>"; };
+		4D3E25391D05C4EC00478052 /* DNSServiceErrorCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DNSServiceErrorCode.swift; path = "Error Handling/DNSServiceErrorCode.swift"; sourceTree = "<group>"; };
+		4D3E253A1D05C4EC00478052 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Result.swift; path = "Error Handling/Result.swift"; sourceTree = "<group>"; };
+		4D3E253B1D05C4EC00478052 /* ShovelError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ShovelError.swift; path = "Error Handling/ShovelError.swift"; sourceTree = "<group>"; };
+		4D3E253F1D05C55C00478052 /* SessionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionController.swift; path = Communication/SessionController.swift; sourceTree = "<group>"; };
+		4D3E25401D05C55C00478052 /* SessionIdentifier.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SessionIdentifier.swift; path = Communication/SessionIdentifier.swift; sourceTree = "<group>"; };
+		4D3E25431D05C56400478052 /* DeserializationError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = DeserializationError.swift; path = Communication/Errors/DeserializationError.swift; sourceTree = "<group>"; };
+		4D3E25441D05C56400478052 /* ServerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerError.swift; path = Communication/Errors/ServerError.swift; sourceTree = "<group>"; };
+		4D3E25471D05C56B00478052 /* ClientMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ClientMessage.swift; path = Communication/Messages/ClientMessage.swift; sourceTree = "<group>"; };
+		4D3E25481D05C56B00478052 /* MessageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MessageType.swift; path = Communication/Messages/MessageType.swift; sourceTree = "<group>"; };
+		4D3E25491D05C56B00478052 /* ServerMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ServerMessage.swift; path = Communication/Messages/ServerMessage.swift; sourceTree = "<group>"; };
 		4D4B136B1CBB9FE1008EC7CD /* Burrow-iOS.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Burrow-iOS.entitlements"; sourceTree = "<group>"; };
 		4D4B136D1CBB9FE9008EC7CD /* Burrow-Mac.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "Burrow-Mac.entitlements"; sourceTree = "<group>"; };
 		4D4B136F1CBBA00B008EC7CD /* BurrowTunnel-Extension-Mac.entitlements */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.xml; path = "BurrowTunnel-Extension-Mac.entitlements"; sourceTree = "<group>"; };
@@ -204,20 +207,10 @@
 		4D62BB781CFA463300F0A2C3 /* iphonesimulator.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = iphonesimulator.modulemap; sourceTree = "<group>"; };
 		4D62BB791CFA463300F0A2C3 /* macosx.modulemap */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = "sourcecode.module-map"; path = macosx.modulemap; sourceTree = "<group>"; };
 		4D62BB7E1CFA795B00F0A2C3 /* DNSResolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSResolver.swift; sourceTree = "<group>"; };
-		4D62BB911CFACFB200F0A2C3 /* DNSServiceErrorCode.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DNSServiceErrorCode.swift; sourceTree = "<group>"; };
-		4D62BB941CFC108F00F0A2C3 /* Future.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Future.swift; sourceTree = "<group>"; };
-		4D62BB971CFC10A300F0A2C3 /* Resolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Resolver.swift; sourceTree = "<group>"; };
-		4D6768131CE994A30079E173 /* Result.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Result.swift; sourceTree = "<group>"; };
-		4D6768151CE995160079E173 /* ServerError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerError.swift; sourceTree = "<group>"; };
-		4D77F9F01CD7D95400F2586C /* MessageType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageType.swift; sourceTree = "<group>"; };
-		4D77F9F41CD7DA1500F2586C /* ServerMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ServerMessage.swift; sourceTree = "<group>"; };
-		4D77FA021CD7ED1E00F2586C /* SessionController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SessionController.swift; sourceTree = "<group>"; };
 		4D77FA081CD81C1D00F2586C /* BurrowTunnel-iOS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; name = "BurrowTunnel-iOS.entitlements"; path = "../BurrowTunnel-iOS.entitlements"; sourceTree = "<group>"; };
-		4D9788091CCDBD1700774E3F /* ClientMessage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ClientMessage.swift; sourceTree = "<group>"; };
 		4DBD0AA21CC465F6003BC82C /* TransmissionManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionManager.swift; sourceTree = "<group>"; };
 		4DBD0AA41CC4ACD3003BC82C /* Domain.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Domain.swift; sourceTree = "<group>"; };
 		4DBD0AA61CC4B66E003BC82C /* TransmissionTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TransmissionTests.swift; sourceTree = "<group>"; };
-		4DBD0AAD1CC4CA56003BC82C /* ShovelError.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShovelError.swift; sourceTree = "<group>"; };
 		4DCB4EC11CEEF71F006BC0AF /* Logger.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Logger.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		4DCB4EC31CEEF71F006BC0AF /* Logger.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Logger.h; sourceTree = "<group>"; };
 		4DCB4EC51CEEF71F006BC0AF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -443,9 +436,9 @@
 		4D62BB931CFACFBA00F0A2C3 /* Error Handling */ = {
 			isa = PBXGroup;
 			children = (
-				4DBD0AAD1CC4CA56003BC82C /* ShovelError.swift */,
-				4D62BB911CFACFB200F0A2C3 /* DNSServiceErrorCode.swift */,
-				4D6768131CE994A30079E173 /* Result.swift */,
+				4D3E25391D05C4EC00478052 /* DNSServiceErrorCode.swift */,
+				4D3E253A1D05C4EC00478052 /* Result.swift */,
+				4D3E253B1D05C4EC00478052 /* ShovelError.swift */,
 			);
 			name = "Error Handling";
 			sourceTree = "<group>";
@@ -453,8 +446,8 @@
 		4D62BB961CFC109200F0A2C3 /* Futures */ = {
 			isa = PBXGroup;
 			children = (
-				4D62BB971CFC10A300F0A2C3 /* Resolver.swift */,
-				4D62BB941CFC108F00F0A2C3 /* Future.swift */,
+				4D3E25351D05C4D400478052 /* Future.swift */,
+				4D3E25361D05C4D400478052 /* Resolver.swift */,
 			);
 			name = Futures;
 			sourceTree = "<group>";
@@ -462,8 +455,8 @@
 		4D77F9F31CD7D9E300F2586C /* Communication */ = {
 			isa = PBXGroup;
 			children = (
-				4D77FA021CD7ED1E00F2586C /* SessionController.swift */,
-				4D4A1DC41CD7C041003AF9AD /* SessionIdentifier.swift */,
+				4D3E253F1D05C55C00478052 /* SessionController.swift */,
+				4D3E25401D05C55C00478052 /* SessionIdentifier.swift */,
 				4D77FA071CD7F77D00F2586C /* Messages */,
 				4D77F9FA1CD7DB5000F2586C /* Errors */,
 			);
@@ -473,8 +466,8 @@
 		4D77F9FA1CD7DB5000F2586C /* Errors */ = {
 			isa = PBXGroup;
 			children = (
-				4D4A1DC91CD7C38F003AF9AD /* DeserializationError.swift */,
-				4D6768151CE995160079E173 /* ServerError.swift */,
+				4D3E25431D05C56400478052 /* DeserializationError.swift */,
+				4D3E25441D05C56400478052 /* ServerError.swift */,
 			);
 			name = Errors;
 			sourceTree = "<group>";
@@ -482,9 +475,9 @@
 		4D77FA071CD7F77D00F2586C /* Messages */ = {
 			isa = PBXGroup;
 			children = (
-				4D77F9F01CD7D95400F2586C /* MessageType.swift */,
-				4D9788091CCDBD1700774E3F /* ClientMessage.swift */,
-				4D77F9F41CD7DA1500F2586C /* ServerMessage.swift */,
+				4D3E25471D05C56B00478052 /* ClientMessage.swift */,
+				4D3E25481D05C56B00478052 /* MessageType.swift */,
+				4D3E25491D05C56B00478052 /* ServerMessage.swift */,
 			);
 			name = Messages;
 			sourceTree = "<group>";
@@ -871,14 +864,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D97880A1CCDBD1700774E3F /* ClientMessage.swift in Sources */,
 				4D4C41AC1CBB4C8D00055D86 /* PacketTunnelProvider.swift in Sources */,
-				4D77FA031CD7ED1E00F2586C /* SessionController.swift in Sources */,
-				4D77F9F51CD7DA1500F2586C /* ServerMessage.swift in Sources */,
-				4D77F9F11CD7D95400F2586C /* MessageType.swift in Sources */,
-				4D4A1DC71CD7C138003AF9AD /* SessionIdentifier.swift in Sources */,
-				4D4A1DCA1CD7C38F003AF9AD /* DeserializationError.swift in Sources */,
-				4D6768161CE995160079E173 /* ServerError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -886,13 +872,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D97880B1CCDBD1700774E3F /* ClientMessage.swift in Sources */,
 				4D4C41AB1CBB4C8C00055D86 /* PacketTunnelProvider.swift in Sources */,
-				4D77FA041CD7ED1E00F2586C /* SessionController.swift in Sources */,
-				4D77F9F61CD7DA1500F2586C /* ServerMessage.swift in Sources */,
-				4D77F9F21CD7D95400F2586C /* MessageType.swift in Sources */,
-				4D4A1DC81CD7C139003AF9AD /* SessionIdentifier.swift in Sources */,
-				4D4A1DCB1CD7C38F003AF9AD /* DeserializationError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -900,17 +880,23 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4D62BB921CFACFB200F0A2C3 /* DNSServiceErrorCode.swift in Sources */,
-				4DBD0AAE1CC4CA56003BC82C /* ShovelError.swift in Sources */,
+				4D3E253D1D05C4EC00478052 /* Result.swift in Sources */,
 				4D62BB7F1CFA795B00F0A2C3 /* DNSResolver.swift in Sources */,
-				4D62BB981CFC10A300F0A2C3 /* Resolver.swift in Sources */,
+				4D3E254A1D05C56B00478052 /* ClientMessage.swift in Sources */,
 				4DBD0AA31CC465F6003BC82C /* TransmissionManager.swift in Sources */,
 				4D4C421F1CBB5F7600055D86 /* TXTRecord.swift in Sources */,
-				4D6768141CE994A30079E173 /* Result.swift in Sources */,
-				4D4A1DCC1CD7C38F003AF9AD /* DeserializationError.swift in Sources */,
+				4D3E25371D05C4D400478052 /* Future.swift in Sources */,
+				4D3E25461D05C56400478052 /* ServerError.swift in Sources */,
+				4D3E253E1D05C4EC00478052 /* ShovelError.swift in Sources */,
+				4D3E254C1D05C56B00478052 /* ServerMessage.swift in Sources */,
+				4D3E25451D05C56400478052 /* DeserializationError.swift in Sources */,
+				4D3E25421D05C55C00478052 /* SessionIdentifier.swift in Sources */,
+				4D3E25381D05C4D400478052 /* Resolver.swift in Sources */,
 				4DCE66D11CE087EB00C9FBBC /* DomainPackagingMessage.swift in Sources */,
-				4D62BB951CFC108F00F0A2C3 /* Future.swift in Sources */,
 				4DBD0AA51CC4ACD3003BC82C /* Domain.swift in Sources */,
+				4D3E254B1D05C56B00478052 /* MessageType.swift in Sources */,
+				4D3E25411D05C55C00478052 /* SessionController.swift in Sources */,
+				4D3E253C1D05C4EC00478052 /* DNSServiceErrorCode.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

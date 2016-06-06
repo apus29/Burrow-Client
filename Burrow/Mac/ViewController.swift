@@ -21,7 +21,6 @@ class ViewController: NSViewController {
         case true:
             print("User enabled tunnel.")
             
-            // TODO: Listen for notifications
             do {
                 log.precondition(tunnelProviderManager.enabled)
                 tunnelProviderManager.saveToPreferencesWithCompletionHandler {
@@ -71,7 +70,6 @@ class ViewController: NSViewController {
                     }
                 }
             } catch let error {
-                // TODO: This might fail the first time the app is launched.
                 print("Unable to load tunnel provider manager.", error)
             }
         }

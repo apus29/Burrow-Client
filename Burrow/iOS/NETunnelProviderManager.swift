@@ -7,10 +7,9 @@
 //
 
 import NetworkExtension
-import Shovel // TODO: Refactor Result into separate module?
+import Shovel
 import Logger
 
-// TODO: Share between iOS and OS X.
 extension NETunnelProviderManager {
     class func sharedBurrowTunnelProviderManager(completionHandler: Result<NETunnelProviderManager> -> ()) {
         self.loadAllFromPreferencesWithCompletionHandler { managers, error in
