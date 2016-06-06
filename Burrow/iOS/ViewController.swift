@@ -103,6 +103,7 @@ class ViewController: UIViewController {
                 self.view.backgroundColor = .whiteColor()
             }
             print("User disabled tunnel.")
+            self.tunnelProviderManager.connection.stopVPNTunnel()
             
             self.navigationController?.setNavigationBarHidden(true, animated: true)
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(waitDuration * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
