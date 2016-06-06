@@ -158,162 +158,120 @@ In conclusion, we’re confident that we aren’t far off from a fully working p
 ##** Server Modules**
 ![Server Modules](images/server.png)
 
-**Module Name:** Transmission
+**Module Name:** Transmission  
 **Function:** Implements the Transmission class from the Transmission layer. It holds all the data from a single Transmission, defined by a transmissionID. Its functions are called by the resolver as it receives pieces of a Transmission to add data to the Transmission, and to put together and return the completed Transmission.
-Transmission messages come in 3 types. A lookup to <randomdata>.begin.burrow.tech causes the server to create a new Transmission and return a Transmission ID to the client. A lookup to <transmission_ID>.<index>.continue.burrow.tech contains data that is added to the Transmission. A lookup to <# of pieces>.<transmission_ID>.end.burrow.tech means that the Transmission data is put together, and handled as part of a Session. The Session returns a reply that is sent to the client.
-**Authorship:**  Alex
-**Language:**  Python
-**Workload:**  ~60 lines
+Transmission messages come in 3 types. A lookup to <randomdata>.begin.burrow.tech causes the server to create a new Transmission and return a Transmission ID to the client. A lookup to <transmission_ID>.<index>.continue.burrow.tech contains data that is added to the Transmission. A lookup to <# of pieces>.<transmission_ID>.end.burrow.tech means that the Transmission data is put together, and handled as part of a Session. The Session returns a reply that is sent to the client.  
+**Authorship:**  Alex  
+**Language:**  Python  
+**Workload:**  ~60 lines  
 **Possible Failure Conditions:** If it receives a Transmission that is not one of the Transmission types, it will report an error. If it receives a .end call before receiving all of the .continue calls for that Transmission, it will raise an error.
 
-**Module Name:** Burrow Resolver
-**Function:** Implements the DNS resolver of the server. It handles DNS requests from a client on the Transmission layer. It is used to receive DNS requests to the server. It determines what type of transmission the DNS request is, and handles it accordingly, sending back a success or failure message for each piece of a Transmission it receives. Once it receives an end Transmission, the then sends the complete Transmission to the Session layer to get a reply. It then constructs any responses as a TXT record and sends it back to the client. It provides caching of responses in case intermediate DNS servers send a lookup to the server multiple times.
-**Authorship:**  Alex, Jaden
-**Language:**  Python
-**Workload:**  ~300 lines
-**Possible Failure Conditions:** If it receives a .continue or .end call with a Transmission ID that does not exist or was ended too long ago, it will return an error to the client.
+**Module Name:** Burrow Resolver  
+**Function:** Implements the DNS resolver of the server. It handles DNS requests from a client on the Transmission layer. It is used to receive DNS requests to the server. It determines what type of transmission the DNS request is, and handles it accordingly, sending back a success or failure message for each piece of a Transmission it receives. Once it receives an end Transmission, the then sends the complete Transmission to the Session layer to get a reply. It then constructs any responses as a TXT record and sends it back to the client. It provides caching of responses in case intermediate DNS servers send a lookup to the server multiple times.  
+**Authorship:**  Alex, Jaden  
+**Language:**  Python  
+**Workload:**  ~300 lines  
+**Possible Failure Conditions:** If it receives a .continue or .end call with a Transmission ID that does not exist or was ended too long ago, it will return an error to the client.  
 
-**Module Name:** Session
-**Function:** Implements the packet forwarding component of a Session. A Session itself is a packet forwarding session that sits on top of the Transmission layer. The client sends the server a number of packets and queries the server for response packets in a Session. This class uses ScaPy to spoof and forward packets. Each session sends and receives packets on a unique port. It sends a number of packets and holds the responses until the client asks for packets from the Session.
-**Authorship:**  Alex, Mimi
-**Language:**  Python
-**Workload:**  ~60 lines
+**Module Name:** Session  
+**Function:** Implements the packet forwarding component of a Session. A Session itself is a packet forwarding session that sits on top of the Transmission layer. The client sends the server a number of packets and queries the server for response packets in a Session. This class uses ScaPy to spoof and forward packets. Each session sends and receives packets on a unique port. It sends a number of packets and holds the responses until the client asks for packets from the Session.  
+**Authorship:**  Alex, Mimi  
+**Language:**  Python  
+**Workload:**  ~60 lines  
 **Possible Failure Conditions:** It only forwards TCP and UDP IP packets. Any other packets will result in an error. If it runs out of ports to forward packets on, it will also return an error, but this should never happen unless sessions are not being ended properly.
 
-**Module Name:** Serialized Message Handler
-**Function:** This handles messages from the client by delimiting the message string using dashes and getting the first item in the message, which is the type. It calls the appropriate handler based on the message type. A Begin message causes it to return a Session ID and create a new instance of a Session. A Forward message contains packets that are forwarded using its Session. A Request message queries the Session for response packets to the forwarded packets. An End message closes the Session and frees up the port.
-**Authorship:**  Mimi, Alex
-**Language:**  Python
-**Workload:**  ~70 lines
+**Module Name:** Serialized Message Handler  
+**Function:** This handles messages from the client by delimiting the message string using dashes and getting the first item in the message, which is the type. It calls the appropriate handler based on the message type. A Begin message causes it to return a Session ID and create a new instance of a Session. A Forward message contains packets that are forwarded using its Session. A Request message queries the Session for response packets to the forwarded packets. An End message closes the Session and frees up the port.  
+**Authorship:**  Mimi, Alex  
+**Language:**  Python  
+**Workload:**  ~70 lines  
 **Possible Failure Conditions:**  If it receives a Session that is not one of the Session types, it will report an error. Otherwise, if it receives an end session to a session ID that does not exist, it will return an error to the client. It will also pass errors from Session on to the client.
 
-**Module Name:** Burrow Logging
-**Function:** This module allows our server-side code to quickly and easily log to both stdout and a logfile from multiple files and multiple processes/threads simultaneously. It’s fully thread-safe, taking advantage of Python’s multiprocessing library to queue log events. It also allows us to easily define a LOG() function in each file that sets the default indentation level of logs from that file, making the output easier to parse across different layers of abstraction.
-**Authorship:** Alex
-**Language:** Python
-**Workload:** ~30 lines
+**Module Name:** Burrow Logging  
+**Function:** This module allows our server-side code to quickly and easily log to both stdout and a logfile from multiple files and multiple processes/threads simultaneously. It’s fully thread-safe, taking advantage of Python’s multiprocessing library to queue log events. It also allows us to easily define a LOG() function in each file that sets the default indentation level of logs from that file, making the output easier to parse across different layers of abstraction.  
+**Authorship:** Alex  
+**Language:** Python  
+**Workload:** ~30 lines  
 **Possible Failure Conditions:** N/A
 
-**Module Name:** Server run script and configuration
-**Function:** We obtained a domain name and configured it to use our own nameserver (with some difficulty, most registrars seem to assume their customers will take advantage of the free DNS service they provide). Since code had to be running on the actual nameserver for our domain in order to be tested, only one person could work on the server code at a time. To ensure more than one person wouldn’t try to modify the code on the server at the same time, we configured the server to only allow one SSH login at a time. And to enable quick iteration, we developed a simple bash script wrapper for the server that restarts it any time files are changed.
-**Authorship:** Alex
-**Language:** Bash
-**Workload:** ~30 lines
-**Possible Failure Conditions:** N/A
+**Module Name:** Server run script and configuration  
+**Function:** We obtained a domain name and configured it to use our own nameserver (with some difficulty, most registrars seem to assume their customers will take advantage of the free DNS service they provide). Since code had to be running on the actual nameserver for our domain in order to be tested, only one person could work on the server code at a time. To ensure more than one person wouldn’t try to modify the code on the server at the same time, we configured the server to only allow one SSH login at a time. And to enable quick iteration, we developed a simple bash script wrapper for the server that restarts it any time files are changed.  
+**Authorship:** Alex  
+**Language:** Bash  
+**Workload:** ~30 lines  
+**Possible Failure Conditions:** N/A  
 
-**Module Name:** dnslib
-**Function:** **** Used for all DNS-related functions, including listening for, parsing, and replying to DNS requests.
-**Authorship:**** ** Paul Chakravarti
-**Language:**  Python
-**Workload:**  N/A
-**Possible Failure Conditions:** N/A
+**Module Name:** dnslib  
+**Function:** **** Used for all DNS-related functions, including listening for, parsing, and replying to DNS requests.  
+**Authorship:**** ** Paul Chakravarti  
+**Language:**  Python  
+**Workload:**  N/A  
+**Possible Failure Conditions:** N/A  
 
-**Module Name:** ScaPy
-**Function:** Used to spoof the source IP address and port in packets received from a client, to send the spoofed packets out on the network, receive the replies, and then un-spoof the replies so that their destination is the client.
-**Authorship:**   SecDev (Philippe Biondi)
-**Language:**  Python
-**Workload:**  N/A
+**Module Name:** ScaPy  
+**Function:** Used to spoof the source IP address and port in packets received from a client, to send the spoofed packets out on the network, receive the replies, and then un-spoof the replies so that their destination is the client.  
+**Authorship:**  SecDev (Philippe Biondi)  
+**Language:** Python  
+**Workload:** N/A  
 **Possible Failure Conditions:** N/A
 
 
 ##** Client Modules**
 ![Client Modules](images/client.png)
 
-**Module Name:** App
-
-**Function:** The app UI features a switch that is used to activate and deactivate the DNS tunnel. When activated, system-wide traffic is intercepted by our tunneling extension and sent through the server. The app code also configures the extension and uses basic animations to make the tunnel state clear.
-
-**Authorship:**  Jaden
-
-**Language:**  Swift
-
-**Workload:**  ~150 lines
-
+**Module Name:** App  
+**Function:** The app UI features a switch that is used to activate and deactivate the DNS tunnel. When activated, system-wide traffic is intercepted by our tunneling extension and sent through the server. The app code also configures the extension and uses basic animations to make the tunnel state clear.  
+**Authorship:**  Jaden  
+**Language:**  Swift  
+**Workload:**  ~150 lines  
 **Possible Failure Conditions:** Reports an error if it is unable to configure the tunnel provider. For example, if the user does not give Burrow VPN permissions, the app will be unable to configure the tunnel provider.
 
-**Module Name:** Burrow Tunnel Provider
-
-**Function:** Subclass of NETunnelProvider that utilizes the Session Controller module to set up and tear down a tunneling session in response to system events. While the extension is running, the tunnel provider will read packets from the device and forward them over the tunnel using the session controller with each run loop iteration. Further, the tunnel provider will implement the session controller delegate method to handle received packets and inject them into the device.
-
-**Authorship:**  Jaden
-
-**Language:**  Swift
-
-**Workload:**  ~150 lines
-
+**Module Name:** Burrow Tunnel Provider  
+**Function:** Subclass of NETunnelProvider that utilizes the Session Controller module to set up and tear down a tunneling session in response to system events. While the extension is running, the tunnel provider will read packets from the device and forward them over the tunnel using the session controller with each run loop iteration. Further, the tunnel provider will implement the session controller delegate method to handle received packets and inject them into the device.  
+**Authorship:**  Jaden  
+**Language:**  Swift  
+**Workload:**  ~150 lines  
 **Possible Failure Conditions:** Receives errors from the session controller and propagates them upwards.
 
-**Module Name:** Session Controller
+**Module Name:** Session Controller  
+**Function:** Handles the logic of communicating with the session layer on the server. Specifically, serializes messages and deserializes response from the server, sends messages over the transmission layer, and polls the server for packets ready to be sent back to the client, notifying the extension via a delegate method. Also handles tearing down server session once the client is finished tunneling.  
+**Authorship:**  Jaden  
+**Language:**  Swift  
+**Workload:**  ~400 lines  
+**Possible Failure Conditions:** *Deserialization error:* The sever returned a response with either invalid formatting or invalid contents. *Server error:* The server was unable to fulfill a client request, and responded with an error message indicating unknown message type, unknown session id, or some undefined error.
 
-**Function:** Handles the logic of communicating with the session layer on the server. Specifically, serializes messages and deserializes response from the server, sends messages over the transmission layer, and polls the server for packets ready to be sent back to the client, notifying the extension via a delegate method. Also handles tearing down server session once the client is finished tunneling.
-
-**Authorship:**  Jaden
-
-**Language:**  Swift
-
-**Workload:**  ~400 lines
-
-**Possible Failure Conditions:**
-
-*Deserialization error:* The sever returned a response with either invalid formatting or invalid contents. *Server error:* The server was unable to fulfill a client request, and responded with an error message indicating unknown message type, unknown session id, or some undefined error.
-
-**Module Name:** Transmission Manager
-
-**Function:** This is the client’s complement to the server’s Transmission layer. It sends arbitrary data to the server by breaking the data up into domain name sized chunks, and encoding it in Base64. It will query <garbage>.begin.burrow.tech to begin a Transmission and get a Transmission ID, then send the data over multiple queries to continue.burrow.tech using the Transmission ID and the index of the chunk of data being sent. After the whole Transmission has been sent, it will query <# of pieces>.<transmission_ID>.end.burrow.tech. It uses the DNS resolver to perform the queries.
-
-**Authorship:**  Jaden, Mimi
-
-**Language:**  Swift
-
-**Workload:**  ~230 lines
-
+**Module Name:** Transmission Manager  
+**Function:** This is the client’s complement to the server’s Transmission layer. It sends arbitrary data to the server by breaking the data up into domain name sized chunks, and encoding it in Base64. It will query <garbage>.begin.burrow.tech to begin a Transmission and get a Transmission ID, then send the data over multiple queries to continue.burrow.tech using the Transmission ID and the index of the chunk of data being sent. After the whole Transmission has been sent, it will query <# of pieces>.<transmission_ID>.end.burrow.tech. It uses the DNS resolver to perform the queries.  
+**Authorship:**  Jaden, Mimi  
+**Language:**  Swift  
+**Workload:**  ~230 lines  
 **Possible Failure Conditions:****** Throws an error if it is unable to handle a given TXT record. Reasons include unexpected server response, server failure response, and transmission timeout. Also propagates DNSResolver errors upwards.
 
-**Module Name:** DNS Resolver
-
-**Function:** Provides a high level API for asynchronous DNS resolution using the run loop rather than threads. This prevents a whole class of concurrency bugs that might’ve existed in our previous threaded implementation. Built on top of the low level DNS Service Discovery C module, this API returns a Future that will be executed when the DNS lookup resolves successfully. The Transmission Manager uses this class to encode messages to the server as DNS lookups, receiving TXT record responses. This API also handles collecting multiple TXT record responses from the server and returning them together to the caller. Further, it exposes methods for parsing TXT records into attribute dictionaries.
-
-**Authorship:**  Jaden
-
-**Language:**  Swift
-
-**Workload:**  ~350 lines
-
+**Module Name:** DNS Resolver  
+**Function:** Provides a high level API for asynchronous DNS resolution using the run loop rather than threads. This prevents a whole class of concurrency bugs that might’ve existed in our previous threaded implementation. Built on top of the low level DNS Service Discovery C module, this API returns a Future that will be executed when the DNS lookup resolves successfully. The Transmission Manager uses this class to encode messages to the server as DNS lookups, receiving TXT record responses. This API also handles collecting multiple TXT record responses from the server and returning them together to the caller. Further, it exposes methods for parsing TXT records into attribute dictionaries.  
+**Authorship:**  Jaden  
+**Language:**  Swift  
+**Workload:**  ~350 lines  
 **Possible Failure Conditions:** Throws an error if it cannot parse the TXT record. Also propagates DNS Service Discovery errors upwards.
 
-**Module Name:** DNS Service Discovery
-
-**Function:** DNS Service Discovery is an Apple API for discovering services over DNS. It is built as a C API, but we created a module-map to expose it to Swift. We ignore it’s service features and simply use it to resolve DNS lookups. Since it exposes the socket used by the lookup, we can wait until the socket is ready to read. This can be done asynchronously using a run loop event source. Note that we previously used the `lib resolver` API, but it blocked on DNS resolution, and spawning a new thread for each DNS lookup was bug-prone and inefficient.
-
-**Authorship:**  Apple (modularized by Jaden)
-
-**Language:**  C
-
-**Workload:**  N/A
-
+**Module Name:** DNS Service Discovery  
+**Function:** DNS Service Discovery is an Apple API for discovering services over DNS. It is built as a C API, but we created a module-map to expose it to Swift. We ignore it’s service features and simply use it to resolve DNS lookups. Since it exposes the socket used by the lookup, we can wait until the socket is ready to read. This can be done asynchronously using a run loop event source. Note that we previously used the `lib resolver` API, but it blocked on DNS resolution, and spawning a new thread for each DNS lookup was bug-prone and inefficient.  
+**Authorship:**  Apple (modularized by Jaden)  
+**Language:**  C  
+**Workload:**  N/A  
 **Possible Failure Conditions:** OS-level failure conditions such as out of memory or no network connectivity https://developer.apple.com/library/ios/documentation/Networking/Reference/DNSServiceDiscovery_CRef/#//apple_ref/doc/constant_group/DNS_Error_Codes
 
-**Module Name:** Logger
-
-**Function:** Provides the capability to easily log messages with differing severities and later filter messages by module and severity. Each module or file can create a log object specific to itself such that all logs generated by this code will be labeled with the category. Each log is either an error, a warning, an info message, a debug message, or a verbose message. We can set our desired severity for each module such that only useful logs will print to the console. This makes debugging much easier since we don’t need to sift through unrelated messages. Further, it allows use to easily obtain more info about what’s happening when we observe a problem in a specific module.
-
-**Authorship:**  Jaden
-
-**Language:**  Swift
-
-**Workload:**  ~100 lines
-
+**Module Name:** Logger  
+**Function:** Provides the capability to easily log messages with differing severities and later filter messages by module and severity. Each module or file can create a log object specific to itself such that all logs generated by this code will be labeled with the category. Each log is either an error, a warning, an info message, a debug message, or a verbose message. We can set our desired severity for each module such that only useful logs will print to the console. This makes debugging much easier since we don’t need to sift through unrelated messages. Further, it allows use to easily obtain more info about what’s happening when we observe a problem in a specific module.  
+**Authorship:**  Jaden  
+**Language:**  Swift  
+**Workload:**  ~100 lines  
 **Possible Failure Conditions:** N/A
 
-**Module Name:** Future (Promises)
-
-**Function:** Used instead of callbacks throughout the project in order to simplify the logic. Previously, it was easy to forget to call a callback on a certain code path, so we built this module to ensure correctness in our code. Further, it allows use to built combinators that operate on our callbacks. For example, we can build a callback that will only be called once all of its dependencies are called. This is useful in the Transmission Manager since we want to wait until all continue responses have been received before we send the end message.
-
-**Authorship:**  Jaden
-
-**Language:**  Swift
-
-**Workload:**  ~150 lines
-
+**Module Name:** Future (Promises)  
+**Function:** Used instead of callbacks throughout the project in order to simplify the logic. Previously, it was easy to forget to call a callback on a certain code path, so we built this module to ensure correctness in our code. Further, it allows use to built combinators that operate on our callbacks. For example, we can build a callback that will only be called once all of its dependencies are called. This is useful in the Transmission Manager since we want to wait until all continue responses have been received before we send the end message.  
+**Authorship:**  Jaden  
+**Language:**  Swift  
+**Workload:**  ~150 lines  
 **Possible Failure Conditions:** N/A
 
