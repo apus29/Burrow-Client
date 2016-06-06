@@ -12,19 +12,23 @@ import Logger
 extension Logger { public static let dnsResolverCategory = "DNSResolver" }
 private let log = Logger.category(Logger.dnsResolverCategory)
 
+private let timeoutDuration = 30.0 // seconds
+
 enum DNSResolveError: ErrorType {
     case queryFailure(DNSServiceErrorCode)
     case parseFailure(NSData)
     case countParseFailure(String)
+    case timeout
 }
 
 private struct QueryInfo {
     var service: DNSServiceRef
     var socket: CFSocketRef!
-    var runLoopSource: CFRunLoopSourceRef!
+    var socketSource: CFRunLoopSourceRef!
     var records: Result<[TXTRecord]>
     var responseHandler: Result<[TXTRecord]> -> ()
     var totalPacketCount: Int?
+    var timer: CFRunLoopTimer!
 }
 
 extension QueryInfo {
@@ -32,7 +36,8 @@ extension QueryInfo {
         log.verbose("Cleaning up resources for query with socket: \(socket)")
         
         // Remove socket listener from run look, destory socket, and deallocate service
-        CFRunLoopRemoveSource(CFRunLoopGetCurrent(), runLoopSource, kCFRunLoopDefaultMode)
+        CFRunLoopSourceInvalidate(socketSource)
+        CFRunLoopTimerInvalidate(timer)
         CFSocketInvalidate(socket)
         DNSServiceRefDeallocate(service)
     }
@@ -123,6 +128,17 @@ private func querySocketCallback(
 
 }
 
+private func timerCallback(timer: CFRunLoopTimer!, info: UnsafeMutablePointer<Void>) {
+    log.debug("Timer callback for context with address \(info)")
+    let queryContext = UnsafeMutablePointer<QueryInfo>(info)
+
+    log.debug("Freeing context with address \(info)")
+    queryContext.memory.responseHandler(.Failure(DNSResolveError.timeout))
+    queryContext.memory.performCleanUp()
+    queryContext.destroy()
+    queryContext.dealloc(1)
+}
+
 class DNSResolver {
     private init() { }
     
@@ -136,10 +152,11 @@ class DNSResolver {
             queryContext.initialize(QueryInfo(
                 service: nil,
                 socket: nil,
-                runLoopSource: nil,
+                socketSource: nil,
                 records: .Success([]),
                 responseHandler: resolve,
-                totalPacketCount: nil
+                totalPacketCount: nil,
+                timer: nil
             ))
             
             // Create DNS Query
@@ -186,15 +203,35 @@ class DNSResolver {
             log.verbose("Created socket for query to domain `\(domain)`: \(socket)")
             
             // Add socket listener to run loop
-            let runLoopSource = CFSocketCreateRunLoopSource(
+            let socketSource = CFSocketCreateRunLoopSource(
                 /* allocator: */ nil,
                 /* socket: */ socket,
                 /* order: */ 0
             )
             // TODO: Is this run loop retained here? If not, it crashes. If so, it leaks.
-            queryContext.memory.runLoopSource = runLoopSource
-            CFRunLoopAddSource(CFRunLoopGetMain(), runLoopSource, kCFRunLoopDefaultMode)
-            log.verbose("Added run loop source \(runLoopSource) for query to domain `\(domain)`")
+            queryContext.memory.socketSource = socketSource
+            CFRunLoopAddSource(CFRunLoopGetMain(), socketSource, kCFRunLoopDefaultMode)
+            log.verbose("Added run loop source \(socketSource) for query to domain `\(domain)`")
+            
+            // Add timeout timer to run loop
+            var timerContext = CFRunLoopTimerContext(
+                version: 0,
+                info: queryContext,
+                retain: nil,
+                release: nil,
+                copyDescription: nil
+            )
+            let timer = CFRunLoopTimerCreate(
+                /* allocator: */ nil,
+                /* fireDate: */ CFAbsoluteTimeGetCurrent() + timeoutDuration,
+                /* interval: */ 0,
+                /* flags: */ 0,
+                /* order: */ 0,
+                /* callout: */ timerCallback,
+                /* context: */ &timerContext
+            )
+            queryContext.memory.timer = timer
+            CFRunLoopAddTimer(CFRunLoopGetMain(), timer, kCFRunLoopDefaultMode)
         }
     }
 }
