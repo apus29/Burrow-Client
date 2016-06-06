@@ -6,8 +6,6 @@
 //
 //
 
-import Shovel
-
 import Logger
 extension Logger { public static let sessionControllerCategory = "SessionController" }
 private let log = Logger.category(Logger.sessionControllerCategory)
