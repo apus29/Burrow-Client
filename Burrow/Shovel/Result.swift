@@ -59,6 +59,18 @@ extension Result {
         }
     }
     
+    public mutating func mutate(@noescape mutation: (inout Element) throws -> ()) {
+        if case .Success(let value) = self {
+            do {
+                var copy = value
+                try mutation(&copy)
+                self = .Success(copy)
+            } catch let error {
+                self = .Failure(error)
+            }
+        }
+    }
+    
     public func recover(@noescape handle: (ErrorType) throws -> Element) -> Result<Element> {
         switch self {
         case .Success(let value):

@@ -15,26 +15,26 @@ private let log = Logger.category(Logger.dnsResolverCategory)
 enum DNSResolveError: ErrorType {
     case queryFailure(DNSServiceErrorCode)
     case parseFailure(NSData)
+    case countParseFailure(String)
 }
 
 private struct QueryInfo {
     var service: DNSServiceRef
     var socket: CFSocketRef!
     var runLoopSource: CFRunLoopSourceRef!
-    var records: [Result<TXTRecord>]
+    var records: Result<[TXTRecord]>
     var responseHandler: Result<[TXTRecord]> -> ()
+    var totalPacketCount: Int?
+}
+
 extension QueryInfo {
-    static func destroy(queryContext: UnsafeMutablePointer<QueryInfo>) {
-        log.verbose("Cleaning up resources for query with socket: \(queryContext.memory.socket)")
+    func performCleanUp() {
+        log.verbose("Cleaning up resources for query with socket: \(socket)")
         
         // Remove socket listener from run look, destory socket, and deallocate service
-        CFRunLoopRemoveSource(CFRunLoopGetCurrent(), queryContext.memory.runLoopSource, kCFRunLoopDefaultMode)
-        CFSocketInvalidate(queryContext.memory.socket)
-        DNSServiceRefDeallocate(queryContext.memory.service)
-        
-        // Deallocate context info
-        queryContext.destroy()
-        queryContext.dealloc(1)
+        CFRunLoopRemoveSource(CFRunLoopGetCurrent(), runLoopSource, kCFRunLoopDefaultMode)
+        CFSocketInvalidate(socket)
+        DNSServiceRefDeallocate(service)
     }
 }
 
@@ -55,8 +55,7 @@ private func queryCallback(
     log.debug("Callback for query \(sdref)")
     let queryContext = UnsafeMutablePointer<QueryInfo>(context)
     
-    // Append record rresult
-    queryContext.memory.records.append(Result {
+    do {
         if let errorCode = DNSServiceErrorCode(rawValue: Int(errorCode)) {
             throw DNSResolveError.queryFailure(errorCode)
         }
@@ -68,8 +67,23 @@ private func queryCallback(
         }
         
         log.info("Received TXT record \(txtRecord) from domain \(String(CString: UnsafePointer(fullname), encoding: NSUTF8StringEncoding))")
-        return txtRecord
-    })
+
+        if case ("$count", let value)? = txtRecord.attribute {
+            if let count = Int(value) {
+                queryContext.memory.totalPacketCount = count
+            } else {
+                throw DNSResolveError.countParseFailure(value)
+            }
+        } else {
+            assert(queryContext.memory.records.error == nil)
+            queryContext.memory.records.mutate { array in
+                array.append(txtRecord)
+            }
+        }
+    } catch let error {
+        queryContext.memory.records = .Failure(error)
+        queryContext.memory.performCleanUp()
+    }
 }
 
 private func querySocketCallback(
@@ -87,7 +101,7 @@ private func querySocketCallback(
     
     // Clean up resources
     defer {
-        QueryInfo.destroy(queryContext)
+        queryContext.memory.performCleanUp()
         // TODO: Is stuff leaking?
     }
     
@@ -95,14 +109,20 @@ private func querySocketCallback(
     log.verbose("Processing result for socket: \(socket)")
     let status = DNSServiceProcessResult(queryContext.memory.service)
     
-    // Respond to the caller
-    queryContext.memory.responseHandler(Result {
+    queryContext.memory.records.mutate { _ in
         if let errorCode = DNSServiceErrorCode(rawValue: Int(status)) {
             throw DNSResolveError.queryFailure(errorCode)
-        } else {
-            return try queryContext.memory.records.map { try $0.unwrap() }
         }
-    })
+    }
+    
+    if case .Success(let records) = queryContext.memory.records {
+        guard records.count == queryContext.memory.totalPacketCount else { return }
+    }
+    
+    queryContext.memory.responseHandler(queryContext.memory.records)
+    queryContext.destroy()
+    queryContext.dealloc(1)
+
 }
 
 class DNSResolver {
@@ -119,9 +139,10 @@ class DNSResolver {
                 service: nil,
                 socket: nil,
                 runLoopSource: nil,
-                records: [],
-                responseHandler: resolve
-                ))
+                records: .Success([]),
+                responseHandler: resolve,
+                totalPacketCount: nil
+            ))
             
             // Create DNS Query
             var service: DNSServiceRef = nil
