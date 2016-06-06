@@ -23,7 +23,6 @@ private struct QueryInfo {
     var runLoopSource: CFRunLoopSourceRef!
     var records: [Result<TXTRecord>]
     var responseHandler: Result<[TXTRecord]> -> ()
-    var isDone: Bool
 }
 
 private func queryCallback(
@@ -42,9 +41,6 @@ private func queryCallback(
     
     log.debug("Callback for query \(sdref)")
     let queryContext = UnsafeMutablePointer<QueryInfo>(context)
-    
-    let isMoreComing = flags & UInt32(kDNSServiceFlagsMoreComing) != 0
-    queryContext.memory.isDone = !isMoreComing
     
     // Append record rresult
     queryContext.memory.records.append(Result {
@@ -76,28 +72,25 @@ private func querySocketCallback(
     log.verbose("Current context is \(queryContext.memory)")
     assert(socket === queryContext.memory.socket)
     
+    // Clean up resources
+    defer {
+        log.verbose("Cleaning up resources for query with socket: \(socket)")
+        
+        // Remove socket listener from run look, destory socket, and deallocate service
+        CFRunLoopRemoveSource(CFRunLoopGetCurrent(), queryContext.memory.runLoopSource, kCFRunLoopDefaultMode)
+        CFSocketInvalidate(queryContext.memory.socket)
+        DNSServiceRefDeallocate(queryContext.memory.service)
+        
+        // Deallocate context info
+        queryContext.destroy()
+        queryContext.dealloc(1)
+        
+        // TODO: Is stuff leaking?
+    }
+    
     // Process the result
     log.verbose("Processing result for socket: \(socket)")
     let status = DNSServiceProcessResult(queryContext.memory.service)
-    // Note that this call blocks until the result is processed
-    
-    defer {
-        if queryContext.memory.isDone {
-            // Clean up resources
-            log.verbose("Cleaning up resources for query with socket: \(socket)")
-            
-            // Remove socket listener from run look, destory socket, and deallocate service
-            CFRunLoopRemoveSource(CFRunLoopGetCurrent(), queryContext.memory.runLoopSource, kCFRunLoopDefaultMode)
-            CFSocketInvalidate(queryContext.memory.socket)
-            DNSServiceRefDeallocate(queryContext.memory.service)
-            
-            // Deallocate context info
-            queryContext.destroy()
-            queryContext.dealloc(1)
-            
-            // TODO: Is stuff leaking?
-        }
-    }
     
     // Respond to the caller
     queryContext.memory.responseHandler(Result {
@@ -124,9 +117,8 @@ class DNSResolver {
                 socket: nil,
                 runLoopSource: nil,
                 records: [],
-                responseHandler: resolve,
-                isDone: false
-            ))
+                responseHandler: resolve
+                ))
             
             // Create DNS Query
             var service: DNSServiceRef = nil
