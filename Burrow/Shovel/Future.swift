@@ -63,6 +63,23 @@ extension Future where Element: ResultType {
         }
     }
     
+    public func recover(block: ErrorType throws -> Future) -> Future {
+        return Future { resolve in
+            then { result in
+                do {
+                    try result.unwrap()
+                    resolve(result)
+                } catch let error {
+                    do {
+                        try block(error).then { resolve($0) }
+                    } catch let error {
+                        resolve(Element { throw error })
+                    }
+                }
+            }
+        }
+    }
+    
     public func mapSuccess<V>(transform: Element.Element throws -> V) -> Future<Result<V>> {
         return Future<Result<V>> { resolve in
             then { value in resolve(Result { try transform(value.unwrap()) }) }

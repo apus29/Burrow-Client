@@ -19,6 +19,7 @@ enum DNSResolveError: ErrorType {
     case parseFailure(NSData)
     case countParseFailure(String)
     case timeout
+    case tooManyRetries
 }
 
 private struct QueryInfo {
@@ -151,7 +152,14 @@ class DNSResolver {
     private init() { }
     
     /// Query a domain's TXT records asynchronously
-    static func resolveTXT(domain: Domain) throws -> Future<Result<[TXTRecord]>> {
+    static func resolveTXT(domain: Domain, retryCount: Int = 3) throws -> Future<Result<[TXTRecord]>> {
+        guard retryCount > 0 else { throw DNSResolveError.tooManyRetries }
+        return try _resolveTXT(domain).recover { error in
+            try resolveTXT(domain, retryCount: retryCount - 1)
+        }
+    }
+    
+    static func _resolveTXT(domain: Domain) throws -> Future<Result<[TXTRecord]>> {
         return try Future { resolve in
             log.debug("Will resolve domain `\(domain)`")
             
