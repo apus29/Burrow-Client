@@ -1238,7 +1238,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "BurrowTunnel-iOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Extension/BurrowTunnel-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jaden Geller (6ZM83JD223)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaden Geller (6ZM83JD223)";
 				COPY_PHASE_STRIP = NO;
@@ -1292,7 +1292,7 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_ENTITLEMENTS = "BurrowTunnel-iOS.entitlements";
+				CODE_SIGN_ENTITLEMENTS = "Extension/BurrowTunnel-iOS.entitlements";
 				CODE_SIGN_IDENTITY = "iPhone Developer: Jaden Geller (6ZM83JD223)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Jaden Geller (6ZM83JD223)";
 				COPY_PHASE_STRIP = NO;
