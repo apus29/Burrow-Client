@@ -73,6 +73,10 @@ private func queryCallback(
         
         log.info("Received TXT record \(txtRecord) from domain \(String(CString: UnsafePointer(fullname), encoding: NSUTF8StringEncoding))")
 
+        // Check if this is a special "count" TXT record that indicates the total number of records
+        // that we ought to receive for this query. Note that this is a workaround due to the limitations
+        // of the DNS Service Discovery library, and it would be better if the library exposed the count
+        // itself as this is in the answer.
         if case ("$count", let value)? = txtRecord.attribute {
             if let count = Int(value) {
                 queryContext.memory.totalPacketCount = count
@@ -117,6 +121,7 @@ private func querySocketCallback(
         }
     }
     
+    // Ensure that we wait for all the records we expect to receive.
     if case .Success(let records) = queryContext.memory.records {
         guard records.count == queryContext.memory.totalPacketCount else { return }
     }
