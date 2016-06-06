@@ -137,20 +137,13 @@ In conclusion, we’re confident that we aren’t far off from a fully working p
 
 # References
 
-[1] http://www.daemon.be/maarten/dnstunnel.html
-
-[2] https://www.vpnoverdns.com/faq.html
-
-[3] http://archives.neohapsis.com/archives/bugtraq/1998_2/0079.html
-
-[4] https://developer.apple.com/library/prerelease/ios/documentation/NetworkExtension/Reference/NETunnelProviderClassRef/index.html
-
-[5] https://developer.apple.com/videos/play/wwdc2015/717/
-
-[6] https://github.com/iCepa/iCepa
-
-[7] http://www.smartinsights.com/mobile-marketing/mobile-marketing-analytics/mobile-marketing-statistics/
-
+[1] http://www.daemon.be/maarten/dnstunnel.html  
+[2] https://www.vpnoverdns.com/faq.html  
+[3] http://archives.neohapsis.com/archives/bugtraq/1998_2/0079.html  
+[4] https://developer.apple.com/library/prerelease/ios/documentation/NetworkExtension/Reference/NETunnelProviderClassRef/index.html  
+[5] https://developer.apple.com/videos/play/wwdc2015/717/  
+[6] https://github.com/iCepa/iCepa  
+[7] http://www.smartinsights.com/mobile-marketing/mobile-marketing-analytics/mobile-marketing-statistics/  
 [8] http://blog.cloudmark.com/2014/10/07/dns-tunneling-abuses/
 
 # Appendices
