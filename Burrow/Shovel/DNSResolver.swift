@@ -155,7 +155,8 @@ class DNSResolver {
     static func resolveTXT(domain: Domain, retryCount: Int = 3) throws -> Future<Result<[TXTRecord]>> {
         guard retryCount > 0 else { throw DNSResolveError.tooManyRetries }
         return try _resolveTXT(domain).recover { error in
-            try resolveTXT(domain, retryCount: retryCount - 1)
+            log.info("Retrying query with \(retryCount) tries left: \(domain)")
+            return try resolveTXT(domain, retryCount: retryCount - 1)
         }
     }
     
