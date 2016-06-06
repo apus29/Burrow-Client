@@ -1,5 +1,3 @@
-Burrow — Final Report
-
 # Abstract
 
 We designed and implemented a service that provides one-tap DNS tunneling to users. To achieve this, we built both an iPhone app and a DNS server that relays user traffic. We received an entitlement to use Apple’s new Network Extension API, and used it to create a one-button app that configures the iPhone’s operating system to tunnel all system traffic over DNS. We designed an abstraction layer for communicating arbitrary amounts of data between a client and a DNS server, and a packet forwarding protocol that is built atop it. We were successful in implementing all of the various components of the system, but were not able to successfully load network resources over the tunnel.
