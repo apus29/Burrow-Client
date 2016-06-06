@@ -57,7 +57,8 @@ class ViewController: UIViewController {
     
     func statusChanged() {
         if let tunnelProviderManager = tunnelProviderManager {
-            toggleSwitch.on = tunnelProviderManager.connection.status.rawValue >= NEVPNStatus.Connecting.rawValue
+            toggleSwitch.on = [.Connecting, .Connected].contains(tunnelProviderManager.connection.status)
+            tunnelVisuallyEnabled(toggleSwitch.on)
         }
     }
     
@@ -66,25 +67,37 @@ class ViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func tunnelToggle(sender: UISwitch) {
-        // THIS CODE IS LITERALLY BARF
-        // DON'T WORRY, I'LL REFACTOR WHEN WE GET A BETTER IDEA OF WHAT WE'D LIKE
-        
+    func tunnelVisuallyEnabled(enabled: Bool) {
         let lingerDuration = 0.1
         let animationDuration = NSTimeInterval(UINavigationControllerHideShowBarDuration) * 2 + lingerDuration
         let waitDuration = NSTimeInterval(UINavigationControllerHideShowBarDuration) + lingerDuration
-        
-        if sender.on {
+
+        if enabled {
             UIView.animateWithDuration(animationDuration) {
                 self.view.backgroundColor = .darkGrayColor()
             }
-
+            
             self.navigationController?.setNavigationBarHidden(true, animated: true)
             dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(waitDuration * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
                 self.navigationController?.setNavigationBarHidden(false, animated: true)
                 self.navigationController?.navigationBar.barStyle = .Black
                 self.title = "Burrow (Enabled)"
             }
+        } else {
+            UIView.animateWithDuration(animationDuration) {
+                self.view.backgroundColor = .whiteColor()
+            }
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(waitDuration * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
+                self.navigationController?.setNavigationBarHidden(false, animated: true)
+                self.navigationController?.navigationBar.barStyle = .Default
+                self.title = "Burrow (Disabled)"
+            }
+        }
+    }
+    
+    @IBAction func tunnelToggle(sender: UISwitch) {
+        tunnelVisuallyEnabled(sender.on)
+        if sender.on {
             print("User enabled tunnel.")
             
             // TODO: Listen for notifications
@@ -99,18 +112,11 @@ class ViewController: UIViewController {
             }
             
         } else {
-            UIView.animateWithDuration(animationDuration) {
-                self.view.backgroundColor = .whiteColor()
-            }
             print("User disabled tunnel.")
             self.tunnelProviderManager.connection.stopVPNTunnel()
             
             self.navigationController?.setNavigationBarHidden(true, animated: true)
-            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, Int64(waitDuration * Double(NSEC_PER_SEC))), dispatch_get_main_queue()) {
-                self.navigationController?.setNavigationBarHidden(false, animated: true)
-                self.navigationController?.navigationBar.barStyle = .Default
-                self.title = "Burrow (Disabled)"
-            }
+            
         }
     }
 }
