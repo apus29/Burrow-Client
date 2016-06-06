@@ -14,7 +14,7 @@ class ViewController: NSViewController {
     @IBOutlet weak var toggleButton: NSButton!
 
     @IBAction func togglePress(sender: NSButton) {
-        assert([0, 1].contains(sender.state))
+        log.precondition([0, 1].contains(sender.state))
         let enabled = sender.state == 1
         
         switch enabled {
@@ -23,7 +23,7 @@ class ViewController: NSViewController {
             
             // TODO: Listen for notifications
             do {
-                assert(tunnelProviderManager.enabled)
+                log.precondition(tunnelProviderManager.enabled)
                 tunnelProviderManager.saveToPreferencesWithCompletionHandler {
                     error in
                     try! self.tunnelProviderManager.connection.startVPNTunnel()

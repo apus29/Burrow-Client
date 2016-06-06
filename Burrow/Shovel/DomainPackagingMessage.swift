@@ -6,6 +6,8 @@
 //
 //
 
+import Logger
+
 internal struct DomainPackagingMessage {
     typealias DomainFormat = (sequenceNumber: Int) -> Domain
     
@@ -14,9 +16,9 @@ internal struct DomainPackagingMessage {
     
     // Will not encode data.
     init(domainSafeMessage message: String, underDomain domainFormat: DomainFormat) {
-        precondition(message.rangeOfCharacterFromSet(domainSafeCharacterSet.invertedSet) == nil,
+        log.precondition(message.rangeOfCharacterFromSet(domainSafeCharacterSet.invertedSet) == nil,
                      "Message to package is not domain safe: \(message)")
-        precondition(message.characters.count > 0, "Message must have length greater than zero: \(message)")
+        log.precondition(message.characters.count > 0, "Message must have length greater than zero: \(message)")
 
         self.dataString = message.utf8
         self.domainFormat = domainFormat
@@ -60,7 +62,7 @@ extension DomainPackagingMessage: SequenceType {
             }
 
             // TODO: Is it a problem in practice that we might start with a dash?
-//            precondition(domain.characters.first != "-" && domain.characters.last != "-",
+//            log.precondition(domain.characters.first != "-" && domain.characters.last != "-",
 //                "String may not start or end with dash.")
 
             return domain

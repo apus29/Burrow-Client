@@ -6,6 +6,8 @@
 //
 //
 
+import Logger
+
 public struct Domain {
     public var labels: [String]
     
@@ -23,8 +25,8 @@ extension Domain {
 extension Domain: StringLiteralConvertible {
     public init(_ string: String) {
         self.labels = string.componentsSeparatedByString(".")
-        precondition(domainTextualLength < Domain.maxDomainTextualLength)
-        labels.forEach{ precondition($0.utf8.count < Domain.maxLabelLength) }
+        log.precondition(domainTextualLength < Domain.maxDomainTextualLength)
+        labels.forEach{ log.precondition($0.utf8.count < Domain.maxLabelLength) }
     }
     
     public init(stringLiteral value: String) {
@@ -64,10 +66,10 @@ extension Domain {
 
 extension Domain {
     private mutating func insert(label: String, atIndex index: Int) {
-        precondition(!label.containsString("."))
-        precondition(label.utf8.count <= Domain.maxLabelLength)
+        log.precondition(!label.containsString("."))
+        log.precondition(label.utf8.count <= Domain.maxLabelLength)
         labels.insert(label, atIndex: index)
-        precondition(domainTextualLength <= Domain.maxDomainTextualLength)
+        log.precondition(domainTextualLength <= Domain.maxDomainTextualLength)
     }
     
     public mutating func prepend(label: String) {

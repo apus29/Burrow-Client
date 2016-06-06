@@ -31,7 +31,7 @@ private func value(from attributes: [String : String], forExpectedKey key: Strin
 
 private func requireSuccess(expectedValue: String, from attributes: [String : String]) throws {
     let foundValue = try value(from: attributes, forExpectedKey: "success")
-    precondition(["True", "False"].contains(foundValue))
+    log.precondition(["True", "False"].contains(foundValue))
     guard foundValue == "True" else {
         throw ShovelError(code: .serverErrorResponse, reason: attributes["error"])
     }

@@ -75,7 +75,7 @@ private func queryCallback(
                 throw DNSResolveError.countParseFailure(value)
             }
         } else {
-            assert(queryContext.memory.records.error == nil)
+            log.precondition(queryContext.memory.records.error == nil)
             queryContext.memory.records.mutate { array in
                 array.append(txtRecord)
             }
@@ -93,11 +93,11 @@ private func querySocketCallback(
     data: UnsafePointer<Void>,
     info: UnsafeMutablePointer<Void>
 ) {
-    assert(callbackType == .ReadCallBack)
+    log.precondition(callbackType == .ReadCallBack)
     log.verbose("Callback of type \(callbackType) on socket: \(socket)")
     let queryContext = UnsafeMutablePointer<QueryInfo>(info)
     log.verbose("Current context is \(queryContext.memory)")
-    assert(socket === queryContext.memory.socket)
+    log.precondition(socket === queryContext.memory.socket)
     
     // Process the result
     log.verbose("Processing result for socket: \(socket)")
@@ -157,7 +157,7 @@ class DNSResolver {
                 throw DNSResolveError.queryFailure(errorCode)
             }
             
-            assert(service != nil)
+            log.precondition(service != nil)
             queryContext.memory.service = service
             log.verbose("Created DNS query \(service) to domain `\(domain)`")
             
@@ -170,7 +170,7 @@ class DNSResolver {
                 copyDescription: nil
             )
             let socketIdentifier = DNSServiceRefSockFD(service)
-            assert(socketIdentifier >= 0)
+            log.precondition(socketIdentifier >= 0)
             let socket = CFSocketCreateWithNative(
                 /* allocator: */ nil,
                 /* socket: */ socketIdentifier,

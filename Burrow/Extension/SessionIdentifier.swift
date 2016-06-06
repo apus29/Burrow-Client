@@ -6,12 +6,14 @@
 //
 //
 
+import Logger
+
 struct SessionIdentifier {
     private let backing: String
     
     init(_ string: String) {
         // TODO: Should we restrict this to alphanum?
-        precondition(!string.characters.contains("-"), "Invalid character in session identifier.")
+        log.precondition(!string.characters.contains("-"), "Invalid character in session identifier.")
         self.backing = string
     }
 }

@@ -49,7 +49,7 @@ class SessionController {
     // MARK: Functions
     
     func beginSession() throws -> Future<Result<()>> {
-        precondition(!running)
+        log.precondition(!running)
         // TODO: Recover from certain kinds of failures
         return try transmissionManager.send(.beginSession).mapSuccess { response in
             guard case .beginSession(let identifier) = response else { fatalError() }

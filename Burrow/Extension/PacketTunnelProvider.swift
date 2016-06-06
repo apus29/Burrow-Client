@@ -102,7 +102,7 @@ class PacketTunnelProvider: NEPacketTunnelProvider, SessionControllerDelegate {
             
             // TODO: Handle other types of packets.
             protocolIdentifiers.forEach {
-                assert($0.intValue == AF_INET, "Unkown protocol \($0)")
+                log.precondition($0.intValue == AF_INET, "Unkown protocol \($0)")
             }
             
             log.caught { try self.sessionController.forward(packets: packets).then { result in

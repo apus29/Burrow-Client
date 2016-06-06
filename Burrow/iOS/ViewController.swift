@@ -89,9 +89,9 @@ class ViewController: UIViewController {
             
             // TODO: Listen for notifications
             do {
-                assert(tunnelProviderManager.enabled)
-                assert(tunnelProviderManager.routingMethod == .DestinationIP)
-                assert(tunnelProviderManager.copyAppRules() == nil)
+                log.precondition(tunnelProviderManager.enabled)
+                log.precondition(tunnelProviderManager.routingMethod == .DestinationIP)
+                log.precondition(tunnelProviderManager.copyAppRules() == nil)
                 tunnelProviderManager.saveToPreferencesWithCompletionHandler {
                     error in
                     try! self.tunnelProviderManager.connection.startVPNTunnel()

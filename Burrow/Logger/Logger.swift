@@ -113,8 +113,14 @@ extension Logger {
         do {
             return try block()
         } catch let error {
-            log.error("Unrecoverable error: \(error)")
+            log.error("uncaught exception: \(error)")
             fatalError()
+        }
+    }
+    
+    public func precondition(condition: Bool, @autoclosure _ message: () -> String = "", file: StaticString = #file, line: UInt = #line) {
+        if !condition {
+            log.error("precondition failed: \(message()): file \(file), line \(line))")
         }
     }
 }

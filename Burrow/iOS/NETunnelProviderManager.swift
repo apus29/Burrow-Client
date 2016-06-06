@@ -8,6 +8,7 @@
 
 import NetworkExtension
 import Shovel // TODO: Refactor Result into separate module?
+import Logger
 
 // TODO: Share between iOS and OS X.
 extension NETunnelProviderManager {
@@ -18,7 +19,7 @@ extension NETunnelProviderManager {
                 completionHandler(.Failure(error))
             }
             else if let manager = managers?.first {
-                precondition(managers!.count == 1)
+                log.precondition(managers!.count == 1)
                 
                 // Return the existing manager
                 completionHandler(.Success(manager))

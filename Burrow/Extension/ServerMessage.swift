@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Logger
 
 enum ServerMessage {
     case beginSession(SessionIdentifier)
@@ -56,7 +57,7 @@ extension ServerMessage {
             // TODO: Decide if the object is required. Right now, the server is misbehaved.
             let object = components.next() //try components.next(failure: "Missing object", object: string)
             
-            precondition(components.next() == nil)
+            log.precondition(components.next() == nil)
 
             throw ServerError(
                 code: ServerError.Code(code),
