@@ -93,6 +93,8 @@ private func querySocketCallback(
     data: UnsafePointer<Void>,
     info: UnsafeMutablePointer<Void>
 ) {
+    log.debug("Socket callback for context with address \(info)")
+
     log.precondition(callbackType == .ReadCallBack)
     log.verbose("Callback of type \(callbackType) on socket: \(socket)")
     let queryContext = UnsafeMutablePointer<QueryInfo>(info)
@@ -114,6 +116,7 @@ private func querySocketCallback(
         guard records.count == queryContext.memory.totalPacketCount else { return }
     }
     
+    log.debug("Freeing context with address \(info)")
     queryContext.memory.responseHandler(queryContext.memory.records)
     queryContext.destroy()
     queryContext.dealloc(1)
